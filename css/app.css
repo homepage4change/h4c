@@ -31999,7 +31999,28 @@ video {
   --tw-backdrop-sepia: sepia(100%);
 }
 
-/* Colours */
+/* CONFIG */
+
+/* THEME */
+
+.bg-lime {
+  background-color: #D4F78B;
+}
+
+.bg-lavender {
+  background-color: #C9A0EE;
+}
+
+.bg-red {
+  background-color: #F46153;
+  color: #D4F78B;
+}
+
+.bg-plum {
+  background-color: #840C4A;
+}
+
+/* FONTS */
 
 @font-face {
   font-family: "Druk Wide";
@@ -32027,22 +32048,7 @@ video {
   font-weight: 400;
 }
 
-.bg-lime {
-  background-color: #D4F78B;
-}
-
-.bg-lavender {
-  background-color: #C9A0EE;
-}
-
-.bg-red {
-  background-color: #F46153;
-  color: #D4F78B;
-}
-
-.bg-plum {
-  background-color: #840C4A;
-}
+/* BASE */
 
 html, body {
   -webkit-font-smoothing: antialiased;
@@ -32057,7 +32063,7 @@ body {
 
 h1 {
   font-family: "Druk Wide", Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 1.8vw;
   text-transform: uppercase;
   color: #F46153;
   margin-bottom: 1rem;
@@ -32065,7 +32071,7 @@ h1 {
 
 h2 {
   font-family: "Druk Wide", Helvetica, sans-serif;
-  font-size: 5.625rem;
+  font-size: 7vw;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -32102,67 +32108,16 @@ u:after {
   height: 100vh;
 }
 
+.card,
 .hero {
   position: absolute;
-  width: 100%;
   overflow: hidden;
-  flex-basis: 100%;
   padding: 7vw;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #F46153;
-}
-
-.hero h1, .hero p {
-  white-space: pre-line;
-}
-
-.hero .heading {
-  position: relative;
-}
-
-.hero .heading:before, .hero .heading:after {
-  content: "";
-  position: absolute;
-  width: 50vw;
-  height: 25vw;
-  min-width: 700px;
-  min-height: 400px;
-  top: 50%;
-  left: 50%;
-}
-
-.hero .heading:before {
-  border: 20px solid #C9A0EE;
-  z-index: -1;
-  transform: translate(-50%, -50%) rotate(-8deg);
-}
-
-.hero:nth-of-type(1) {
-  background-image: url("/images/hero-background.svg");
-}
-
-.hero:last-child button {
-  font-family: "Druk Wide", Helvetica, sans-serif;
-  font-size: 25px;
-  text-transform: uppercase;
-  color: #F46153;
-  white-space: pre-line;
-}
-
-.hero:last-child .heading:after {
-  border: 1px solid #77DF86;
-  z-index: -2;
-  transform: translate(-50%, -50%);
 }
 
 .card {
-  position: absolute;
   width: 50%;
-  overflow: hidden;
   flex-basis: 50%;
-  padding: 7vw;
 }
 
 .card .heading p {
@@ -32170,6 +32125,15 @@ u:after {
   font-size: 1.5rem;
   font-weight: normal;
   text-transform: none;
+}
+
+.card:nth-of-type(2n) {
+  transform: translatey(100%);
+}
+
+.card:nth-of-type(2n+1) {
+  left: 50%;
+  transform: translatey(-100%);
 }
 
 .card--image {
@@ -32187,13 +32151,97 @@ u:after {
   object-fit: cover;
 }
 
-.card:nth-of-type(2n) {
-  transform: translatey(100%);
+.hero {
+  width: 100%;
+  flex-basis: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #F46153;
 }
 
-.card:nth-of-type(2n+1) {
+.hero h1, .hero p {
+  white-space: pre-line;
+}
+
+.hero .heading {
+  position: relative;
+}
+
+.hero .heading:before, .hero .heading:after {
+  content: "";
+  position: absolute;
+  width: 55vw;
+  height: 32vw;
+  /* min-width: 700px; */
+  /* min-height: 400px; */
+  top: 50%;
   left: 50%;
-  transform: translatey(-100%);
+}
+
+.hero .heading:before {
+  border: 1.5625vw solid #C9A0EE;
+  z-index: -1;
+  transform: translate(-50%, -50%) rotate(-8deg);
+}
+
+.hero:nth-of-type(1) .background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+.hero:nth-of-type(1) .background [class*=rect] {
+  position: absolute;
+  border: 0.15vw solid #77DF86;
+}
+
+.hero:nth-of-type(1) .background .rect1 {
+  width: 10.25vw;
+  height: 32vh;
+  top: 18.5%;
+  left: -2px;
+}
+
+.hero:nth-of-type(1) .background .rect2 {
+  width: 32.5vw;
+  height: 15.5vh;
+  top: -5.5%;
+  left: 28%;
+  transform: rotate(-7deg);
+}
+
+.hero:nth-of-type(1) .background .rect3 {
+  width: 16.5vw;
+  height: 42vh;
+  bottom: 20.5%;
+  right: -7%;
+  transform: rotate(15deg);
+}
+
+.hero:nth-of-type(1) .background .rect4 {
+  width: 15.5vw;
+  height: 30.5vh;
+  left: 56%;
+  top: 87%;
+  transform: rotate(-32deg);
+}
+
+.hero:last-child button {
+  font-family: "Druk Wide", Helvetica, sans-serif;
+  font-size: 25px;
+  text-transform: uppercase;
+  color: #F46153;
+  white-space: pre-line;
+}
+
+.hero:last-child .heading:after {
+  border: 1px solid #77DF86;
+  z-index: -2;
+  transform: translate(-50%, -50%);
 }
 
 .copy p {
