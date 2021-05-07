@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,9 +33,21 @@
 }
 @font-face {
   font-family: "Lacrima";
-  src: url("/fonts/lacrima/LacrimaSerifTRIAL-Regular.otf") format("opentype");
+  src: url("/fonts/lacrima/LacrimaSerif-Regular.eot");
+  /* IE9*/
+  src: url("/fonts/lacrima/LacrimaSerif-Regular.eot?#iefix") format("embedded-opentype"), url("/fonts/lacrima/LacrimaSerif-Regular.woff2") format("woff2"), url("/fonts/lacrima/LacrimaSerif-Regular.woff") format("woff"), url("/fonts/lacrima/LacrimaSerif-Regular.ttf") format("truetype");
+  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
   font-style: normal;
   font-weight: 400;
+}
+@font-face {
+  font-family: "Lacrima";
+  src: url("/fonts/lacrima/LacrimaSerif-Bold.eot");
+  /* IE9*/
+  src: url("/fonts/lacrima/LacrimaSerif-Bold.eot?#iefix") format("embedded-opentype"), url("/fonts/lacrima/LacrimaSerif-Bold.woff2") format("woff2"), url("/fonts/lacrima/LacrimaSerif-Bold.woff") format("woff"), url("/fonts/lacrima/LacrimaSerif-Bold.ttf") format("truetype");
+  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  font-style: normal;
+  font-weight: 700;
 }
 /* BASE */
 html, body {
