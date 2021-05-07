@@ -6,3 +6,103 @@ $slime: #77DF86;
 $lavender: #C9A0EE;
 $red: #F46153;
 $plum: #840C4A;
+
+
+
+/*============================================================================
+  Dependency-free breakpoint mixin
+    - http://blog.grayghostvisuals.com/sass/sass-media-query-mixin/
+==============================================================================*/
+
+// ==================================================
+// $Variables
+// ==================================================
+// Supports 
+// @media min-width
+// @media max-width
+// @media min-width and max-width
+
+$viewport-increment: 0.1px; // customize to suite
+
+// Extra Large Desktop
+$xlDesktop: 2000px; // customize to suite
+$pre-xlDesktop: $xlDesktop - $viewport-increment;
+
+// Large Desktop
+$lgDesktop: 1600px; // customize to suite
+$pre-lgDesktop: $lgDesktop - $viewport-increment;
+
+// Medium Desktop
+$mdDesktop: 1280px; // customize to suite
+$pre-mdDesktop: $mdDesktop - $viewport-increment;
+
+// Small Desktop
+$smDesktop: 1024px; // customize to suite
+$pre-smDesktop: $smDesktop - $viewport-increment;
+
+// Tablet
+$tablet: 768px; // customize to suite
+$pre-tablet: $tablet - $viewport-increment;
+
+// Palm
+$palm: 640px; // customize to suite
+$post-palm: $palm + $viewport-increment;
+
+// Constraints
+$min: min-width;
+$max: max-width;
+
+
+// ==================================================
+// $Media Query @Mixin
+// ==================================================
+
+@mixin atMedia($constraint, $viewport1, $viewport2: null) {
+
+  @if $constraint == $min {
+
+    @media screen and ($min: $viewport1) {
+      @content;
+    }
+
+  } @else if $constraint == $max {
+
+    @media screen and ($max: $viewport1) {
+      @content;
+    }
+
+  } @else {
+
+    @media screen and ($min: $viewport1) and ($max: $viewport2) {
+      @content;
+    }
+
+  }
+
+}
+
+
+@mixin spin($target, $start, $duration, $delay, $direction) {
+	$end: $start + 360deg;
+
+	@keyframes spin-#{$target} {
+		0% {
+	    	transform: rotate($start);
+	    	filter: blur(0);
+	  	}
+	  	50% {
+	  		filter: blur(4px);
+	  	}
+	  	100% {
+	    	transform: rotate($end);
+	    	filter: blur(0);
+		}
+	}
+
+	@if $direction == "reverse" {
+		animation: spin-#{$target} $duration infinite reverse $delay;	
+	}
+	@else {
+		animation: spin-#{$target} $duration infinite $delay;
+	}
+}
