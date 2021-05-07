@@ -1,0 +1,172 @@
+// Tailwind import
+//--------------------------------------------------------------------------------//
+// @import '~tailwindcss/dist/tailwind.min.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'config';
+@import 'fonts';
+
+.bg-lime { 
+	background-color: #D4F78B;
+}
+.bg-lavender { 
+	background-color: #C9A0EE;
+}
+.bg-red { 
+	background-color: #F46153;
+	color: $lime;
+}
+.bg-plum { 
+	background-color: #840C4A;
+}
+
+html,body {
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	color: $plum;
+	font-family: 'Lacrima', 'Times New Roman', serif;
+	background-color: $lime;
+}
+
+h1 {
+	font-family: 'Druk Wide', Helvetica, sans-serif;
+	font-size: 25px;
+	text-transform: uppercase;
+	color: $red;
+	margin-bottom: 1rem;
+}
+
+h2 {
+	font-family: 'Druk Wide', Helvetica, sans-serif;
+	font-size: 5.625rem;
+	line-height: 1;
+	text-transform: uppercase;
+}
+p {
+	margin-bottom: 1rem;
+}
+u {
+	text-decoration: none;
+	position: relative;
+	&:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -3px;
+		height: 3px;
+		width: 100%;
+		background-color: $red;
+		// border: 1px solid $red;
+	}
+}
+
+#app {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.container {
+	height: 100vh;
+}
+
+.hero {
+	position: absolute;
+	width: 100%;
+	overflow: hidden;
+	flex-basis: 100%;
+	padding: 7vw;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: $red;
+
+	h1, p {
+		white-space: pre-line;
+	}
+
+	.heading {
+		position: relative;
+		&:before, &:after {
+			content: "";
+		    position: absolute;
+		    width: 50vw;
+		    height: 25vw;
+		    min-width: 700px;
+		    min-height: 400px;
+		    top: 50%;
+		    left: 50%;
+		}
+		&:before {
+			border: 20px solid #C9A0EE;
+		    z-index: -1;
+		    transform: translate(-50%, -50%) rotate(-8deg);
+		}
+	}
+}
+.hero:nth-of-type(1) {
+	background-image: url('/images/hero-background.svg');
+}
+.hero:last-child {
+	button {
+		font-family: 'Druk Wide', Helvetica, sans-serif;
+		font-size: 25px;
+		text-transform: uppercase;
+		color: $red;
+		white-space: pre-line;
+	}
+
+	.heading {
+		&:after {
+		    border: 1px solid $slime;
+		    z-index: -2;
+		    transform: translate(-50%, -50%);
+		}
+	}
+}
+
+.card {
+	position: absolute;
+	width: 50%;
+	overflow: hidden;
+	flex-basis: 50%;
+	padding: 7vw;
+
+	.heading p {
+		font-family: 'Lacrima', 'Times New Roman', serif;
+		font-size: 1.5rem;
+		font-weight: normal;
+		text-transform: none;
+	}
+}
+.card--image {
+	padding: 0;
+	.image {
+		height: 100vh;
+	}
+	img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+.card:nth-of-type(2n) {
+	transform: translatey(100%);
+}
+.card:nth-of-type(2n+1) {
+	left: 50%;
+	transform: translatey(-100%);
+}
+
+.copy p {
+	font-size: 1.125rem;
+}
+

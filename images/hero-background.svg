@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="800" viewBox="0 0 1280 800">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_107" data-name="Rectangle 107" width="1280" height="800" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" clip-path="url(#clip-path)">
+    <g id="Group_152" data-name="Group 152">
+      <g id="Rectangle_66" data-name="Rectangle 66" transform="translate(665.774 765.878) rotate(-32)" fill="none" stroke="#7de186" stroke-width="1">
+        <rect width="196.112" height="203.017" stroke="none"/>
+        <rect x="0.5" y="0.5" width="195.112" height="202.017" fill="none"/>
+      </g>
+      <g id="Rectangle_63" data-name="Rectangle 63" transform="translate(-127 148)" fill="none" stroke="#7de186" stroke-width="1">
+        <rect width="255" height="255" stroke="none"/>
+        <rect x="0.5" y="0.5" width="254" height="254" fill="none"/>
+      </g>
+      <g id="Rectangle_64" data-name="Rectangle 64" transform="translate(336.46 -149.716) rotate(-7)" fill="none" stroke="#7de186" stroke-width="1">
+        <rect width="413.63" height="254.807" stroke="none"/>
+        <rect x="0.5" y="0.5" width="412.63" height="253.807" fill="none"/>
+      </g>
+      <g id="Rectangle_65" data-name="Rectangle 65" transform="matrix(0.966, 0.259, -0.259, 0.966, 1208.343, 276.904)" fill="none" stroke="#7de186" stroke-width="1">
+        <rect width="214.756" height="335.6" stroke="none"/>
+        <rect x="0.5" y="0.5" width="213.756" height="334.6" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>
