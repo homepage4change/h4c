@@ -161,7 +161,16 @@ tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .container', {
   y: "-100%",
   duration: d,
   ease: 'linear'
-}, "-=" + d);
+}, "-=" + d); //Submit button hover event
+
+var lch = document.querySelector('.hero:last-child .heading');
+var sb = document.querySelector('.hero:last-child .submit');
+sb.addEventListener("mouseover", function () {
+  lch.classList.add('pause');
+});
+sb.addEventListener("mouseout", function () {
+  lch.classList.remove('pause');
+});
 
 /***/ }),
 

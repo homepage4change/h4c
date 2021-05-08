@@ -110,6 +110,8 @@
 
 	.heading {
 		position: relative;
+		transition: all 0.3s ease-in-out;
+
 		&:before, &:after {
 			content: "";
 			position: absolute;
@@ -117,6 +119,7 @@
 			/* min-height: 400px; */
 			top: 50%;
 			left: 50%;
+			transition: all 0.3s ease-in-out;
 		}
 
 		//Fat border
@@ -136,7 +139,7 @@
 
 		//Thin border
 		&:after {
-			width: 50vw;
+			width: 52.5vw;
 			height: 30vw;
 			max-width: 1000px;
 			max-height: 600px;
@@ -180,7 +183,7 @@
 			    height: 32.5vw;
 				max-width: 650px;
 				max-height: 650px;
-			    top: -38.5%;
+			    top: -50.5%;
 			    left: 26.5%;
 			    transform: rotate(-7deg);
 			    @include spin("rect2", -7deg, 300s, 0s, "reverse");
@@ -212,10 +215,30 @@
 	&:last-child {
 		button {
 			font-family: 'Druk Wide', Helvetica, sans-serif;
-			font-size: 25px;
+			font-size: 1.8vw;
+			@include atMedia($min, $xlDesktop) {
+				font-size: 2.25rem;
+			}
 			text-transform: uppercase;
 			color: $red;
 			white-space: pre-line;
+			transition: color 0.3s ease-in-out;
+
+			&:hover {
+				color: $plum;
+			}
+		}
+
+		.heading.pause {
+			transform: scale(0.99);
+			&:before {
+				animation-play-state: paused;
+				filter: blur(2px);
+				border-color: $red;
+			}
+			&:after {
+				filter: blur(2px);
+			}
 		}
 	}
 }

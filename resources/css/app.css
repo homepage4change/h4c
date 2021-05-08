@@ -231,6 +231,7 @@ u:after {
 }
 .hero .heading {
   position: relative;
+  transition: all 0.3s ease-in-out;
 }
 .hero .heading:before, .hero .heading:after {
   content: "";
@@ -239,6 +240,7 @@ u:after {
   /* min-height: 400px; */
   top: 50%;
   left: 50%;
+  transition: all 0.3s ease-in-out;
 }
 .hero .heading:before {
   width: 54vw;
@@ -257,7 +259,7 @@ u:after {
   }
 }
 .hero .heading:after {
-  width: 50vw;
+  width: 52.5vw;
   height: 30vw;
   max-width: 1000px;
   max-height: 600px;
@@ -328,7 +330,7 @@ u:after {
   height: 32.5vw;
   max-width: 650px;
   max-height: 650px;
-  top: -38.5%;
+  top: -50.5%;
   left: 26.5%;
   transform: rotate(-7deg);
   animation: spin-rect2 300s infinite reverse 0s;
@@ -434,10 +436,31 @@ u:after {
 }
 .hero:last-child button {
   font-family: "Druk Wide", Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 1.8vw;
   text-transform: uppercase;
   color: #F46153;
   white-space: pre-line;
+  transition: color 0.3s ease-in-out;
+}
+@media screen and (min-width: 2000px) {
+  .hero:last-child button {
+    font-size: 2.25rem;
+  }
+}
+.hero:last-child button:hover {
+  color: #840C4A;
+}
+.hero:last-child .heading.pause {
+  transform: scale(0.99);
+}
+.hero:last-child .heading.pause:before {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+  filter: blur(2px);
+  border-color: #F46153;
+}
+.hero:last-child .heading.pause:after {
+  filter: blur(2px);
 }
 
 .copy p {
