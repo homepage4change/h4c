@@ -7,12 +7,12 @@ html,body {
 
 body {
 	color: $plum;
-	font-family: 'Lacrima', 'Times New Roman', serif;
+	font-family: $serif;
 	background-color: $lime;
 }
 
 h1 {
-	font-family: 'Druk Wide', Helvetica, sans-serif;
+	font-family: $sans-serif;
 	font-size: 1.8vw;
 	text-transform: uppercase;
 	color: $red;
@@ -24,7 +24,7 @@ h1 {
 }
 
 h2 {
-	font-family: 'Druk Wide', Helvetica, sans-serif;
+	font-family: $sans-serif;
 	font-size: 7vw;
 	line-height: 1;
 	text-transform: uppercase;

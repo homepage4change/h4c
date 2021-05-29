@@ -7,6 +7,10 @@ $lavender: #C9A0EE;
 $red: #F46153;
 $plum: #840C4A;
 
+// Fonts
+$serif: 'Lacrima', 'Times New Roman', serif;
+$sans-serif: 'Druk Wide', Helvetica, sans-serif;
+
 
 
 /*============================================================================
@@ -58,30 +62,24 @@ $max: max-width;
 // ==================================================
 
 @mixin atMedia($constraint, $viewport1, $viewport2: null) {
-
   @if $constraint == $min {
-
     @media screen and ($min: $viewport1) {
       @content;
     }
-
   } @else if $constraint == $max {
-
     @media screen and ($max: $viewport1) {
       @content;
     }
-
   } @else {
-
     @media screen and ($min: $viewport1) and ($max: $viewport2) {
       @content;
     }
-
   }
-
 }
 
 
+
+/* HERO BACKGROUND ANIMATION  ---------------------------*/
 @mixin spin($target, $start, $duration, $delay, $direction) {
 	$end: $start + 360deg;
 

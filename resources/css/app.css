@@ -1,15 +1,46 @@
 @charset "UTF-8";
+/* TAILWIND IMPORT  ---------------------------*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* SASS IMPORTS  ---------------------------*/
 /* CONFIG */
 /*============================================================================
   Dependency-free breakpoint mixin
     - http://blog.grayghostvisuals.com/sass/sass-media-query-mixin/
 ==============================================================================*/
+/* HERO BACKGROUND ANIMATION  ---------------------------*/
 /* THEME */
+svg.nav-element {
+  fill: #D4F78B;
+}
+
+button.nav-element {
+  background-color: #D4F78B;
+  color: #C9A0EE;
+}
+
+a:hover svg.nav-element {
+  fill: #840C4A;
+}
+a:hover button.nav-element {
+  background-color: #840C4A;
+  color: #C9A0EE;
+}
+
 .bg-lime {
   background-color: #D4F78B;
+}
+.bg-lime svg.nav-element,
+.bg-lime svg .nav-element {
+  fill: #C9A0EE;
+}
+.bg-lime button.nav-element {
+  background-color: #C9A0EE;
+  color: #D4F78B;
+}
+.bg-lime a:hover button.nav-element {
+  color: #D4F78B;
 }
 
 .bg-lavender {
@@ -23,6 +54,10 @@
 
 .bg-plum {
   background-color: #840C4A;
+}
+
+.blur {
+  filter: blur(4px);
 }
 
 /* FONTS */
@@ -108,69 +143,7 @@ u:after {
   background-color: #F46153;
 }
 
-#app {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.container {
-  height: 100vh;
-}
-
-.card,
-.hero {
-  position: absolute;
-  overflow: hidden;
-  padding: 4.9vw;
-}
-@media screen and (min-width: 2000px) {
-  .card,
-.hero {
-    padding: 98px;
-  }
-}
-
-.card {
-  width: 50%;
-  flex-basis: 50%;
-}
-.card .heading p {
-  font-family: "Lacrima", "Times New Roman", serif;
-  font-weight: normal;
-  text-transform: none;
-  margin: 0.5rem 0;
-  font-size: 1.953125vw;
-}
-@media screen and (min-width: 2000px) {
-  .card .heading p {
-    font-size: 2.4375rem;
-  }
-}
-.card:nth-of-type(2n) {
-  transform: translatey(100%);
-}
-.card:nth-of-type(2n+1) {
-  left: 50%;
-  transform: translatey(-100%);
-}
-
-.card--image {
-  padding: 0;
-}
-.card--image .image {
-  height: 100vh;
-}
-.card--image img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
+/* ANIMATIONS  ---------------------------*/
 @-webkit-keyframes twist {
   0% {
     transform: translate(-50%, -50%) rotate(-8deg);
@@ -182,7 +155,6 @@ u:after {
     transform: translate(-50%, -50%) rotate(-8deg);
   }
 }
-
 @keyframes twist {
   0% {
     transform: translate(-50%, -50%) rotate(-8deg);
@@ -210,39 +182,87 @@ u:after {
     transform: translate(-50%, -50%) rotate(359deg);
   }
 }
-.hero {
-  width: 100%;
-  flex-basis: 100%;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+/* NAV ELEMENTS  ---------------------------*/
+.h4c-logo {
+  width: 10.9375vw;
+  left: 3.90625vw;
+  top: 3.125vw;
+}
+
+.btyb-juliet {
+  width: 10.9375vw;
+  left: 3.90625vw;
+  bottom: 3.125vw;
+}
+
+.hamburger-menu,
+.icon-close-menu {
+  top: 3.125vw;
+  right: 3.90625vw;
+}
+
+.hamburger-menu {
+  width: 4.296875vw;
+}
+.hamburger-menu .hover {
+  transition: all 0.2s ease-in-out;
+}
+.hamburger-menu:hover .hover {
+  transform: translatex(130px);
+}
+
+.icon-close-menu {
+  width: 3.4375vw;
+}
+
+.submit-cta {
+  bottom: 3.125vw;
+  right: 3.90625vw;
+  font-family: "Druk Wide", Helvetica, sans-serif;
+  background-color: #C9A0EE;
+  color: #D4F78B;
+  padding: 0.78125vw 1.015625vw;
+  font-size: 1.5625vw;
+}
+
+#app {
+  transition: all 0.6s ease-in-out;
+}
+
+/* SECTIONS  ---------------------------*/
+.card,
+.slate {
+  padding: 4.9vw;
+}
+@media screen and (min-width: 2000px) {
+  .card,
+.slate {
+    padding: 98px;
+  }
+}
+
+.slate {
   color: #F46153;
 }
-.hero h1, .hero p {
-  white-space: pre-line;
-}
-.hero p {
+.slate p {
   font-size: 1.25vw;
 }
 @media screen and (min-width: 2000px) {
-  .hero p {
+  .slate p {
     font-size: 1.5625rem;
   }
 }
-.hero .heading {
-  position: relative;
+.slate .heading {
   transition: all 0.3s ease-in-out;
 }
-.hero .heading:before, .hero .heading:after {
+.slate .heading:before, .slate .heading:after {
   content: "";
   position: absolute;
-  /* min-width: 700px; */
-  /* min-height: 400px; */
   top: 50%;
   left: 50%;
   transition: all 0.3s ease-in-out;
 }
-.hero .heading:before {
+.slate .heading:before {
   width: 54vw;
   height: 32vw;
   max-width: 1080px;
@@ -250,15 +270,15 @@ u:after {
   z-index: -1;
   transform: translate(-50%, -50%) rotate(-8deg);
   border: 1.5625vw solid #C9A0EE;
-  -webkit-animation: 30s ease-in-out 2s infinite twist;
-          animation: 30s ease-in-out 2s infinite twist;
+  -webkit-animation: 20s ease-in-out 1s infinite twist;
+          animation: 20s ease-in-out 1s infinite twist;
 }
 @media screen and (min-width: 2000px) {
-  .hero .heading:before {
+  .slate .heading:before {
     border: 31.25px solid #C9A0EE;
   }
 }
-.hero .heading:after {
+.slate .heading:after {
   width: 52.5vw;
   height: 30vw;
   max-width: 1000px;
@@ -268,36 +288,30 @@ u:after {
   border: 0.15vw solid #77DF86;
 }
 @media screen and (min-width: 2000px) {
-  .hero .heading:after {
+  .slate .heading:after {
     border: 3px solid #77DF86;
   }
 }
-.hero:nth-of-type(1) .background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+.slate:nth-of-type(1) .background {
   z-index: -2;
 }
-.hero:nth-of-type(1) .background [class*=rect] {
-  position: absolute;
+.slate:nth-of-type(1) .background [class*=rect] {
   border: 0.15vw solid #77DF86;
 }
 @media screen and (min-width: 2000px) {
-  .hero:nth-of-type(1) .background [class*=rect] {
+  .slate:nth-of-type(1) .background [class*=rect] {
     border: 3px solid #77DF86;
   }
 }
-.hero:nth-of-type(1) .background .rect1 {
+.slate:nth-of-type(1) .background .rect1 {
   width: 21.5vw;
   height: 21.5vw;
   max-width: 428px;
   max-height: 428px;
   top: 18.5%;
   left: -11.5%;
-  -webkit-animation: spin-rect1 400s infinite 8s;
-          animation: spin-rect1 400s infinite 8s;
+  -webkit-animation: spin-rect1 300s infinite 8s;
+          animation: spin-rect1 300s infinite 8s;
 }
 @-webkit-keyframes spin-rect1 {
   0% {
@@ -325,7 +339,7 @@ u:after {
     filter: blur(0);
   }
 }
-.hero:nth-of-type(1) .background .rect2 {
+.slate:nth-of-type(1) .background .rect2 {
   width: 32.5vw;
   height: 32.5vw;
   max-width: 650px;
@@ -333,7 +347,7 @@ u:after {
   top: -50.5%;
   left: 26.5%;
   transform: rotate(-7deg);
-  animation: spin-rect2 300s infinite reverse 0s;
+  animation: spin-rect2 200s infinite reverse 0s;
 }
 @-webkit-keyframes spin-rect2 {
   0% {
@@ -361,7 +375,7 @@ u:after {
     filter: blur(0);
   }
 }
-.hero:nth-of-type(1) .background .rect3 {
+.slate:nth-of-type(1) .background .rect3 {
   width: 28vw;
   height: 28vw;
   max-width: 560px;
@@ -369,7 +383,7 @@ u:after {
   bottom: 18.5%;
   right: -18.5%;
   transform: rotate(15deg);
-  animation: spin-rect3 275s infinite reverse 2s;
+  animation: spin-rect3 175s infinite reverse 2s;
 }
 @-webkit-keyframes spin-rect3 {
   0% {
@@ -397,7 +411,7 @@ u:after {
     filter: blur(0);
   }
 }
-.hero:nth-of-type(1) .background .rect4 {
+.slate:nth-of-type(1) .background .rect4 {
   width: 15.5vw;
   height: 30.5vh;
   max-width: 310px;
@@ -405,8 +419,8 @@ u:after {
   left: 56%;
   top: 87%;
   transform: rotate(-32deg);
-  -webkit-animation: spin-rect4 300s infinite 3s;
-          animation: spin-rect4 300s infinite 3s;
+  -webkit-animation: spin-rect4 200s infinite 3s;
+          animation: spin-rect4 200s infinite 3s;
 }
 @-webkit-keyframes spin-rect4 {
   0% {
@@ -434,33 +448,55 @@ u:after {
     filter: blur(0);
   }
 }
-.hero:last-child button {
+.slate:last-child .container button {
   font-family: "Druk Wide", Helvetica, sans-serif;
   font-size: 1.8vw;
-  text-transform: uppercase;
   color: #F46153;
-  white-space: pre-line;
   transition: color 0.3s ease-in-out;
 }
 @media screen and (min-width: 2000px) {
-  .hero:last-child button {
+  .slate:last-child .container button {
     font-size: 2.25rem;
   }
 }
-.hero:last-child button:hover {
+.slate:last-child .container button:hover {
   color: #840C4A;
 }
-.hero:last-child .heading.pause {
+.slate:last-child .heading.pause {
   transform: scale(0.99);
 }
-.hero:last-child .heading.pause:before {
+.slate:last-child .heading.pause:before {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
   filter: blur(2px);
   border-color: #F46153;
 }
-.hero:last-child .heading.pause:after {
+.slate:last-child .heading.pause:after {
   filter: blur(2px);
+}
+
+.card .heading p {
+  font-family: "Lacrima", "Times New Roman", serif;
+  font-weight: normal;
+  text-transform: none;
+  margin: 0.5rem 0;
+  font-size: 1.953125vw;
+}
+@media screen and (min-width: 2000px) {
+  .card .heading p {
+    font-size: 2.4375rem;
+  }
+}
+.card:nth-of-type(2n) {
+  transform: translatey(100%);
+}
+.card:nth-of-type(2n+1) {
+  left: 50%;
+  transform: translatey(-100%);
+}
+
+.card--image {
+  padding: 0;
 }
 
 .copy p {
@@ -468,13 +504,67 @@ u:after {
 }
 @media screen and (min-width: 1280px) and (max-width: 1999.9px) {
   .copy p {
-    font-size: 1.25vw;
+    font-size: 1.125vw;
   }
 }
 @media screen and (min-width: 2000px) {
   .copy p {
     font-size: 1.5625rem;
   }
+}
+
+/* MENU  ---------------------------*/
+#menu {
+  background-color: #C9A0EE;
+  overflow: hidden;
+  transform: translatex(0);
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+#menu .container, #menu .icon-close-menu {
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+#menu .icon-close-menu, #menu .container {
+  position: fixed;
+  transform: translatex(0);
+}
+#menu.hidden {
+  display: flex;
+  background-color: #840C4A;
+  transform: translatex(100vw);
+}
+#menu.hidden .icon-close-menu, #menu.hidden .container {
+  transform: translatex(-100vw);
+}
+#menu a {
+  color: #840C4A;
+  font-family: "Druk Wide", Helvetica, sans-serif;
+  font-size: 3.359375vw;
+  line-height: 1.72;
+  overflow: hidden;
+  background: linear-gradient(to right, #D4F78B, #D4F78B 50%, #840C4A 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 275ms ease;
+  text-decoration: none;
+}
+#menu a:hover {
+  background-position: 0 100%;
+}
+#menu li li a {
+  font-family: "Lacrima", "Times New Roman", serif;
+  font-size: 1.953125vw;
+}
+
+.collapse {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+}
+.collapse.active {
+  max-height: 50vh;
 }
 
 /*# sourceMappingURL=app.css.map*/

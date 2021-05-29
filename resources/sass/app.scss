@@ -1,74 +1,17 @@
-// Tailwind import
-//--------------------------------------------------------------------------------//
-// @import '~tailwindcss/dist/tailwind.min.css';
+/* TAILWIND IMPORT  ---------------------------*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+/* SASS IMPORTS  ---------------------------*/
 @import 'config';
 @import 'theme';
 @import 'fonts';
 @import 'base';
 
 
-#app {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.container {
-	height: 100vh;
-}
-
-.card,
-.hero {
-	position: absolute;
-	overflow: hidden;
-	padding: 4.9vw;
-	@include atMedia($min, $xlDesktop) {
-		padding: 98px;
-	}
-}
-
-.card {
-	width: 50%;
-	flex-basis: 50%;
-
-	.heading p {
-		font-family: 'Lacrima', 'Times New Roman', serif;
-		font-weight: normal;
-		text-transform: none;
-		margin: 0.5rem 0;
-		font-size: 1.953125vw;
-		@include atMedia($min, $xlDesktop) {
-			font-size: 2.4375rem;
-		}
-	}
-
-	&:nth-of-type(2n) {
-		transform: translatey(100%);
-	}
-	&:nth-of-type(2n+1) {
-		left: 50%;
-		transform: translatey(-100%);
-	}
-}
-.card--image {
-	padding: 0;
-	.image {
-		height: 100vh;
-	}
-	img {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-	}
-}
-
+/* ANIMATIONS  ---------------------------*/
 @keyframes twist {
   0% {
     transform: translate(-50%, -50%) rotate(-8deg);
@@ -90,17 +33,66 @@
   }
 }
 
-.hero {
-	width: 100%;
-	flex-basis: 100%;
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
+
+/* NAV ELEMENTS  ---------------------------*/
+.h4c-logo {
+	width: 10.9375vw;
+	left: 3.90625vw;
+	top: 3.125vw;
+}
+.btyb-juliet {
+	width: 10.9375vw;
+	left: 3.90625vw;
+	bottom:3.125vw;
+}
+.hamburger-menu,
+.icon-close-menu {
+	top: 3.125vw;
+	right: 3.90625vw;
+}
+.hamburger-menu {
+	width: 4.296875vw;
+	.hover {
+		transition: all 0.2s ease-in-out;
+	}
+
+	&:hover {
+		.hover {
+			transform: translatex(130px);
+		}
+	}
+}
+.icon-close-menu {
+	width: 3.4375vw;
+}
+.submit-cta {
+	bottom: 3.125vw;
+	right: 3.90625vw;
+	font-family: $sans-serif;
+	background-color: $lavender;
+	color: $lime;
+	padding: 0.78125vw 1.015625vw;
+	font-size: 1.5625vw;
+}
+
+
+#app {
+	transition: all 0.6s ease-in-out;
+}
+
+/* SECTIONS  ---------------------------*/
+.card,
+.slate {
+	padding: 4.9vw;
+	@include atMedia($min, $xlDesktop) {
+		padding: 98px;
+	}
+}
+
+// Slates
+.slate {
 	color: $red;
 
-	h1, p {
-		white-space: pre-line;
-	}
 	p {
 		font-size: 1.25vw;
 		@include atMedia($min, $xlDesktop) {
@@ -109,14 +101,11 @@
 	}
 
 	.heading {
-		position: relative;
 		transition: all 0.3s ease-in-out;
 
 		&:before, &:after {
 			content: "";
 			position: absolute;
-			/* min-width: 700px; */
-			/* min-height: 400px; */
 			top: 50%;
 			left: 50%;
 			transition: all 0.3s ease-in-out;
@@ -134,7 +123,7 @@
 			@include atMedia($min, $xlDesktop) {
 				border: 31.25px solid $lavender;
 			}
-			animation: 30s ease-in-out 2s infinite twist;
+			animation: 20s ease-in-out 1s infinite twist;
 		}
 
 		//Thin border
@@ -155,15 +144,9 @@
 	//Main hero
 	&:nth-of-type(1) {
 		.background {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
 			z-index: -2;
 
 			[class*="rect"] {
-			    position: absolute;
 			    border: 0.15vw solid $slime;
 			    @include atMedia($min, $xlDesktop) {
 					border: 3px solid $slime;
@@ -176,7 +159,7 @@
 			    max-height: 428px;
 			    top: 18.5%;
 			    left: -11.5%;
-			    @include spin("rect1", 0deg, 400s, 8s, null);
+			    @include spin("rect1", 0deg, 300s, 8s, null);
 			}
 			.rect2 {
 			    width: 32.5vw;
@@ -186,7 +169,7 @@
 			    top: -50.5%;
 			    left: 26.5%;
 			    transform: rotate(-7deg);
-			    @include spin("rect2", -7deg, 300s, 0s, "reverse");
+			    @include spin("rect2", -7deg, 200s, 0s, "reverse");
 			}
 			.rect3 {
 				width: 28vw;
@@ -196,7 +179,7 @@
 				bottom: 18.5%;
 				right: -18.5%;
 				transform: rotate(15deg);
-				@include spin("rect3", 15deg, 275s, 2s, "reverse");
+				@include spin("rect3", 15deg, 175s, 2s, "reverse");
 			}
 			.rect4 {
 				width: 15.5vw;
@@ -206,22 +189,20 @@
 			    left: 56%;
     			top: 87%;
 			    transform: rotate(-32deg);
-			    @include spin("rect4", -32deg, 300s, 3s, null);
+			    @include spin("rect4", -32deg, 200s, 3s, null);
 			}
 		}
 	}
 
 	//Final screen
 	&:last-child {
-		button {
-			font-family: 'Druk Wide', Helvetica, sans-serif;
+		.container button {
+			font-family: $sans-serif;
 			font-size: 1.8vw;
 			@include atMedia($min, $xlDesktop) {
 				font-size: 2.25rem;
 			}
-			text-transform: uppercase;
 			color: $red;
-			white-space: pre-line;
 			transition: color 0.3s ease-in-out;
 
 			&:hover {
@@ -243,15 +224,98 @@
 	}
 }
 
+//Cards
+.card {
+	.heading p {
+		font-family: $serif;
+		font-weight: normal;
+		text-transform: none;
+		margin: 0.5rem 0;
+		font-size: 1.953125vw;
+		@include atMedia($min, $xlDesktop) {
+			font-size: 2.4375rem;
+		}
+	}
 
-
+	&:nth-of-type(2n) {
+		transform: translatey(100%);
+	}
+	&:nth-of-type(2n+1) {
+		left: 50%;
+		transform: translatey(-100%);
+	}
+}
+.card--image {
+	padding: 0;
+}
 .copy p {
 	font-size: 1rem;
 	@include atMedia(null, $mdDesktop, $pre-xlDesktop) {
-		font-size: 1.25vw;
+		font-size: 1.125vw;
 	}
 	@include atMedia($min, $xlDesktop) {
 		font-size: 1.5625rem; //25px
 	}
 }
 
+
+/* MENU  ---------------------------*/
+
+#menu {
+	background-color: $lavender;
+	overflow: hidden;
+	transform: translatex(0);
+	transition: 
+		transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+		background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+	.container, .icon-close-menu {
+		transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+	}
+    .icon-close-menu, .container {
+		position: fixed;
+		transform: translatex(0);
+	}
+    &.hidden {
+    	display: flex;
+    	background-color: $plum;
+    	transform: translatex(100vw);
+    	.icon-close-menu, .container {
+			transform: translatex(-100vw);
+		}
+    }
+	a {
+		color: $plum;
+		font-family: $sans-serif;
+		font-size: 3.359375vw;
+		line-height: 1.72;
+		overflow: hidden;
+		
+		background: linear-gradient(to right, $lime, $lime 50%, $plum 50%);
+		background-size: 200% 100%;
+		background-position: 100%;
+
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		transition: background-position 275ms ease;
+		text-decoration: none; // text decorations are clipped in WebKit browsers
+		&:hover {
+			background-position: 0 100%;
+		}
+	}
+
+	li li a {
+		font-family: $serif;
+		font-size: 1.953125vw;
+	}
+
+	
+}
+.collapse {
+	overflow: hidden;
+	max-height: 0;
+	transition: max-height 0.5s ease-in-out;
+	&.active {
+		max-height: 50vh;
+	}
+}

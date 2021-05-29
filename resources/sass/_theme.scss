@@ -1,16 +1,53 @@
 /* THEME */
 
+// .nav-element {
+// 	transition: background-color 0.1s linear, fill 0.1s linear;
+// }
+svg.nav-element {
+	fill: $lime;
+}
+button.nav-element {
+	background-color: $lime;
+	color: $lavender;
+}
+a:hover {
+	svg.nav-element {
+		fill: $plum;
+	}
+	button.nav-element {
+		background-color: $plum;
+		color: $lavender;
+	}
+}
+
 // Background colours
 .bg-lime { 
-	background-color: #D4F78B;
+	background-color: $lime;
+	svg.nav-element,
+	svg .nav-element {
+		fill: $lavender;
+	}
+	button.nav-element {
+		background-color: $lavender;
+		color: $lime;
+	}
+	a:hover {
+		button.nav-element {
+			color: $lime;
+		}
+	}
 }
 .bg-lavender { 
-	background-color: #C9A0EE;
+	background-color: $lavender;
 }
 .bg-red { 
-	background-color: #F46153;
+	background-color: $red;
 	color: $lime;
 }
 .bg-plum { 
-	background-color: #840C4A;
+	background-color: $plum;
+}
+
+.blur {
+	filter: blur(4px);
 }
