@@ -1,39 +1,8 @@
 /* THEME */
 
-svg.nav-element,
-svg .bar {
-	fill: $lime;
-}
-button.nav-element {
-	background-color: $lime;
-	color: $lavender;
-}
-a:hover {
-	svg.nav-element {
-		fill: $plum;
-	}
-	button.nav-element {
-		background-color: $plum;
-		color: $lavender;
-	}
-}
-
 // Background colours
 .bg-lime { 
 	background-color: $lime;
-	svg.nav-element,
-	svg .bar {
-		fill: $lavender;
-	}
-	button.nav-element {
-		background-color: $lavender;
-		color: $lime;
-	}
-	a:hover {
-		button.nav-element {
-			color: $lime;
-		}
-	}
 }
 .bg-lavender { 
 	background-color: $lavender;

@@ -32022,41 +32022,8 @@ video {
 
 /* THEME */
 
-svg.nav-element,
-svg .bar {
-  fill: #D4F78B;
-}
-
-button.nav-element {
-  background-color: #D4F78B;
-  color: #C9A0EE;
-}
-
-a:hover svg.nav-element {
-  fill: #840C4A;
-}
-
-a:hover button.nav-element {
-  background-color: #840C4A;
-  color: #C9A0EE;
-}
-
 .bg-lime {
   background-color: #D4F78B;
-}
-
-.bg-lime svg.nav-element,
-.bg-lime svg .bar {
-  fill: #C9A0EE;
-}
-
-.bg-lime button.nav-element {
-  background-color: #C9A0EE;
-  color: #D4F78B;
-}
-
-.bg-lime a:hover button.nav-element {
-  color: #D4F78B;
 }
 
 .bg-lavender {
@@ -32192,7 +32159,7 @@ u:after {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: background-position 275ms ease;
+  transition: background-position 0.2s ease-in-out;
   text-decoration: none;
 }
 
@@ -32252,10 +32219,33 @@ u:after {
 
 /* NAV ELEMENTS  ---------------------------*/
 
+.hover,
+.default {
+  transition: all 0.2s ease-in-out;
+}
+
+.default,
+.nav-element {
+  fill: #D4F78B;
+}
+
+.bg-lime .default,
+.bg-lime .nav-element {
+  fill: #C9A0EE;
+}
+
 .h4c-logo {
   width: 10.9375vw;
   left: 3.90625vw;
   top: 3.125vw;
+}
+
+.h4c-logo:hover .hover {
+  transform: translate(48px, 37px);
+}
+
+.h4c-logo:hover .default {
+  transform: translate(188px, 37px);
 }
 
 .btyb-juliet {
@@ -32264,18 +32254,16 @@ u:after {
   bottom: 3.125vw;
 }
 
-.hamburger-menu,
-.icon-close-menu {
-  top: 3.125vw;
-  right: 3.90625vw;
+.btyb-juliet:hover .hover {
+  transform: translate(47.137px, 678.851px);
+}
+
+.btyb-juliet:hover .default {
+  transform: translate(187.137px, 678.851px);
 }
 
 .hamburger-menu {
   width: 4.296875vw;
-}
-
-.hamburger-menu .hover {
-  transition: all 0.2s ease-in-out;
 }
 
 .hamburger-menu:hover .hover {
@@ -32286,18 +32274,37 @@ u:after {
   width: 3.4375vw;
 }
 
+.icon-close-menu polygon {
+  fill: #D4F78B;
+  transition: all 0.2s ease-in-out;
+  transform-origin: 50% 50%;
+}
+
+.icon-close-menu:hover polygon {
+  transform: rotate(90deg);
+  fill: #840C4A;
+}
+
+.hamburger-menu,
+.icon-close-menu {
+  top: 3.125vw;
+  right: 3.90625vw;
+}
+
 .submit-cta {
-  font-family: "Druk Wide", Helvetica, sans-serif;
-  background-color: #C9A0EE;
   color: #D4F78B;
   padding: 0.78125vw 1.015625vw;
   font-size: 1.5625vw;
+  font-family: "Druk Wide", Helvetica, sans-serif;
+  background-color: #C9A0EE;
+  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #C9A0EE 50%);
+  -webkit-background-clip: inherit;
+  -webkit-text-fill-color: inherit;
 }
 
-.submit-cta,
-.contact-cta {
-  bottom: 3.125vw;
-  right: 3.90625vw;
+.bg-lavender .submit-cta {
+  color: #C9A0EE;
+  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #D4F78B 50%);
 }
 
 .contact-cta h2, .contact-cta a {
@@ -32311,6 +32318,12 @@ u:after {
 .contact-cta a {
   font-size: 1.25vw;
   background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #C9A0EE 50%);
+}
+
+.submit-cta,
+.contact-cta {
+  bottom: 3.125vw;
+  right: 3.90625vw;
 }
 
 #app {

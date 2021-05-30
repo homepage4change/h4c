@@ -35,45 +35,86 @@
 
 
 /* NAV ELEMENTS  ---------------------------*/
+.hover,
+.default {
+	transition: all 0.2s ease-in-out;
+}
+
+.default,
+.nav-element {
+	fill: $lime;
+
+	.bg-lime & {
+		fill: $lavender;
+	}
+}
+
 .h4c-logo {
 	width: 10.9375vw;
 	left: 3.90625vw;
 	top: 3.125vw;
+	&:hover {
+		.hover {
+			transform: translate(48px, 37px);
+		}
+		.default {
+			transform: translate(188px, 37px);
+		}
+	}
 }
+
 .btyb-juliet {
 	width: 10.9375vw;
 	left: 3.90625vw;
 	bottom:3.125vw;
+	&:hover {
+		.hover {
+			transform: translate(47.137px, 678.851px);
+		}
+		.default {
+			transform: translate(187.137px, 678.851px);
+		}
+	}
 }
-.hamburger-menu,
-.icon-close-menu {
-	top: 3.125vw;
-	right: 3.90625vw;
-}
+
 .hamburger-menu {
 	width: 4.296875vw;
-	.hover {
-		transition: all 0.2s ease-in-out;
-	}
-
 	&:hover .hover {
 		transform: translatex(130px);
 	}
 }
 .icon-close-menu {
 	width: 3.4375vw;
+	polygon {
+		fill: $lime;
+		transition: all 0.2s ease-in-out;
+		transform-origin: 50% 50%;
+	}
+	&:hover polygon {
+		transform: rotate(90deg);
+		fill: $plum;
+	}
 }
+.hamburger-menu,
+.icon-close-menu {
+	top: 3.125vw;
+	right: 3.90625vw;
+}
+
 .submit-cta {	
-	font-family: $sans-serif;
-	background-color: $lavender;
 	color: $lime;
 	padding: 0.78125vw 1.015625vw;
 	font-size: 1.5625vw;
-}
-.submit-cta,
-.contact-cta {
-	bottom: 3.125vw;
-	right: 3.90625vw;
+	font-family: $sans-serif;
+	background-color: $lavender;
+	background-image: linear-gradient(to right, $plum, $plum 50%, $lavender 50%);
+	-webkit-background-clip: inherit;
+	-webkit-text-fill-color: inherit;
+
+	.bg-lavender & {
+		color: $lavender;
+		background-image: linear-gradient(to right, $plum, $plum 50%, $lime 50%);
+	}
 }
 .contact-cta {
 	h2, a {
@@ -86,6 +127,11 @@
 		font-size: 1.25vw;
 		background-image: linear-gradient(to right, $plum, $plum 50%, $lavender 50%);
 	}
+}
+.submit-cta,
+.contact-cta {
+	bottom: 3.125vw;
+	right: 3.90625vw;
 }
 
 

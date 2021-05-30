@@ -57,7 +57,7 @@ u {
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	transition: background-position 275ms ease;
+	transition: background-position 0.2s ease-in-out;
 	text-decoration: none; // text decorations are clipped in WebKit browsers
 	&:hover {
 		background-position: 0 100%;
