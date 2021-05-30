@@ -1,4 +1,4 @@
-<svg class="hamburger-menu nav-element z-1 fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="41" viewBox="0 0 55 41">
+<svg class="hamburger-menu nav-element z-1 absolute" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="41" viewBox="0 0 55 41">
   <defs>
     <clipPath id="clip-path">
       <rect id="mask" width="55" height="41" transform="translate(1172 44)" fill="#fff"/>

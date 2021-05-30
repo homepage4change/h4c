@@ -34,7 +34,7 @@
 // }
 
 
-/* NAV ELEMENTS  ---------------------------*/
+/* NAV ELEMENTS  ---------------------------*/	
 .hover,
 .default {
 	transition: all 0.2s ease-in-out;
@@ -53,12 +53,18 @@
 	width: 10.9375vw;
 	left: 3.90625vw;
 	top: 3.125vw;
+	.default {
+		transform: translate(48px, 37px);
+	}
+	.hover {
+		transform: translate(-92px, 37px);
+	}
 	&:hover {
-		.hover {
-			transform: translate(48px, 37px);
-		}
 		.default {
 			transform: translate(188px, 37px);
+		}
+		.hover {
+			transform: translate(48px, 37px);
 		}
 	}
 }
@@ -67,12 +73,18 @@
 	width: 10.9375vw;
 	left: 3.90625vw;
 	bottom:3.125vw;
+	.default {
+		transform: translate(47.137px, 678.851px);
+	}
+	.hover {
+		transform: translate(-92.86px, 678.851px);
+	}
 	&:hover {
-		.hover {
-			transform: translate(47.137px, 678.851px);
-		}
 		.default {
 			transform: translate(187.137px, 678.851px);
+		}
+		.hover {
+			transform: translate(47.137px, 678.851px);
 		}
 	}
 }
@@ -253,32 +265,32 @@
 	// 		}
 	// 	}
 	// }
+}
 
-	//Final screen
-	&:last-child {
-		.container button {
-			font-family: $sans-serif;
-			font-size: 1.8vw;
-			@include atMedia($min, $xlDesktop) {
-				font-size: 2.25rem;
-			}
-			background-image: linear-gradient(to right, $plum, $plum 50%, $red 50%);
-
-			&:hover {
-				color: $plum;
-			}
+//Final screen
+#the-end {
+	.container a {
+		font-family: $sans-serif;
+		font-size: 1.8vw;
+		@include atMedia($min, $xlDesktop) {
+			font-size: 2.25rem;
 		}
+		background-image: linear-gradient(to right, $plum, $plum 50%, $red 50%);
 
-		.heading.pause {
-			transform: scale(0.99);
-			&:before {
-				animation-play-state: paused;
-				filter: blur(2px);
-				border-color: $red;
-			}
-			&:after {
-				filter: blur(2px);
-			}
+		// &:hover {
+		// 	color: $plum;
+		// }
+	}
+
+	.heading.pause {
+		transform: scale(0.99);
+		&:before {
+			animation-play-state: paused;
+			filter: blur(2px);
+			border-color: $red;
+		}
+		&:after {
+			filter: blur(2px);
 		}
 	}
 }

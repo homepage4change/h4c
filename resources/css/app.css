@@ -172,11 +172,17 @@ u:after {
   left: 3.90625vw;
   top: 3.125vw;
 }
-.h4c-logo:hover .hover {
+.h4c-logo .default {
   transform: translate(48px, 37px);
+}
+.h4c-logo .hover {
+  transform: translate(-92px, 37px);
 }
 .h4c-logo:hover .default {
   transform: translate(188px, 37px);
+}
+.h4c-logo:hover .hover {
+  transform: translate(48px, 37px);
 }
 
 .btyb-juliet {
@@ -184,11 +190,17 @@ u:after {
   left: 3.90625vw;
   bottom: 3.125vw;
 }
-.btyb-juliet:hover .hover {
+.btyb-juliet .default {
   transform: translate(47.137px, 678.851px);
+}
+.btyb-juliet .hover {
+  transform: translate(-92.86px, 678.851px);
 }
 .btyb-juliet:hover .default {
   transform: translate(187.137px, 678.851px);
+}
+.btyb-juliet:hover .hover {
+  transform: translate(47.137px, 678.851px);
 }
 
 .hamburger-menu {
@@ -317,29 +329,27 @@ u:after {
     border: 3px solid #77DF86;
   }
 }
-.slate:last-child .container button {
+
+#the-end .container a {
   font-family: "Druk Wide", Helvetica, sans-serif;
   font-size: 1.8vw;
   background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #F46153 50%);
 }
 @media screen and (min-width: 2000px) {
-  .slate:last-child .container button {
+  #the-end .container a {
     font-size: 2.25rem;
   }
 }
-.slate:last-child .container button:hover {
-  color: #840C4A;
-}
-.slate:last-child .heading.pause {
+#the-end .heading.pause {
   transform: scale(0.99);
 }
-.slate:last-child .heading.pause:before {
+#the-end .heading.pause:before {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
   filter: blur(2px);
   border-color: #F46153;
 }
-.slate:last-child .heading.pause:after {
+#the-end .heading.pause:after {
   filter: blur(2px);
 }
 
