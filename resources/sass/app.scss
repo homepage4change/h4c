@@ -24,14 +24,14 @@
   }
 }
 
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(359deg);
-  }
-}
+// @keyframes spin {
+//   0% {
+//     transform: translate(-50%, -50%) rotate(0);
+//   }
+//   100% {
+//     transform: translate(-50%, -50%) rotate(359deg);
+//   }
+// }
 
 
 /* NAV ELEMENTS  ---------------------------*/
@@ -201,57 +201,57 @@
 	}
 
 	//Main hero
-	&:nth-of-type(1) {
-		.background {
-			z-index: -2;
+	// &:nth-of-type(1) {
+	// 	.background {
+	// 		z-index: -2;
 
-			[class*="rect"] {
-			    border: 0.15vw solid $slime;
-			    @include atMedia($min, $xlDesktop) {
-					border: 3px solid $slime;
-				}
-			}
-			.rect1 {
-				width: 21.5vw;
-			    height: 21.5vw;
-			    max-width: 428px;
-			    max-height: 428px;
-			    top: 18.5%;
-			    left: -11.5%;
-			    @include spin("rect1", 0deg, 300s, 8s, null);
-			}
-			.rect2 {
-			    width: 32.5vw;
-			    height: 32.5vw;
-				max-width: 650px;
-				max-height: 650px;
-			    top: -50.5%;
-			    left: 26.5%;
-			    transform: rotate(-7deg);
-			    @include spin("rect2", -7deg, 200s, 0s, "reverse");
-			}
-			.rect3 {
-				width: 28vw;
-    			height: 28vw;
-				max-width: 560px;
-				max-height: 560px;
-				bottom: 18.5%;
-				right: -18.5%;
-				transform: rotate(15deg);
-				@include spin("rect3", 15deg, 175s, 2s, "reverse");
-			}
-			.rect4 {
-				width: 15.5vw;
-			    height: 30.5vh;
-			    max-width: 310px;
-				max-height: 407px;
-			    left: 56%;
-    			top: 87%;
-			    transform: rotate(-32deg);
-			    @include spin("rect4", -32deg, 200s, 3s, null);
-			}
-		}
-	}
+	// 		[class*="rect"] {
+	// 		    border: 0.15vw solid $slime;
+	// 		    @include atMedia($min, $xlDesktop) {
+	// 				border: 3px solid $slime;
+	// 			}
+	// 		}
+	// 		.rect1 {
+	// 			width: 21.5vw;
+	// 		    height: 21.5vw;
+	// 		    max-width: 428px;
+	// 		    max-height: 428px;
+	// 		    top: 18.5%;
+	// 		    left: -11.5%;
+	// 		    @include spin("rect1", 0deg, 300s, 8s, null);
+	// 		}
+	// 		.rect2 {
+	// 		    width: 32.5vw;
+	// 		    height: 32.5vw;
+	// 			max-width: 650px;
+	// 			max-height: 650px;
+	// 		    top: -50.5%;
+	// 		    left: 26.5%;
+	// 		    transform: rotate(-7deg);
+	// 		    @include spin("rect2", -7deg, 200s, 0s, "reverse");
+	// 		}
+	// 		.rect3 {
+	// 			width: 28vw;
+ //    			height: 28vw;
+	// 			max-width: 560px;
+	// 			max-height: 560px;
+	// 			bottom: 18.5%;
+	// 			right: -18.5%;
+	// 			transform: rotate(15deg);
+	// 			@include spin("rect3", 15deg, 175s, 2s, "reverse");
+	// 		}
+	// 		.rect4 {
+	// 			width: 15.5vw;
+	// 		    height: 30.5vh;
+	// 		    max-width: 310px;
+	// 			max-height: 407px;
+	// 		    left: 56%;
+ //    			top: 87%;
+	// 		    transform: rotate(-32deg);
+	// 		    @include spin("rect4", -32deg, 200s, 3s, null);
+	// 		}
+	// 	}
+	// }
 
 	//Final screen
 	&:last-child {
@@ -261,9 +261,7 @@
 			@include atMedia($min, $xlDesktop) {
 				font-size: 2.25rem;
 			}
-			// color: $red;
 			background-image: linear-gradient(to right, $plum, $plum 50%, $red 50%);
-			// transition: color 0.3s ease-in-out;
 
 			&:hover {
 				color: $plum;
@@ -320,7 +318,6 @@
 
 
 /* MENU  ---------------------------*/
-
 #menu {
 	background-color: $lavender;
 	overflow: hidden;
