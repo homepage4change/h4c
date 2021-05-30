@@ -13,6 +13,10 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//$ and $$ -- Query selector shorthands
+var $ = document.querySelector.bind(document);
+var $$ = document.querySelectorAll.bind(document); //Load Greensock plugin
+
 var gsap = __webpack_require__(/*! gsap/dist/gsap */ "./node_modules/gsap/dist/gsap.js").gsap;
 
 var ScrollTrigger = __webpack_require__(/*! gsap/dist/ScrollTrigger */ "./node_modules/gsap/dist/ScrollTrigger.js").ScrollTrigger;
@@ -21,7 +25,13 @@ var ScrollToPlugin = __webpack_require__(/*! gsap/dist/ScrollToPlugin */ "./node
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
-var app = document.getElementById("app"); //Register a new timeline object
+var app = $("#app");
+var cards = $$('.card');
+var slates = $$('.slate');
+/******************************************************************
+ * Timeline animations
+ ******************************************************************/
+// Register a new timeline object
 
 var tl = gsap.timeline({
   // Attach it to the scroll
@@ -30,7 +40,7 @@ var tl = gsap.timeline({
     pin: true,
     start: "top top",
     end: function end() {
-      return "+=".concat(app.offsetHeight * 10);
+      return "+=".concat(app.offsetHeight * (cards.length / 2 + slates.length / 2));
     },
     scrub: 0.3,
     invalidateOnRefresh: true,
@@ -38,14 +48,9 @@ var tl = gsap.timeline({
       return tl.progress(self.progress);
     }
   }
-});
-var d = 1; //animation duration
+}); // Animation duration
 
-var cards = document.querySelectorAll('.card');
-/**
- * Timeline animations
- */
-//Move the first two cards into the center position
+var d = 1; //Move the first two cards into the center position
 
 tl.fromTo('.card:nth-child(2)', {
   y: "100%"
@@ -112,13 +117,17 @@ for (var i = 1; i < cards.length - 2; i += 2) {
     duration: d,
     ease: 'linear'
   }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', {
-    y: 0
-  }, {
-    y: "100vh",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
+
+  if ($('.card:nth-child(' + (i + 1) + ') .nav-element')) {
+    tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', {
+      y: 0
+    }, {
+      y: "100vh",
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d); ///
+  }
+
   tl.fromTo('.card:nth-child(' + (i + 3) + ')', {
     y: "100%"
   }, {
@@ -133,13 +142,17 @@ for (var i = 1; i < cards.length - 2; i += 2) {
     duration: d,
     ease: 'linear'
   }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', {
-    y: "-100vh"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
+
+  if ($('.card:nth-child(' + (i + 3) + ') .nav-element')) {
+    tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', {
+      y: "-100vh"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d); ///
+  }
+
   tl.fromTo('.card:nth-child(' + (i + 2) + ')', {
     y: 0
   }, {
@@ -154,13 +167,17 @@ for (var i = 1; i < cards.length - 2; i += 2) {
     duration: d,
     ease: 'linear'
   }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', {
-    y: 0
-  }, {
-    y: "-100vh",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
+
+  if ($('.card:nth-child(' + (i + 2) + ') .nav-element')) {
+    tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', {
+      y: 0
+    }, {
+      y: "-100vh",
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d); ///
+  }
+
   tl.fromTo('.card:nth-child(' + (i + 4) + ')', {
     y: "-100%"
   }, {
@@ -175,13 +192,16 @@ for (var i = 1; i < cards.length - 2; i += 2) {
     duration: d,
     ease: 'linear'
   }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', {
-    y: "100vh"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
+
+  if ($('.card:nth-child(' + (i + 4) + ') .nav-element')) {
+    tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', {
+      y: "100vh"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d); ///
+  }
 } //Move the last two cards off stage to reveal the final section
 
 
@@ -199,13 +219,17 @@ tl.fromTo('.card:nth-child(' + cards.length + ') .container', {
   duration: d,
   ease: 'linear'
 }, "-=" + d);
-tl.fromTo('.card:nth-child(' + cards.length + ') .nav-element', {
-  y: 0
-}, {
-  y: "100vh",
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
+
+if ($('.card:nth-child(' + cards.length + ') .nav-element')) {
+  tl.fromTo('.card:nth-child(' + cards.length + ') .nav-element', {
+    y: 0
+  }, {
+    y: "100vh",
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+}
+
 tl.fromTo('.card:nth-child(' + (cards.length + 1) + ')', {
   y: 0
 }, {
@@ -220,32 +244,32 @@ tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .container', {
   duration: d,
   ease: 'linear'
 }, "-=" + d);
-tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .nav-element', {
-  y: 0
-}, {
-  y: "-100vh",
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-/**
+
+if ($('.card:nth-child(' + (cards.length + 1) + ') .nav-element')) {
+  tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .nav-element', {
+    y: 0
+  }, {
+    y: "-100vh",
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+}
+/******************************************************************
  * Event handlers
- */
+ ******************************************************************/
+// Submit button hover
 
-var heading = document.querySelector('#the-end .heading');
-var submitButton = document.querySelector('#the-end .submit');
-var links = document.querySelectorAll('.link-home');
-var burgers = document.querySelectorAll('.hamburger-menu');
-var subMenu = document.querySelector('.collapse');
-var mainMenu = document.getElementById('menu');
-var collapsible = document.querySelector('.collapsible');
-var menuLinks = document.querySelectorAll('.close-menu'); // Submit button hover
 
+var heading = $('#the-end .heading');
+var submitButton = $('#the-end .submit');
 submitButton.addEventListener('mouseover', function () {
   heading.classList.add('pause');
 });
 submitButton.addEventListener('mouseout', function () {
   heading.classList.remove('pause');
 }); //Scroll to top when H4C logo is clicked
+
+var links = $$('.link-home');
 
 var _iterator = _createForOfIteratorHelper(links),
     _step;
@@ -267,10 +291,15 @@ try {
   _iterator.f();
 }
 
+var collapsible = $('.collapsible');
+var subMenu = $('.collapse');
 collapsible.addEventListener('click', function (e) {
   e.preventDefault();
   subMenu.classList.toggle("active");
 }); //Show Main Menu
+
+var burgers = $$('.hamburger-menu');
+var mainMenu = $('#menu');
 
 var _iterator2 = _createForOfIteratorHelper(burgers),
     _step2;
@@ -291,6 +320,8 @@ try {
   _iterator2.f();
 }
 
+var menuLinks = $$('.close-menu');
+
 var _iterator3 = _createForOfIteratorHelper(menuLinks),
     _step3;
 
@@ -299,6 +330,10 @@ try {
     var menuLink = _step3.value;
     menuLink.addEventListener('click', handleMenuLinkClick);
   }
+  /******************************************************************
+   * Functions
+   ******************************************************************/
+
 } catch (err) {
   _iterator3.e(err);
 } finally {
@@ -327,6 +362,7 @@ function handleMenuLinkClick(e) {
 
           if (card.getAttribute('id') == sectionID) {
             scrollOffset = innerHeight + innerHeight * cnt / 2;
+            console.log(cards.length, cnt, tl.totalDuration(), innerHeight, scrollOffset);
             break;
           }
 

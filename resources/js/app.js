@@ -1,41 +1,48 @@
+//$ and $$ -- Query selector shorthands
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+//Load Greensock plugin
 const gsap = require('gsap/dist/gsap').gsap;
 const ScrollTrigger = require('gsap/dist/ScrollTrigger').ScrollTrigger;
 const ScrollToPlugin = require('gsap/dist/ScrollToPlugin').ScrollToPlugin;
-
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
 
-const app = document.getElementById("app");
+const app = $("#app");
+const cards = $$('.card');
+const slates = $$('.slate');
 
-//Register a new timeline object
+
+/******************************************************************
+ * Timeline animations
+ ******************************************************************/
+
+// Register a new timeline object
 const tl = gsap.timeline({
 	// Attach it to the scroll
 	scrollTrigger: {
 		trigger: app,
 		pin: true, 
 		start: "top top", 
-		end: () => `+=${app.offsetHeight * 10}`,
+		end: () => `+=${app.offsetHeight * (cards.length/2 + slates.length/2)}`,
 		scrub: 0.3,
 		invalidateOnRefresh: true,
   		onRefresh: self => tl.progress(self.progress)
 	}
 });
 
-const d = 1; //animation duration
-const cards = document.querySelectorAll('.card');
-
-/**
- * Timeline animations
- */
+// Animation duration
+const d = 1; 
 
 //Move the first two cards into the center position
 tl.fromTo('.card:nth-child(2)', 				{y:"100%"}, 	{y:0, 	duration: d, ease: 'linear'});
 tl.fromTo('.card:nth-child(2) .container', 		{y:"-100%"}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
-tl.fromTo('.card:nth-child(2) .nav-element', {y:"-100vh"}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
+tl.fromTo('.card:nth-child(2) .nav-element', 	{y:"-100vh"}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
 
 tl.fromTo('.card:nth-child(3)', 				{y:"-100%"},	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
 tl.fromTo('.card:nth-child(3) .container',  	{y:"100%"},		{y:0, 	duration: d, ease: 'linear'},	"-="+d);
-tl.fromTo('.card:nth-child(3) .nav-element', {y:"100vh"}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
+tl.fromTo('.card:nth-child(3) .nav-element', 	{y:"100vh"}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
 
 //Hide the hero
 tl.to('#hero', {y:"100%", 	duration: 0, ease: 'linear'});
@@ -45,47 +52,51 @@ for(let i = 1; i < cards.length-2; i+=2) {
 	          //target                                  	//from       //to           //duration      //delay
 	tl.fromTo('.card:nth-child('+(i+1)+')', 				{y:0}, 		 {y:"-100%", 	duration: d, ease: 'linear'});
 	tl.fromTo('.card:nth-child('+(i+1)+') .container', 		{y:0}, 		 {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
-	tl.fromTo('.card:nth-child('+(i+1)+') .nav-element', {y:0}, 		 {y:"100vh", 	duration: d, ease: 'linear'}, 	"-="+d);
+	if($('.card:nth-child('+(i+1)+') .nav-element')) {
+		tl.fromTo('.card:nth-child('+(i+1)+') .nav-element', {y:0}, 		 {y:"100vh", 	duration: d, ease: 'linear'}, 	"-="+d); ///
+	}
 
 	tl.fromTo('.card:nth-child('+(i+3)+')', 				{y:"100%"},  {y:0, 			duration: d, ease: 'linear'},	"-="+d);
 	tl.fromTo('.card:nth-child('+(i+3)+') .container', 		{y:"-100%"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
-	tl.fromTo('.card:nth-child('+(i+3)+') .nav-element', {y:"-100vh"},{y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
+	if($('.card:nth-child('+(i+3)+') .nav-element')) {
+		tl.fromTo('.card:nth-child('+(i+3)+') .nav-element', {y:"-100vh"},{y:0, 			duration: d, ease: 'linear'}, 	"-="+d); ///
+	}
 	
 	tl.fromTo('.card:nth-child('+(i+2)+')', 				{y:0},		 {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
 	tl.fromTo('.card:nth-child('+(i+2)+') .container',  	{y:0},		 {y:"-100%", 	duration: d, ease: 'linear'},	"-="+d);
-	tl.fromTo('.card:nth-child('+(i+2)+') .nav-element', {y:0}, 		 {y:"-100vh", 	duration: d, ease: 'linear'}, 	"-="+d);
+	if($('.card:nth-child('+(i+2)+') .nav-element')) {
+		tl.fromTo('.card:nth-child('+(i+2)+') .nav-element', {y:0}, 		 {y:"-100vh", 	duration: d, ease: 'linear'}, 	"-="+d); ///
+	}
 
 	tl.fromTo('.card:nth-child('+(i+4)+')', 				{y:"-100%"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
 	tl.fromTo('.card:nth-child('+(i+4)+') .container',  	{y:"100%"},  {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
-	tl.fromTo('.card:nth-child('+(i+4)+') .nav-element', {y:"100vh"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
+	if($('.card:nth-child('+(i+4)+') .nav-element')) {
+		tl.fromTo('.card:nth-child('+(i+4)+') .nav-element', {y:"100vh"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d); ///
+	}
 }
 
 //Move the last two cards off stage to reveal the final section
 tl.fromTo('.card:nth-child('+(cards.length)+')', 				{y:0}, 	{y:"-100%", 	duration: d, ease: 'linear'});
 tl.fromTo('.card:nth-child('+(cards.length)+') .container', 	{y:0}, 	{y:"100%", 		duration: d, ease: 'linear'}, 	"-="+d);
-tl.fromTo('.card:nth-child('+(cards.length)+') .nav-element',{y:0},  {y:"100vh", 	duration: d, ease: 'linear'}, 	"-="+d);
+if($('.card:nth-child('+(cards.length)+') .nav-element')) {
+	tl.fromTo('.card:nth-child('+(cards.length)+') .nav-element',	{y:0},  {y:"100vh", 	duration: d, ease: 'linear'}, 	"-="+d);
+}
 
-tl.fromTo('.card:nth-child('+(cards.length+1)+')', 					{y:0}, {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
-tl.fromTo('.card:nth-child('+(cards.length+1)+') .container',  		{y:0}, {y:"-100%", 	duration: d, ease: 'linear'},	"-="+d);
-tl.fromTo('.card:nth-child('+(cards.length+1)+') .nav-element',  {y:0}, {y:"-100vh", duration: d, ease: 'linear'}, 	"-="+d);
+tl.fromTo('.card:nth-child('+(cards.length+1)+')', 				{y:0}, {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
+tl.fromTo('.card:nth-child('+(cards.length+1)+') .container',  	{y:0}, {y:"-100%", 	duration: d, ease: 'linear'},	"-="+d);
+if($('.card:nth-child('+(cards.length+1)+') .nav-element')) {
+	tl.fromTo('.card:nth-child('+(cards.length+1)+') .nav-element',  {y:0}, {y:"-100vh", duration: d, ease: 'linear'}, 	"-="+d);
+}
 
 
 
-/**
+/******************************************************************
  * Event handlers
- */
-
-const heading = document.querySelector('#the-end .heading'); 
-const submitButton = document.querySelector('#the-end .submit');
-const links = document.querySelectorAll('.link-home');
-const burgers = document.querySelectorAll(('.hamburger-menu'));
-const subMenu = document.querySelector(('.collapse'));
-const mainMenu = document.getElementById('menu');
-const collapsible = document.querySelector(('.collapsible'));
-const menuLinks = document.querySelectorAll(('.close-menu'));
-
+ ******************************************************************/
 
 // Submit button hover
+const heading = $('#the-end .heading'); 
+const submitButton = $('#the-end .submit');
 submitButton.addEventListener ('mouseover', function() {
 	heading.classList.add('pause');
 });
@@ -95,6 +106,7 @@ submitButton.addEventListener ('mouseout', function() {
 
 
 //Scroll to top when H4C logo is clicked
+const links = $$('.link-home');
 for (const link of links) {
 	link.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -104,12 +116,16 @@ for (const link of links) {
 
 
 //Toggle (collapse/expand) Sub-menu
+const collapsible = $(('.collapsible'));
+const subMenu = $(('.collapse'));
 collapsible.addEventListener('click', function(e) {
 	e.preventDefault();
 	subMenu.classList.toggle("active");
 });
 
 //Show Main Menu
+const burgers = $$(('.hamburger-menu'));
+const mainMenu = $('#menu');
 for (const burger of burgers) {
 	burger.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -119,12 +135,18 @@ for (const burger of burgers) {
 }
 
 //Hide Main Menu
+const menuLinks = $$(('.close-menu'));
 for (const menuLink of menuLinks) {
 	menuLink.addEventListener('click', handleMenuLinkClick);
 }
 
+
+
+/******************************************************************
+ * Functions
+ ******************************************************************/
+
 function handleMenuLinkClick(e) {
-	
 	const href = this.getAttribute('href') || "";
 
 	if(href.indexOf("https") == -1) {
@@ -141,6 +163,7 @@ function handleMenuLinkClick(e) {
 			for(const card of cards) {
 				if (card.getAttribute('id') == sectionID) {
 					scrollOffset = innerHeight + (innerHeight * cnt/2);
+					console.log(cards.length, cnt, tl.totalDuration(), innerHeight, scrollOffset);
 					break;
 				}
 				cnt++;
