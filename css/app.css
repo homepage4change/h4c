@@ -32284,8 +32284,8 @@ u:after {
   font-family: "Druk Wide", Helvetica, sans-serif;
   background-color: #C9A0EE;
   background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #C9A0EE 50%);
-  -webkit-background-clip: inherit;
-  -webkit-text-fill-color: inherit;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
 }
 
 .bg-lavender .submit-cta {
@@ -32345,6 +32345,7 @@ u:after {
 }
 
 .slate .heading {
+  width: 45vw;
   transition: all 0.3s ease-in-out;
 }
 
@@ -32467,6 +32468,7 @@ u:after {
 /* MENU  ---------------------------*/
 
 #menu {
+  z-index: 100;
   background-color: #C9A0EE;
   overflow: hidden;
   transform: translatex(0);
@@ -32485,15 +32487,14 @@ u:after {
   transform: translatex(0);
 }
 
-#menu.hidden {
-  display: flex;
+#menu.closed {
   background-color: #840C4A;
   transform: translatex(100vw);
 }
 
-#menu.hidden .container,
-#menu.hidden .icon-close-menu,
-#menu.hidden .contact-cta {
+#menu.closed .container,
+#menu.closed .icon-close-menu,
+#menu.closed .contact-cta {
   transform: translatex(-100vw);
 }
 

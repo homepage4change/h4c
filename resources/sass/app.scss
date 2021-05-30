@@ -108,8 +108,8 @@
 	font-family: $sans-serif;
 	background-color: $lavender;
 	background-image: linear-gradient(to right, $plum, $plum 50%, $lavender 50%);
-	-webkit-background-clip: inherit;
-	-webkit-text-fill-color: inherit;
+	-webkit-background-clip: initial;
+	-webkit-text-fill-color: initial;
 
 	.bg-lavender & {
 		color: $lavender;
@@ -160,6 +160,7 @@
 	}
 
 	.heading {
+		width: 45vw;
 		transition: all 0.3s ease-in-out;
 
 		&:before, &:after {
@@ -319,6 +320,7 @@
 
 /* MENU  ---------------------------*/
 #menu {
+	z-index: 100;
 	background-color: $lavender;
 	overflow: hidden;
 	transform: translatex(0);
@@ -338,8 +340,9 @@
 		transform: translatex(0);
 	}
     
-    &.hidden {
-    	display: flex;
+    &.closed {
+    	// z-index: -100;
+    	// display: flex;
     	background-color: $plum;
     	transform: translatex(100vw);
     	.container,

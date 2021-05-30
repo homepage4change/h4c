@@ -263,10 +263,10 @@ if ($('.card:nth-child(' + (cards.length + 1) + ') .nav-element')) {
 var heading = $('#the-end .heading');
 var submitButton = $('#the-end .submit');
 submitButton.addEventListener('mouseover', function () {
-  heading.classList.add('pause');
+  return heading.classList.add('pause');
 });
 submitButton.addEventListener('mouseout', function () {
-  heading.classList.remove('pause');
+  return heading.classList.remove('pause');
 }); //Scroll to top when H4C logo is clicked
 
 var links = $$('.link-home');
@@ -311,6 +311,9 @@ try {
       e.preventDefault();
       mainMenu.classList.remove('hidden');
       app.classList.add('blur');
+      setTimeout(function () {
+        return mainMenu.classList.remove('closed');
+      }, 1);
     });
   } //Hide Main Menu
 
@@ -362,7 +365,6 @@ function handleMenuLinkClick(e) {
 
           if (card.getAttribute('id') == sectionID) {
             scrollOffset = innerHeight + innerHeight * cnt / 2;
-            console.log(cards.length, cnt, tl.totalDuration(), innerHeight, scrollOffset);
             break;
           }
 
@@ -378,7 +380,7 @@ function handleMenuLinkClick(e) {
         scrollTo: scrollOffset,
         duration: 0,
         onComplete: function onComplete() {
-          setTimeout(closeMenu, 200);
+          return setTimeout(closeMenu, 200);
         }
       });
     }
@@ -388,9 +390,12 @@ function handleMenuLinkClick(e) {
 }
 
 function closeMenu() {
-  mainMenu.classList.add('hidden');
   subMenu.classList.remove("active");
   app.classList.remove('blur');
+  mainMenu.classList.add('closed');
+  setTimeout(function () {
+    return mainMenu.classList.add('hidden');
+  }, 1200);
 }
 
 /***/ }),

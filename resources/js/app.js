@@ -50,10 +50,10 @@ tl.to('#hero', {y:"100%", 	duration: 0, ease: 'linear'});
 //Animate all the cards
 for(let i = 1; i < cards.length-2; i+=2) {
 	          //target                                  	//from       //to           //duration      //delay
-	tl.fromTo('.card:nth-child('+(i+1)+')', 				{y:0}, 		 {y:"-100%", 	duration: d, ease: 'linear'});
-	tl.fromTo('.card:nth-child('+(i+1)+') .container', 		{y:0}, 		 {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
+	tl.fromTo('.card:nth-child('+(i+1)+')', 				{y:0}, 		{y:"-100%", 	duration: d, ease: 'linear'});
+	tl.fromTo('.card:nth-child('+(i+1)+') .container', 		{y:0}, 		{y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
 	if($('.card:nth-child('+(i+1)+') .nav-element')) {
-		tl.fromTo('.card:nth-child('+(i+1)+') .nav-element', {y:0}, 		 {y:"100vh", 	duration: d, ease: 'linear'}, 	"-="+d); ///
+		tl.fromTo('.card:nth-child('+(i+1)+') .nav-element', {y:0}, 	{y:"100vh", 	duration: d, ease: 'linear'}, 	"-="+d); ///
 	}
 
 	tl.fromTo('.card:nth-child('+(i+3)+')', 				{y:"100%"},  {y:0, 			duration: d, ease: 'linear'},	"-="+d);
@@ -65,7 +65,7 @@ for(let i = 1; i < cards.length-2; i+=2) {
 	tl.fromTo('.card:nth-child('+(i+2)+')', 				{y:0},		 {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
 	tl.fromTo('.card:nth-child('+(i+2)+') .container',  	{y:0},		 {y:"-100%", 	duration: d, ease: 'linear'},	"-="+d);
 	if($('.card:nth-child('+(i+2)+') .nav-element')) {
-		tl.fromTo('.card:nth-child('+(i+2)+') .nav-element', {y:0}, 		 {y:"-100vh", 	duration: d, ease: 'linear'}, 	"-="+d); ///
+		tl.fromTo('.card:nth-child('+(i+2)+') .nav-element', {y:0}, 	{y:"-100vh", 	duration: d, ease: 'linear'}, 	"-="+d); ///
 	}
 
 	tl.fromTo('.card:nth-child('+(i+4)+')', 				{y:"-100%"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
@@ -97,18 +97,14 @@ if($('.card:nth-child('+(cards.length+1)+') .nav-element')) {
 // Submit button hover
 const heading = $('#the-end .heading'); 
 const submitButton = $('#the-end .submit');
-submitButton.addEventListener ('mouseover', function() {
-	heading.classList.add('pause');
-});
-submitButton.addEventListener ('mouseout', function() {
-	heading.classList.remove('pause');
-});
+submitButton.addEventListener ('mouseover', () => heading.classList.add('pause') );
+submitButton.addEventListener ('mouseout', () => heading.classList.remove('pause') );
 
 
 //Scroll to top when H4C logo is clicked
 const links = $$('.link-home');
 for (const link of links) {
-	link.addEventListener('click', function(e) {
+	link.addEventListener('click', e => {
 		e.preventDefault();
 		gsap.to(window, {scrollTo: 0});
 	});
@@ -118,7 +114,7 @@ for (const link of links) {
 //Toggle (collapse/expand) Sub-menu
 const collapsible = $(('.collapsible'));
 const subMenu = $(('.collapse'));
-collapsible.addEventListener('click', function(e) {
+collapsible.addEventListener('click', e => {
 	e.preventDefault();
 	subMenu.classList.toggle("active");
 });
@@ -127,10 +123,12 @@ collapsible.addEventListener('click', function(e) {
 const burgers = $$(('.hamburger-menu'));
 const mainMenu = $('#menu');
 for (const burger of burgers) {
-	burger.addEventListener('click', function(e) {
+	burger.addEventListener('click', e => {
 		e.preventDefault();
 		mainMenu.classList.remove('hidden');
 		app.classList.add('blur');
+		setTimeout(() => mainMenu.classList.remove('closed'), 1);
+		
 	});
 }
 
@@ -163,7 +161,6 @@ function handleMenuLinkClick(e) {
 			for(const card of cards) {
 				if (card.getAttribute('id') == sectionID) {
 					scrollOffset = innerHeight + (innerHeight * cnt/2);
-					console.log(cards.length, cnt, tl.totalDuration(), innerHeight, scrollOffset);
 					break;
 				}
 				cnt++;
@@ -172,9 +169,7 @@ function handleMenuLinkClick(e) {
 			gsap.to(window, {
 				scrollTo: scrollOffset,
 				duration: 0,
-				onComplete: function() {
-					setTimeout(closeMenu, 200);
-				}
+				onComplete: () => setTimeout(closeMenu, 200)
 			});
 		}
 	}
@@ -184,9 +179,10 @@ function handleMenuLinkClick(e) {
 }
 
 function closeMenu() {
-	mainMenu.classList.add('hidden');
 	subMenu.classList.remove("active");
 	app.classList.remove('blur');
+	mainMenu.classList.add('closed');
+	setTimeout(() => mainMenu.classList.add('hidden'), 1200);
 }
 
 
