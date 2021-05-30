@@ -32022,7 +32022,8 @@ video {
 
 /* THEME */
 
-svg.nav-element {
+svg.nav-element,
+svg .bar {
   fill: #D4F78B;
 }
 
@@ -32045,7 +32046,7 @@ a:hover button.nav-element {
 }
 
 .bg-lime svg.nav-element,
-.bg-lime svg .nav-element {
+.bg-lime svg .bar {
   fill: #C9A0EE;
 }
 
@@ -32184,6 +32185,21 @@ u:after {
   background-color: #F46153;
 }
 
+.swipe {
+  overflow: hidden;
+  background-size: 200% 100%;
+  background-position: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 275ms ease;
+  text-decoration: none;
+}
+
+.swipe:hover {
+  background-position: 0 100%;
+}
+
 /* ANIMATIONS  ---------------------------*/
 
 @-webkit-keyframes twist {
@@ -32271,13 +32287,30 @@ u:after {
 }
 
 .submit-cta {
-  bottom: 3.125vw;
-  right: 3.90625vw;
   font-family: "Druk Wide", Helvetica, sans-serif;
   background-color: #C9A0EE;
   color: #D4F78B;
   padding: 0.78125vw 1.015625vw;
   font-size: 1.5625vw;
+}
+
+.submit-cta,
+.contact-cta {
+  bottom: 3.125vw;
+  right: 3.90625vw;
+}
+
+.contact-cta h2, .contact-cta a {
+  color: #C9A0EE;
+}
+
+.contact-cta h2 {
+  font-size: 1.40625vw;
+}
+
+.contact-cta a {
+  font-size: 1.25vw;
+  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #C9A0EE 50%);
 }
 
 #app {
@@ -32548,8 +32581,7 @@ u:after {
 .slate:last-child .container button {
   font-family: "Druk Wide", Helvetica, sans-serif;
   font-size: 1.8vw;
-  color: #F46153;
-  transition: color 0.3s ease-in-out;
+  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #F46153 50%);
 }
 
 @media screen and (min-width: 2000px) {
@@ -32629,11 +32661,14 @@ u:after {
   transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-#menu .container, #menu .icon-close-menu {
-  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+#menu .container {
+  padding: 0 20px;
 }
 
-#menu .icon-close-menu, #menu .container {
+#menu .container,
+#menu .icon-close-menu,
+#menu .contact-cta {
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
   position: fixed;
   transform: translatex(0);
 }
@@ -32644,7 +32679,9 @@ u:after {
   transform: translatex(100vw);
 }
 
-#menu.hidden .icon-close-menu, #menu.hidden .container {
+#menu.hidden .container,
+#menu.hidden .icon-close-menu,
+#menu.hidden .contact-cta {
   transform: translatex(-100vw);
 }
 
@@ -32653,19 +32690,17 @@ u:after {
   font-family: "Druk Wide", Helvetica, sans-serif;
   font-size: 3.359375vw;
   line-height: 1.72;
-  overflow: hidden;
-  background: linear-gradient(to right, #D4F78B, #D4F78B 50%, #840C4A 50%);
-  background-size: 200% 100%;
-  background-position: 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: background-position 275ms ease;
-  text-decoration: none;
+  background-image: linear-gradient(to right, #D4F78B, #D4F78B 50%, #840C4A 50%);
 }
 
-#menu a:hover {
-  background-position: 0 100%;
+#menu .contact-cta h2 {
+  color: #840C4A;
+}
+
+#menu .contact-cta a {
+  font-size: 1.25vw;
+  line-height: 1.5;
+  font-family: "Lacrima", "Times New Roman", serif;
 }
 
 #menu li li a {

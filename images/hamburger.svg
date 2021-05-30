@@ -1,20 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="41" viewBox="0 0 55 41">
+<svg class="hamburger-menu nav-element z-1 fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="41" viewBox="0 0 55 41">
   <defs>
     <clipPath id="clip-path">
       <rect id="mask" width="55" height="41" transform="translate(1172 44)" fill="#fff"/>
     </clipPath>
   </defs>
-  <g id="hamburger" transform="translate(-1172 -44)" clip-path="url(#clip-path)">
-    <g id="container">
-      <g id="default">
-        <rect id="Rectangle_2" data-name="Rectangle 2" width="55" height="7" transform="translate(1172 44)" fill="#c9a0ee"/>
-        <rect id="Rectangle_62" data-name="Rectangle 62" width="55" height="7" transform="translate(1172 78)" fill="#c9a0ee"/>
-        <rect id="Rectangle_61" data-name="Rectangle 61" width="55" height="7" transform="translate(1172 61)" fill="#c9a0ee"/>
+  <g class="hamburger" transform="translate(-1172 -44)" clip-path="url(#clip-path)">
+    <g>
+      <g class="default">
+        <rect class="bar" data-name="Rectangle 2" width="55" height="7" transform="translate(1172 44)"/>
+        <rect class="bar" data-name="Rectangle 62" width="55" height="7" transform="translate(1172 78)"/>
+        <rect class="bar" data-name="Rectangle 61" width="55" height="7" transform="translate(1172 61)"/>
       </g>
-      <g id="hover" transform="translate(55)">
-        <rect id="Rectangle_130" data-name="Rectangle 130" width="55" height="7" transform="translate(1042 44)" fill="#840c4a"/>
-        <rect id="Rectangle_131" data-name="Rectangle 131" width="75" height="7" transform="translate(1042 78)" fill="#840c4a"/>
-        <rect id="Rectangle_132" data-name="Rectangle 132" width="65" height="7" transform="translate(1042 61)" fill="#840c4a"/>
+      <g class="hover" transform="translate(55)">
+        <rect data-name="Rectangle 130" width="55" height="7" transform="translate(1042 44)" fill="#840c4a"/>
+        <rect data-name="Rectangle 131" width="75" height="7" transform="translate(1042 78)" fill="#840c4a"/>
+        <rect data-name="Rectangle 132" width="65" height="7" transform="translate(1042 61)" fill="#840c4a"/>
       </g>
     </g>
   </g>

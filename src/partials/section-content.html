@@ -1,0 +1,30 @@
+<section id="{{ id }}" class="z-{{ z_index }} card flex h-screen bg-{{ bg_left }} w-1/2 absolute overflow-hidden">
+			
+	<include src="header-left.html"></include>
+	
+	<div class="container mx-auto text-center self-center h-screen">
+		<div class="flex h-full w-full justify-center">
+			<div class="heading self-center relative">
+				<h2>{{ heading_1 }}
+				<p>{{ sub_heading_1 }}</p>
+				{{ heading_2 }}
+				<p>{{ sub_heading_2 }}</p>
+				</h2>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="z-{{ z_index }} card flex h-screen bg-{{ bg_right }} w-1/2 absolute overflow-hidden">
+	
+	<include src="header-right.html"></include>
+
+	<div class="container mx-auto text-center self-center h-screen">
+		<div class="flex h-full w-full justify-center">
+			<div class="copy self-center">
+				<p>{{ content_line_1 }}</p>
+				<p>{{ content_line_2 }}</p>
+				<p>{{ content_line_3 }}</p>
+			</div>
+		</div>
+	</div>
+</section>

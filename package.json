@@ -1,6 +1,8 @@
 {
   "devDependencies": {
-    "laravel-mix": "^6.0.18",
+    "filename-regex": "^2.0.1",
+    "laravel-mix": "^6.0.19",
+    "mix-html-builder": "^0.7.2",
     "sass": "^1.32.12",
     "sass-loader": "^11.0.1"
   },

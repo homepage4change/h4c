@@ -1,9 +1,7 @@
 /* THEME */
 
-// .nav-element {
-// 	transition: background-color 0.1s linear, fill 0.1s linear;
-// }
-svg.nav-element {
+svg.nav-element,
+svg .bar {
 	fill: $lime;
 }
 button.nav-element {
@@ -24,7 +22,7 @@ a:hover {
 .bg-lime { 
 	background-color: $lime;
 	svg.nav-element,
-	svg .nav-element {
+	svg .bar {
 		fill: $lavender;
 	}
 	button.nav-element {
