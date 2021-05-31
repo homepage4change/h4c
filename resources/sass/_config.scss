@@ -52,6 +52,10 @@ $pre-tablet: $tablet - $viewport-increment;
 $palm: 640px; // customize to suite
 $post-palm: $palm + $viewport-increment;
 
+// Palm
+$iphone6: 375px; // customize to suite
+$pre-iphone6: $iphone6 - $viewport-increment;
+
 // Constraints
 $min: min-width;
 $max: max-width;
@@ -103,4 +107,15 @@ $max: max-width;
 	@else {
 		animation: spin-#{$target} $duration infinite $delay;
 	}
+}
+
+
+
+
+/*================ VIEWPORT HEIGHT HELPERS ================*/
+@function vh($quantity) {
+  @return calc(var(--vh, 1vh) * #{$quantity});
+}
+@function ih($quantity) {
+  @return calc(var(--ih, 1vh) * #{$quantity});
 }

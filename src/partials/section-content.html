@@ -1,9 +1,9 @@
-<section id="{{ id }}" class="z-{{ z_index }} card flex h-screen bg-{{ bg_left }} w-1/2 absolute overflow-hidden">
+<section id="{{ id }}" class="z-{{ z_index }} card flex bg-{{ bg_left }} w-full md:w-1/2 relative md:absolute overflow-hidden">
 			
 	<include src="header-left.html"></include>
 	
-	<div class="container mx-auto text-center self-center h-screen">
-		<div class="flex h-full w-full justify-center">
+	<div class="container mx-auto text-center self-center">
+		<div class="flex md:h-full w-full justify-center">
 			<div class="heading self-center relative">
 				<h2>{{ heading_1 }}
 				<p>{{ sub_heading_1 }}</p>
@@ -14,12 +14,12 @@
 		</div>
 	</div>
 </section>
-<section class="z-{{ z_index }} card flex h-screen bg-{{ bg_right }} w-1/2 absolute overflow-hidden">
+<section class="z-{{ z_index }} card flex bg-{{ bg_right }} w-full md:w-1/2 relative md:absolute overflow-hidden">
 	
 	<include src="header-right.html"></include>
 
-	<div class="container mx-auto text-center self-center h-screen">
-		<div class="flex h-full w-full justify-center">
+	<div class="container mx-auto text-center self-center">
+		<div class="flex md:h-full w-full justify-center">
 			<div class="copy self-center">
 				<p>{{ content_line_1 }}</p>
 				<p>{{ content_line_2 }}</p>

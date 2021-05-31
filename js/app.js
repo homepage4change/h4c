@@ -15,7 +15,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 //$ and $$ -- Query selector shorthands
 var $ = document.querySelector.bind(document);
-var $$ = document.querySelectorAll.bind(document); //Load Greensock plugin
+var $$ = document.querySelectorAll.bind(document);
+var app = $("#app");
+var cards = $$('.card');
+var slates = $$('.slate');
+var requestId = null;
+initViewportVars(); //Load Greensock plugin
 
 var gsap = __webpack_require__(/*! gsap/dist/gsap */ "./node_modules/gsap/dist/gsap.js").gsap;
 
@@ -24,235 +29,29 @@ var ScrollTrigger = __webpack_require__(/*! gsap/dist/ScrollTrigger */ "./node_m
 var ScrollToPlugin = __webpack_require__(/*! gsap/dist/ScrollToPlugin */ "./node_modules/gsap/dist/ScrollToPlugin.js").ScrollToPlugin;
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(ScrollToPlugin);
-var app = $("#app");
-var cards = $$('.card');
-var slates = $$('.slate');
-/******************************************************************
- * Timeline animations
- ******************************************************************/
-// Register a new timeline object
+gsap.registerPlugin(ScrollToPlugin); // Register a new timeline object
 
-var tl = gsap.timeline({
-  // Attach it to the scroll
-  scrollTrigger: {
-    trigger: app,
-    pin: true,
-    start: "top top",
-    end: function end() {
-      return "+=".concat(app.offsetHeight * (cards.length / 2 + slates.length / 2));
-    },
-    scrub: 0.3,
-    invalidateOnRefresh: true,
-    onRefresh: function onRefresh(self) {
-      return tl.progress(self.progress);
+var tl;
+
+if (window.innerWidth > 767 && !is_touch_device()) {
+  tl = gsap.timeline({
+    // Attach it to the scroll
+    scrollTrigger: {
+      trigger: app,
+      pin: true,
+      start: "top top",
+      end: function end() {
+        return "+=".concat(app.offsetHeight * (cards.length / 2 + slates.length / 2));
+      },
+      scrub: 0.3,
+      invalidateOnRefresh: true,
+      onRefresh: function onRefresh(self) {
+        return tl.progress(self.progress);
+      }
     }
-  }
-}); // Animation duration
-
-var d = 1; //Move the first two cards into the center position
-
-tl.fromTo('.card:nth-child(2)', {
-  y: "100%"
-}, {
-  y: 0,
-  duration: d,
-  ease: 'linear'
-});
-tl.fromTo('.card:nth-child(2) .container', {
-  y: "-100%"
-}, {
-  y: 0,
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-tl.fromTo('.card:nth-child(2) .nav-element', {
-  y: "-100vh"
-}, {
-  y: 0,
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-tl.fromTo('.card:nth-child(3)', {
-  y: "-100%"
-}, {
-  y: 0,
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-tl.fromTo('.card:nth-child(3) .container', {
-  y: "100%"
-}, {
-  y: 0,
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-tl.fromTo('.card:nth-child(3) .nav-element', {
-  y: "100vh"
-}, {
-  y: 0,
-  duration: d,
-  ease: 'linear'
-}, "-=" + d); //Hide the hero
-
-tl.to('#hero', {
-  y: "100%",
-  duration: 0,
-  ease: 'linear'
-}); //Animate all the cards
-
-for (var i = 1; i < cards.length - 2; i += 2) {
-  //target                                  	//from       //to           //duration      //delay
-  tl.fromTo('.card:nth-child(' + (i + 1) + ')', {
-    y: 0
-  }, {
-    y: "-100%",
-    duration: d,
-    ease: 'linear'
   });
-  tl.fromTo('.card:nth-child(' + (i + 1) + ') .container', {
-    y: 0
-  }, {
-    y: "100%",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-
-  if ($('.card:nth-child(' + (i + 1) + ') .nav-element')) {
-    tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', {
-      y: 0
-    }, {
-      y: "100vh",
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d); ///
-  }
-
-  tl.fromTo('.card:nth-child(' + (i + 3) + ')', {
-    y: "100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 3) + ') .container', {
-    y: "-100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-
-  if ($('.card:nth-child(' + (i + 3) + ') .nav-element')) {
-    tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', {
-      y: "-100vh"
-    }, {
-      y: 0,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d); ///
-  }
-
-  tl.fromTo('.card:nth-child(' + (i + 2) + ')', {
-    y: 0
-  }, {
-    y: "100%",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 2) + ') .container', {
-    y: 0
-  }, {
-    y: "-100%",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-
-  if ($('.card:nth-child(' + (i + 2) + ') .nav-element')) {
-    tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', {
-      y: 0
-    }, {
-      y: "-100vh",
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d); ///
-  }
-
-  tl.fromTo('.card:nth-child(' + (i + 4) + ')', {
-    y: "-100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (i + 4) + ') .container', {
-    y: "100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-
-  if ($('.card:nth-child(' + (i + 4) + ') .nav-element')) {
-    tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', {
-      y: "100vh"
-    }, {
-      y: 0,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d); ///
-  }
-} //Move the last two cards off stage to reveal the final section
-
-
-tl.fromTo('.card:nth-child(' + cards.length + ')', {
-  y: 0
-}, {
-  y: "-100%",
-  duration: d,
-  ease: 'linear'
-});
-tl.fromTo('.card:nth-child(' + cards.length + ') .container', {
-  y: 0
-}, {
-  y: "100%",
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-
-if ($('.card:nth-child(' + cards.length + ') .nav-element')) {
-  tl.fromTo('.card:nth-child(' + cards.length + ') .nav-element', {
-    y: 0
-  }, {
-    y: "100vh",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-}
-
-tl.fromTo('.card:nth-child(' + (cards.length + 1) + ')', {
-  y: 0
-}, {
-  y: "100%",
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .container', {
-  y: 0
-}, {
-  y: "-100%",
-  duration: d,
-  ease: 'linear'
-}, "-=" + d);
-
-if ($('.card:nth-child(' + (cards.length + 1) + ') .nav-element')) {
-  tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .nav-element', {
-    y: 0
-  }, {
-    y: "-100vh",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
+  buildTimeline();
+  window.addEventListener("resize", requestResize);
 }
 /******************************************************************
  * Event handlers
@@ -313,7 +112,7 @@ try {
       app.classList.add('blur');
       setTimeout(function () {
         return mainMenu.classList.remove('closed');
-      }, 1);
+      }, 20);
     });
   } //Hide Main Menu
 
@@ -341,6 +140,230 @@ try {
   _iterator3.e(err);
 } finally {
   _iterator3.f();
+}
+
+function requestResize() {
+  cancelAnimationFrame(requestId);
+  requestId = requestAnimationFrame(resize);
+}
+
+function resize() {
+  var progress = tl.totalProgress();
+  tl.seek(0).clear();
+  buildTimeline(progress);
+}
+
+function buildTimeline(progress) {
+  /******************************************************************
+   * Timeline animations
+   ******************************************************************/
+  // Animation duration
+  var d = 1; //Move the first two cards into the center position
+
+  tl.fromTo('.card:nth-child(2)', {
+    y: "100%"
+  }, {
+    y: 0,
+    duration: d,
+    ease: 'linear'
+  });
+  tl.fromTo('.card:nth-child(2) .container', {
+    y: "-100%"
+  }, {
+    y: 0,
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+  tl.fromTo('.card:nth-child(2) .nav-element', {
+    y: -1 * innerHeight
+  }, {
+    y: 0,
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+  tl.fromTo('.card:nth-child(3)', {
+    y: "-100%"
+  }, {
+    y: 0,
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+  tl.fromTo('.card:nth-child(3) .container', {
+    y: "100%"
+  }, {
+    y: 0,
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+  tl.fromTo('.card:nth-child(3) .nav-element', {
+    y: innerHeight
+  }, {
+    y: 0,
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d); //Hide the hero
+
+  tl.to('#hero', {
+    y: "100%",
+    duration: 0,
+    ease: 'linear'
+  }); //Animate all the cards
+
+  for (var i = 1; i < cards.length - 2; i += 2) {
+    //target                                  	//from       //to           //duration      //delay
+    tl.fromTo('.card:nth-child(' + (i + 1) + ')', {
+      y: 0
+    }, {
+      y: "-100%",
+      duration: d,
+      ease: 'linear'
+    });
+    tl.fromTo('.card:nth-child(' + (i + 1) + ') .container', {
+      y: 0
+    }, {
+      y: "100%",
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+
+    if ($('.card:nth-child(' + (i + 1) + ') .nav-element')) {
+      tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', {
+        y: 0
+      }, {
+        y: innerHeight,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d); ///
+    }
+
+    tl.fromTo('.card:nth-child(' + (i + 3) + ')', {
+      y: "100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(' + (i + 3) + ') .container', {
+      y: "-100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+
+    if ($('.card:nth-child(' + (i + 3) + ') .nav-element')) {
+      tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', {
+        y: -1 * innerHeight
+      }, {
+        y: 0,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d); ///
+    }
+
+    tl.fromTo('.card:nth-child(' + (i + 2) + ')', {
+      y: 0
+    }, {
+      y: "100%",
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(' + (i + 2) + ') .container', {
+      y: 0
+    }, {
+      y: "-100%",
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+
+    if ($('.card:nth-child(' + (i + 2) + ') .nav-element')) {
+      tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', {
+        y: 0
+      }, {
+        y: -1 * innerHeight,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d); ///
+    }
+
+    tl.fromTo('.card:nth-child(' + (i + 4) + ')', {
+      y: "-100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(' + (i + 4) + ') .container', {
+      y: "100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+
+    if ($('.card:nth-child(' + (i + 4) + ') .nav-element')) {
+      tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', {
+        y: innerHeight
+      }, {
+        y: 0,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d); ///
+    }
+  } //Move the last two cards off stage to reveal the final section
+
+
+  tl.fromTo('.card:nth-child(' + cards.length + ')', {
+    y: 0
+  }, {
+    y: "-100%",
+    duration: d,
+    ease: 'linear'
+  });
+  tl.fromTo('.card:nth-child(' + cards.length + ') .container', {
+    y: 0
+  }, {
+    y: "100%",
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+
+  if ($('.card:nth-child(' + cards.length + ') .nav-element')) {
+    tl.fromTo('.card:nth-child(' + cards.length + ') .nav-element', {
+      y: 0
+    }, {
+      y: innerHeight,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+  }
+
+  tl.fromTo('.card:nth-child(' + (cards.length + 1) + ')', {
+    y: 0
+  }, {
+    y: "100%",
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+  tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .container', {
+    y: 0
+  }, {
+    y: "-100%",
+    duration: d,
+    ease: 'linear'
+  }, "-=" + d);
+
+  if ($('.card:nth-child(' + (cards.length + 1) + ') .nav-element')) {
+    tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .nav-element', {
+      y: 0
+    }, {
+      y: -1 * innerHeight,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+  }
+
+  tl.totalProgress(progress || 0);
 }
 
 function handleMenuLinkClick(e) {
@@ -396,6 +419,49 @@ function closeMenu() {
   setTimeout(function () {
     return mainMenu.classList.add('hidden');
   }, 1200);
+}
+
+function setViewPortVars() {
+  if (typeof window.visualViewport !== 'undefined') {
+    var vh = window.visualViewport.height * 0.01;
+    var vw = window.visualViewport.width * 0.01;
+  } else {
+    var vh = window.innerHeight * 0.01;
+    var vw = window.innerWidth * 0.01;
+  }
+
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+  document.documentElement.style.setProperty('--vw', vw + 'px');
+}
+
+function is_touch_device() {
+  var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+
+  var mq = function mq(query) {
+    return window.matchMedia(query).matches;
+  };
+
+  if ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch) {
+    return true;
+  } // include the 'heartz' as a way to have a non matching MQ to help terminate the join
+  // https://git.io/vznFH
+
+
+  var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+  return mq(query);
+}
+
+function initViewportVars() {
+  // Set viewport variables
+  if (typeof window.visualViewport !== 'undefined') {
+    var ih = window.visualViewport.height * 0.01;
+  } else {
+    var ih = window.innerHeight * 0.01;
+  }
+
+  document.documentElement.style.setProperty('--ih', ih + 'px');
+  setViewPortVars();
+  window.addEventListener('resize', setViewPortVars);
 }
 
 /***/ }),
