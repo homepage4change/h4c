@@ -130,10 +130,11 @@ u:after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -3px;
+  bottom: -1px;
   height: 3px;
   width: 100%;
-  background-color: #F46153;
+  background-color: transparent;
+  border: 1px solid #F46153;
 }
 
 .swipe {
@@ -240,10 +241,14 @@ u:after {
 .hamburger-menu {
   height: auto;
   width: 40px;
+  top: 5vw;
+  right: 5vw;
 }
 @media screen and (min-width: 768px) {
   .hamburger-menu {
     width: 4.296875vw;
+    top: 3.125vw;
+    right: 3.90625vw;
   }
 }
 .hamburger-menu:hover .hover {
@@ -252,11 +257,15 @@ u:after {
 
 .icon-close-menu {
   height: auto;
-  width: 40px;
+  width: 30px;
+  top: 5vw;
+  right: 6.5vw;
 }
 @media screen and (min-width: 768px) {
   .icon-close-menu {
     width: 3.4375vw;
+    top: 3.125vw;
+    right: 4.4vw;
   }
 }
 .icon-close-menu polygon {
@@ -267,19 +276,6 @@ u:after {
 .icon-close-menu:hover polygon {
   transform: rotate(90deg);
   fill: #840C4A;
-}
-
-.hamburger-menu,
-.icon-close-menu {
-  top: 5vw;
-  right: 5vw;
-}
-@media screen and (min-width: 768px) {
-  .hamburger-menu,
-.icon-close-menu {
-    top: 3.125vw;
-    right: 3.90625vw;
-  }
 }
 
 .submit-cta {
@@ -322,6 +318,71 @@ u:after {
   }
 }
 
+body > .mobile-nav {
+  position: fixed;
+  z-index: 99;
+}
+@media screen and (min-width: 768px) {
+  body > .mobile-nav {
+    z-index: -99;
+    height: 0;
+    width: 0;
+  }
+  body > .mobile-nav .nav-element {
+    top: -9999px;
+  }
+}
+
+@media screen and (max-width: 767.9px) {
+  .card .nav-element, .slate .nav-element {
+    display: none;
+  }
+
+  .link-home {
+    top: 0;
+    left: 0;
+    width: 85px;
+    height: 35px;
+  }
+
+  .link-menu {
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 30px;
+  }
+
+  .nav-element,
+.default {
+    fill: #C9A0EE;
+  }
+  .page-submission .nav-element,
+.page-submission .default {
+    fill: #840C4A;
+  }
+
+  .link-home .hover, .link-home .default,
+.link-menu .hover,
+.link-menu .default {
+    transition: all 0.1s ease-in-out;
+  }
+  .link-home.lime,
+.link-menu.lime {
+    filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.05));
+  }
+  .link-home.lime .nav-element,
+.link-home.lime .default,
+.link-menu.lime .nav-element,
+.link-menu.lime .default {
+    fill: #D4F78B;
+  }
+  .link-home.lavender .nav-element,
+.link-home.lavender .default,
+.link-menu.lavender .nav-element,
+.link-menu.lavender .default {
+    fill: #C9A0EE;
+  }
+}
 #app {
   height: calc(var(--vh, 1vh) * 100) !important;
   max-height: calc(var(--vh, 1vh) * 100) !important;
@@ -604,6 +665,45 @@ u:after {
   .copy p {
     font-size: 1.5625rem;
   }
+}
+
+.schedule {
+  border: 1px solid #840C4A;
+  width: 100%;
+  margin-top: 3.75vw;
+  padding: 4vw 2vw 1.5vw;
+}
+@media screen and (min-width: 768px) {
+  .schedule {
+    padding: 4vw 6vw 1.5vw;
+  }
+}
+.schedule table {
+  width: 100%;
+  font-size: 3.86vw;
+}
+@media screen and (min-width: 414px) {
+  .schedule table {
+    font-size: 1rem;
+  }
+}
+.schedule thead {
+  text-align: left;
+  font-family: "Druk Wide", Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 2.9vw;
+}
+@media screen and (min-width: 414px) {
+  .schedule thead {
+    font-size: 0.75rem;
+  }
+}
+.schedule th {
+  padding-bottom: 0.5rem;
+}
+.schedule .footnote {
+  font-size: 12px;
+  margin-top: 2.65625vw;
 }
 
 /* MENU  ---------------------------*/

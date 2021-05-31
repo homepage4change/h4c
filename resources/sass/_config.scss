@@ -52,7 +52,11 @@ $pre-tablet: $tablet - $viewport-increment;
 $palm: 640px; // customize to suite
 $post-palm: $palm + $viewport-increment;
 
-// Palm
+// iPhone 6/7/8 Plus
+$lgiPhone: 414px; // customize to suite
+$pre-lgiPhone: $lgiPhone - $viewport-increment;
+
+// iPhone 6
 $iphone6: 375px; // customize to suite
 $pre-iphone6: $iphone6 - $viewport-increment;
 

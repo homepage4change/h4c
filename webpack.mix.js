@@ -20,7 +20,7 @@ mix.js("resources/js/app.js", "js")
 mix.options({ processCssUrls: false });
 
 mix.html({
-    htmlRoot: './src/index.html', // Your html root file(s)
+    htmlRoot: './src/*.html', // Your html root file(s)
     output: './', // The html output folder
     partialRoot: './src/partials',    // default partial path
     layoutRoot: './src/layouts',    // default partial path

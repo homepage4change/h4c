@@ -52,6 +52,11 @@ if (window.innerWidth > 767 && !is_touch_device()) {
   });
   buildTimeline();
   window.addEventListener("resize", requestResize);
+} // if(window.innerWidth <= 767 && is_touch_device()) {
+
+
+if (window.innerWidth <= 767) {
+  mobile_swapNavColours();
 }
 /******************************************************************
  * Event handlers
@@ -462,6 +467,50 @@ function initViewportVars() {
   document.documentElement.style.setProperty('--ih', ih + 'px');
   setViewPortVars();
   window.addEventListener('resize', setViewPortVars);
+}
+
+function mobile_swapNavColours() {
+  var sections = $$('section');
+  window.addEventListener('scroll', function () {
+    var scrollTop = window.pageYOffset;
+
+    var _iterator5 = _createForOfIteratorHelper(sections),
+        _step5;
+
+    try {
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        section = _step5.value;
+        var sectionTop = section.offsetTop;
+        var sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+          console.log(">>>>>", section.id, scrollTop, sectionTop, sectionBottom);
+          $('.mobile-nav.link-home').classList.remove('lime', 'lavender', 'hidden');
+          $('.mobile-nav.link-menu').classList.remove('lime', 'lavender', 'hidden');
+
+          if (section.classList.contains('card--image')) {
+            $('.mobile-nav.link-home').classList.add('hidden');
+            $('.mobile-nav.link-menu').classList.add('hidden');
+          } else if (section.classList.contains('bg-lavender') || section.classList.contains('bg-red')) {
+            $('.mobile-nav.link-home').classList.add('lime');
+            $('.mobile-nav.link-menu').classList.add('lime');
+          } else if (section.classList.contains('bg-lime')) {
+            if (section.id !== "hero") {
+              $('.mobile-nav.link-home').classList.add('lavender');
+              $('.mobile-nav.link-menu').classList.add('lavender');
+            }
+          }
+        } // else {
+        // 	console.log(section.id, scrollTop, sectionTop, sectionBottom);	
+        // }
+
+      }
+    } catch (err) {
+      _iterator5.e(err);
+    } finally {
+      _iterator5.f();
+    }
+  });
 }
 
 /***/ }),
