@@ -32479,7 +32479,6 @@ body > .mobile-nav {
   transition: filter 0.6s ease-in-out;
   height: calc(var(--vh, 1vh) * 100) !important;
   max-height: calc(var(--vh, 1vh) * 100) !important;
-  transform: translate(0px, 0px) !important;
 }
 
 @media screen and (min-width: 768px) {
