@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 
 			tl.fromTo('.card:nth-child('+(i+3)+')', {y:"100%"}, {y:0, duration: d, ease: 'linear'}, "-="+d);
-			tl.fromTo('.card:nth-child('+(i+3)+') .container',	{y:"-100%"}, {y:0, duration: d, ease: 'linear'},"-="+d);
+			tl.fromTo('.card:nth-child('+(i+3)+') .container', {y:"-100%"}, {y:0, duration: d, ease: 'linear'},"-="+d);
 			if($('.card:nth-child('+(i+3)+') .nav-element')) {
 				tl.fromTo('.card:nth-child('+(i+3)+') .nav-element', {y:-1*innerHeight},{y:0, duration: d, ease: 'linear'},"-="+d);
 			}
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 
 			tl.fromTo('.card:nth-child('+(i+4)+')', {y:"-100%"}, {y:0, duration: d, ease: 'linear'},"-="+d);
-			tl.fromTo('.card:nth-child('+(i+4)+') .container', {y:"100%"},  {y:0, duration: d, ease: 'linear'},"-="+d);
+			tl.fromTo('.card:nth-child('+(i+4)+') .container', {y:"100%"}, {y:0, duration: d, ease: 'linear'},"-="+d);
 			if($('.card:nth-child('+(i+4)+') .nav-element')) {
 				tl.fromTo('.card:nth-child('+(i+4)+') .nav-element', {y:innerHeight}, {y:0, duration: d, ease: 'linear'},"-="+d);
 			}
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		tl.fromTo('.card:nth-child('+(cards.length)+')', {y:0},{y:"-100%",duration: d, ease: 'linear'});
 		tl.fromTo('.card:nth-child('+(cards.length)+') .container', {y:0},{ y:"100%", duration: d, ease: 'linear'},"-="+d);
 		if($('.card:nth-child('+(cards.length)+') .nav-element')) {
-			tl.fromTo('.card:nth-child('+(cards.length)+') .nav-element', {y:0},  {y:innerHeight,duration: d, ease: 'linear'},"-="+d);
+			tl.fromTo('.card:nth-child('+(cards.length)+') .nav-element', {y:0}, {y:innerHeight,duration: d, ease: 'linear'},"-="+d);
 		}
 
 		tl.fromTo('.card:nth-child('+(cards.length+1)+')', {y:0}, {y:"100%",duration: d, ease: 'linear'},"-="+d);
