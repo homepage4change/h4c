@@ -136,56 +136,56 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		const d = 1;
 
 		//Move the first two cards into the center position
-		tl.fromTo('.card:nth-child(2)', 				{y:"100%"}, 	{y:0, 	duration: d, ease: 'linear'});
-		tl.fromTo('.card:nth-child(2) .container', 		{y:"-100%"}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
-		tl.fromTo('.card:nth-child(2) .nav-element', 	{y:-1*innerHeight}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
+		tl.fromTo('.card:nth-child(2)', {y:"100%"},{y:0,duration: d, ease: 'linear'});
+		tl.fromTo('.card:nth-child(2) .container',	{y:"-100%"},{y:0,duration: d, ease: 'linear'},"-="+d);
+		tl.fromTo('.card:nth-child(2) .nav-element',{y:-1*innerHeight},{y:0,duration: d, ease: 'linear'},"-="+d);
 
-		tl.fromTo('.card:nth-child(3)', 				{y:"-100%"},	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
-		tl.fromTo('.card:nth-child(3) .container',  	{y:"100%"},		{y:0, 	duration: d, ease: 'linear'},	"-="+d);
-		tl.fromTo('.card:nth-child(3) .nav-element', 	{y:innerHeight}, 	{y:0, 	duration: d, ease: 'linear'}, 	"-="+d);
+		tl.fromTo('.card:nth-child(3)', {y:"-100%"}, {y:0,duration: d, ease: 'linear'},"-="+d);
+		tl.fromTo('.card:nth-child(3) .container', {y:"100%"}, {y:0,duration: d, ease: 'linear'},	"-="+d);
+		tl.fromTo('.card:nth-child(3) .nav-element',{y:innerHeight},{y:0,duration: d, ease: 'linear'},"-="+d);
 
 		//Hide the hero
-		tl.to('#hero', {y:"100%", 	duration: 0, ease: 'linear'});
+		tl.to('#hero', {y:"100%",duration: 0, ease: 'linear'});
 
 		//Animate all the cards
 		for(let i = 1; i < cards.length-2; i+=2) {
-			          //target                                  	//from       //to           //duration      //delay
-			tl.fromTo('.card:nth-child('+(i+1)+')', 				{y:0}, 		{y:"-100%", 	duration: d, ease: 'linear'});
-			tl.fromTo('.card:nth-child('+(i+1)+') .container', 		{y:0}, 		{y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
+			          //target                       //from  //to    //duration //delay
+			tl.fromTo('.card:nth-child('+(i+1)+')', {y:0}, {y:"-100%",duration: d, ease: 'linear'});
+			tl.fromTo('.card:nth-child('+(i+1)+') .container', {y:0}, {y:"100%",duration: d, ease: 'linear'},"-="+d);
 			if($('.card:nth-child('+(i+1)+') .nav-element')) {
-				tl.fromTo('.card:nth-child('+(i+1)+') .nav-element', {y:0}, 	{y:innerHeight, 	duration: d, ease: 'linear'}, 	"-="+d); ///
+				tl.fromTo('.card:nth-child('+(i+1)+') .nav-element', {y:0},{y:innerHeight,duration: d, ease: 'linear'},"-="+d);
 			}
 
-			tl.fromTo('.card:nth-child('+(i+3)+')', 				{y:"100%"},  {y:0, 			duration: d, ease: 'linear'},	"-="+d);
-			tl.fromTo('.card:nth-child('+(i+3)+') .container', 		{y:"-100%"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
+			tl.fromTo('.card:nth-child('+(i+3)+')', {y:"100%"}, {y:0, duration: d, ease: 'linear'}, "-="+d);
+			tl.fromTo('.card:nth-child('+(i+3)+') .container',	{y:"-100%"}, {y:0, duration: d, ease: 'linear'},"-="+d);
 			if($('.card:nth-child('+(i+3)+') .nav-element')) {
-				tl.fromTo('.card:nth-child('+(i+3)+') .nav-element', {y:-1*innerHeight},{y:0, 			duration: d, ease: 'linear'}, 	"-="+d); ///
+				tl.fromTo('.card:nth-child('+(i+3)+') .nav-element', {y:-1*innerHeight},{y:0, duration: d, ease: 'linear'},"-="+d);
 			}
 			
-			tl.fromTo('.card:nth-child('+(i+2)+')', 				{y:0},		 {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
-			tl.fromTo('.card:nth-child('+(i+2)+') .container',  	{y:0},		 {y:"-100%", 	duration: d, ease: 'linear'},	"-="+d);
+			tl.fromTo('.card:nth-child('+(i+2)+')', {y:0}, {y:"100%",duration: d, ease: 'linear'},"-="+d);
+			tl.fromTo('.card:nth-child('+(i+2)+') .container', {y:0}, {y:"-100%",duration: d, ease: 'linear'},	"-="+d);
 			if($('.card:nth-child('+(i+2)+') .nav-element')) {
-				tl.fromTo('.card:nth-child('+(i+2)+') .nav-element', {y:0}, 	{y:-1*innerHeight, 	duration: d, ease: 'linear'}, 	"-="+d); ///
+				tl.fromTo('.card:nth-child('+(i+2)+') .nav-element', {y:0},{y:-1*innerHeight,duration: d, ease: 'linear'},"-="+d);
 			}
 
-			tl.fromTo('.card:nth-child('+(i+4)+')', 				{y:"-100%"}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
-			tl.fromTo('.card:nth-child('+(i+4)+') .container',  	{y:"100%"},  {y:0, 			duration: d, ease: 'linear'}, 	"-="+d);
+			tl.fromTo('.card:nth-child('+(i+4)+')', {y:"-100%"}, {y:0, duration: d, ease: 'linear'},"-="+d);
+			tl.fromTo('.card:nth-child('+(i+4)+') .container', {y:"100%"},  {y:0, duration: d, ease: 'linear'},"-="+d);
 			if($('.card:nth-child('+(i+4)+') .nav-element')) {
-				tl.fromTo('.card:nth-child('+(i+4)+') .nav-element', {y:innerHeight}, {y:0, 			duration: d, ease: 'linear'}, 	"-="+d); ///
+				tl.fromTo('.card:nth-child('+(i+4)+') .nav-element', {y:innerHeight}, {y:0, duration: d, ease: 'linear'},"-="+d);
 			}
 		}
 
 		//Move the last two cards off stage to reveal the final section
-		tl.fromTo('.card:nth-child('+(cards.length)+')', 				{y:0}, 	{y:"-100%", 	duration: d, ease: 'linear'});
-		tl.fromTo('.card:nth-child('+(cards.length)+') .container', 	{y:0}, 	{y:"100%", 		duration: d, ease: 'linear'}, 	"-="+d);
+		tl.fromTo('.card:nth-child('+(cards.length)+')', {y:0},{y:"-100%",duration: d, ease: 'linear'});
+		tl.fromTo('.card:nth-child('+(cards.length)+') .container', {y:0},{ y:"100%", duration: d, ease: 'linear'},"-="+d);
 		if($('.card:nth-child('+(cards.length)+') .nav-element')) {
-			tl.fromTo('.card:nth-child('+(cards.length)+') .nav-element',	{y:0},  {y:innerHeight, 	duration: d, ease: 'linear'}, 	"-="+d);
+			tl.fromTo('.card:nth-child('+(cards.length)+') .nav-element', {y:0},  {y:innerHeight,duration: d, ease: 'linear'},"-="+d);
 		}
 
-		tl.fromTo('.card:nth-child('+(cards.length+1)+')', 				{y:0}, {y:"100%", 	duration: d, ease: 'linear'}, 	"-="+d);
-		tl.fromTo('.card:nth-child('+(cards.length+1)+') .container',  	{y:0}, {y:"-100%", 	duration: d, ease: 'linear'},	"-="+d);
+		tl.fromTo('.card:nth-child('+(cards.length+1)+')', {y:0}, {y:"100%",duration: d, ease: 'linear'},"-="+d);
+		tl.fromTo('.card:nth-child('+(cards.length+1)+') .container', {y:0}, {y:"-100%",duration: d, ease: 'linear'}, "-="+d);
 		if($('.card:nth-child('+(cards.length+1)+') .nav-element')) {
-			tl.fromTo('.card:nth-child('+(cards.length+1)+') .nav-element',  {y:0}, {y:-1*innerHeight, duration: d, ease: 'linear'}, 	"-="+d);
+			tl.fromTo('.card:nth-child('+(cards.length+1)+') .nav-element', {y:0}, {y:-1*innerHeight, duration: d, ease: 'linear'},"-="+d);
 		}
 
 		tl.totalProgress(progress || 0);

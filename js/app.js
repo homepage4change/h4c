@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }); //Animate all the cards
 
     for (var i = 1; i < cards.length - 2; i += 2) {
-      //target                                  	//from       //to           //duration      //delay
+      //target                       //from  //to    //duration //delay
       tl.fromTo('.card:nth-child(' + (i + 1) + ')', {
         y: 0
       }, {
@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           y: innerHeight,
           duration: d,
           ease: 'linear'
-        }, "-=" + d); ///
+        }, "-=" + d);
       }
 
       tl.fromTo('.card:nth-child(' + (i + 3) + ')', {
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           y: 0,
           duration: d,
           ease: 'linear'
-        }, "-=" + d); ///
+        }, "-=" + d);
       }
 
       tl.fromTo('.card:nth-child(' + (i + 2) + ')', {
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           y: -1 * innerHeight,
           duration: d,
           ease: 'linear'
-        }, "-=" + d); ///
+        }, "-=" + d);
       }
 
       tl.fromTo('.card:nth-child(' + (i + 4) + ')', {
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           y: 0,
           duration: d,
           ease: 'linear'
-        }, "-=" + d); ///
+        }, "-=" + d);
       }
     } //Move the last two cards off stage to reveal the final section
 
