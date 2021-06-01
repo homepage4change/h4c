@@ -5,7 +5,7 @@
     </clipPath>
   </defs>
   <g transform="translate(-47.137 -678.85)" clip-path="url(#clip-path1)">
-    <rect class="hover" width="141" height="80" transform="translate(-93.863 678.851)" fill="#840c4a"/>
+    <rect class="hover" width="141" height="80" transform="translate(-93.863 678.851)" fill="#F46153"/>
     <rect class="default" width="141" height="80" transform="translate(47.137 678.851)" />
   </g>
 </svg>

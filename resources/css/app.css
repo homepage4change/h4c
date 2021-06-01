@@ -79,6 +79,7 @@ h1 {
   color: #F46153;
   margin-bottom: 1rem;
   font-size: 17px;
+  line-height: 1.2;
 }
 @media screen and (min-width: 768px) {
   h1 {
@@ -154,6 +155,9 @@ u:after {
 .swipe:hover {
   background-position: 0 100%;
 }
+.bg-lavender .swipe:hover {
+  color: #D4F78B;
+}
 
 /* ANIMATIONS  ---------------------------*/
 @-webkit-keyframes twist {
@@ -191,6 +195,10 @@ u:after {
 .bg-lime .default,
 .bg-lime .nav-element {
   fill: #C9A0EE;
+}
+
+.bg-red .nav-element .hover {
+  fill: #840C4A;
 }
 
 .h4c-logo {
@@ -284,13 +292,13 @@ u:after {
   font-size: 1.5625vw;
   font-family: "Druk Wide", Helvetica, sans-serif;
   background-color: #C9A0EE;
-  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #C9A0EE 50%);
+  background-image: linear-gradient(to right, #F46153, #F46153 50%, #C9A0EE 50%);
   -webkit-background-clip: initial;
   -webkit-text-fill-color: initial;
 }
 .bg-lavender .submit-cta {
   color: #C9A0EE;
-  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #D4F78B 50%);
+  background-image: linear-gradient(to right, #F46153, #F46153 50%, #D4F78B 50%);
 }
 
 .contact-cta h2, .contact-cta a {
@@ -384,6 +392,7 @@ body > .mobile-nav {
   }
 }
 #app {
+  transition: filter 0.6s ease-in-out;
   height: calc(var(--vh, 1vh) * 100) !important;
   max-height: calc(var(--vh, 1vh) * 100) !important;
   transform: translate(0px, 0px) !important;
@@ -417,6 +426,11 @@ body > .mobile-nav {
   color: #F46153;
   height: calc(var(--ih, 1vh) * 100);
 }
+@media screen and (min-width: 768px) {
+  .slate {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
 .slate p {
   font-size: 15px;
 }
@@ -436,7 +450,7 @@ body > .mobile-nav {
   }
 }
 .slate .container {
-  height: calc(var(--ih, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
 }
 .slate .heading {
   width: 65vw;
@@ -503,66 +517,13 @@ body > .mobile-nav {
   }
 }
 
-/*
-#hero {
-	.background {
-		z-index: -2;
-
-		[class*="rect"] {
-		    border: 0.15vw solid $slime;
-		    @include atMedia($min, $xlDesktop) {
-				border: 3px solid $slime;
-			}
-		}
-		.rect1 {
-			width: 21.5vw;
-		    height: 21.5vw;
-		    max-width: 428px;
-		    max-height: 428px;
-		    top: 18.5%;
-		    left: -11.5%;
-		    @include spin("rect1", 0deg, 300s, 8s, null);
-		}
-		.rect2 {
-		    width: 32.5vw;
-		    height: 32.5vw;
-			max-width: 650px;
-			max-height: 650px;
-		    top: -50.5%;
-		    left: 26.5%;
-		    transform: rotate(-7deg);
-		    @include spin("rect2", -7deg, 200s, 0s, "reverse");
-		}
-		.rect3 {
-			width: 28vw;
-   			height: 28vw;
-			max-width: 560px;
-			max-height: 560px;
-			bottom: 18.5%;
-			right: -18.5%;
-			transform: rotate(15deg);
-			@include spin("rect3", 15deg, 175s, 2s, "reverse");
-		}
-		.rect4 {
-			width: 15.5vw;
-		    height: 30.5vh;
-		    max-width: 310px;
-			max-height: 407px;
-		    left: 56%;
-   			top: 87%;
-		    transform: rotate(-32deg);
-		    @include spin("rect4", -32deg, 200s, 3s, null);
-		}
-	}
-}
-*/
 #the-end {
   height: 100vh;
 }
 #the-end .container a {
   font-family: "Druk Wide", Helvetica, sans-serif;
   font-size: 1.25rem;
-  background-image: linear-gradient(to right, #840C4A, #840C4A 50%, #F46153 50%);
+  background-image: linear-gradient(to right, #C9A0EE, #C9A0EE 50%, #F46153 50%);
 }
 @media screen and (min-width: 768px) {
   #the-end .container a {
@@ -574,10 +535,8 @@ body > .mobile-nav {
     font-size: 2.25rem;
   }
 }
-#the-end .heading.pause {
-  transform: scale(0.99);
-}
 #the-end .heading.pause:before {
+  transform: scale(0.99);
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
   filter: blur(2px);
@@ -670,20 +629,34 @@ body > .mobile-nav {
 .schedule {
   border: 1px solid #840C4A;
   width: 100%;
-  margin-top: 3.75vw;
+  max-width: 450px;
+  margin: 3.75vw auto 0;
   padding: 4vw 2vw 1.5vw;
 }
 @media screen and (min-width: 768px) {
   .schedule {
-    padding: 4vw 6vw 1.5vw;
+    padding: 4vw 0 1.5vw;
   }
 }
 .schedule table {
-  width: 100%;
+  margin: 0 auto;
   font-size: 3.86vw;
+  width: 100%;
 }
 @media screen and (min-width: 414px) {
   .schedule table {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .schedule table {
+    width: 290px;
+    font-size: 0.95rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .schedule table {
+    width: 330px;
     font-size: 1rem;
   }
 }
@@ -712,7 +685,7 @@ body > .mobile-nav {
   background-color: #C9A0EE;
   overflow: hidden;
   transform: translatex(0);
-  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 @media screen and (max-width: 767.9px) {
   #menu {
@@ -726,7 +699,7 @@ body > .mobile-nav {
 #menu .container,
 #menu .icon-close-menu,
 #menu .contact-cta {
-  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   position: fixed;
   transform: translatex(0);
 }

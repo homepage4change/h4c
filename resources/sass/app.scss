@@ -24,15 +24,6 @@
   }
 }
 
-// @keyframes spin {
-//   0% {
-//     transform: translate(-50%, -50%) rotate(0);
-//   }
-//   100% {
-//     transform: translate(-50%, -50%) rotate(359deg);
-//   }
-// }
-
 
 /* NAV ELEMENTS  ---------------------------*/	
 .hover,
@@ -47,6 +38,10 @@
 	.bg-lime & {
 		fill: $lavender;
 	}
+}
+
+.bg-red .nav-element .hover {
+	fill: $plum;
 }
 
 .h4c-logo {
@@ -133,16 +128,6 @@
 		fill: $plum;
 	}
 }
-// .hamburger-menu,
-// .icon-close-menu {
-// 	top: 5vw;
-// 	right: 5vw;
-
-// 	@include atMedia($min, $tablet) {
-// 		top: 3.125vw;
-// 		right: 3.90625vw;
-// 	}
-// }
 
 .submit-cta {	
 	color: $lime;
@@ -150,13 +135,13 @@
 	font-size: 1.5625vw;
 	font-family: $sans-serif;
 	background-color: $lavender;
-	background-image: linear-gradient(to right, $plum, $plum 50%, $lavender 50%);
+	background-image: linear-gradient(to right, $red, $red 50%, $lavender 50%);
 	-webkit-background-clip: initial;
 	-webkit-text-fill-color: initial;
 
 	.bg-lavender & {
 		color: $lavender;
-		background-image: linear-gradient(to right, $plum, $plum 50%, $lime 50%);
+		background-image: linear-gradient(to right, $red, $red 50%, $lime 50%);
 	}
 }
 .contact-cta {
@@ -251,7 +236,7 @@ body > .mobile-nav {
 
 
 #app {
-	// transition: all 0.6s ease-in-out;
+	transition: filter 0.6s ease-in-out;
 	height: vh(100)!important;
 	max-height: vh(100)!important;
 	transform: translate(0px, 0px)!important;
@@ -281,6 +266,9 @@ body > .mobile-nav {
 .slate {
 	color: $red;
 	height: ih(100);
+	@include atMedia($min, $tablet) {
+		height: vh(100);
+	}
 
 	p {
 		font-size: 15px;
@@ -296,7 +284,7 @@ body > .mobile-nav {
 	}
 
 	.container {
-		height: ih(100);
+		height: vh(100);
 	}
 
 	.heading {
@@ -359,60 +347,6 @@ body > .mobile-nav {
 	}
 }
 
-//Main hero
-/*
-#hero {
-	.background {
-		z-index: -2;
-
-		[class*="rect"] {
-		    border: 0.15vw solid $slime;
-		    @include atMedia($min, $xlDesktop) {
-				border: 3px solid $slime;
-			}
-		}
-		.rect1 {
-			width: 21.5vw;
-		    height: 21.5vw;
-		    max-width: 428px;
-		    max-height: 428px;
-		    top: 18.5%;
-		    left: -11.5%;
-		    @include spin("rect1", 0deg, 300s, 8s, null);
-		}
-		.rect2 {
-		    width: 32.5vw;
-		    height: 32.5vw;
-			max-width: 650px;
-			max-height: 650px;
-		    top: -50.5%;
-		    left: 26.5%;
-		    transform: rotate(-7deg);
-		    @include spin("rect2", -7deg, 200s, 0s, "reverse");
-		}
-		.rect3 {
-			width: 28vw;
-   			height: 28vw;
-			max-width: 560px;
-			max-height: 560px;
-			bottom: 18.5%;
-			right: -18.5%;
-			transform: rotate(15deg);
-			@include spin("rect3", 15deg, 175s, 2s, "reverse");
-		}
-		.rect4 {
-			width: 15.5vw;
-		    height: 30.5vh;
-		    max-width: 310px;
-			max-height: 407px;
-		    left: 56%;
-   			top: 87%;
-		    transform: rotate(-32deg);
-		    @include spin("rect4", -32deg, 200s, 3s, null);
-		}
-	}
-}
-*/
 
 //Final screen
 #the-end {
@@ -427,16 +361,12 @@ body > .mobile-nav {
 		@include atMedia($min, $xlDesktop) {
 			font-size: 2.25rem;
 		}
-		background-image: linear-gradient(to right, $plum, $plum 50%, $red 50%);
-
-		// &:hover {
-		// 	color: $plum;
-		// }
+		background-image: linear-gradient(to right, $lavender, $lavender 50%, $red 50%);
 	}
 
 	.heading.pause {
-		transform: scale(0.99);
 		&:before {
+			transform: scale(0.99);
 			animation-play-state: paused;
 			filter: blur(2px);
 			border-color: $red;
@@ -518,18 +448,28 @@ body > .mobile-nav {
 .schedule {
 	border: 1px solid $plum;
 	width: 100%;
-	margin-top: 3.75vw;
+	max-width: 450px;
+	margin: 3.75vw auto 0;
 	
 	padding: 4vw 2vw 1.5vw;
 
 	@include atMedia($min, $tablet) {
-		padding: 4vw 6vw 1.5vw;
+		padding: 4vw 0 1.5vw;
 	}
 
 	table {
-		width: 100%;
+		margin: 0 auto;
 		font-size: 3.86vw;
+		width: 100%;
 		@include atMedia($min, $lgiPhone) {
+			font-size: 1rem;
+		}
+		@include atMedia($min, $tablet) {
+			width: 290px;
+			font-size: 0.95rem;
+		}
+		@include atMedia($min, $smDesktop) {
+			width: 330px;
 			font-size: 1rem;
 		}
 	}
@@ -561,7 +501,7 @@ body > .mobile-nav {
 	overflow: hidden;
 	transform: translatex(0);
 	transition: 
-	transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+	transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
 	background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 
 	@include atMedia($max, $pre-tablet) {
@@ -576,22 +516,22 @@ body > .mobile-nav {
 	.container, 
 	.icon-close-menu,
 	.contact-cta  {
-		transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+		transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 		position: fixed;
 		transform: translatex(0);
 	}
     
-    &.closed {
-    	// z-index: -100;
-    	// display: flex;
-    	background-color: $plum;
-    	transform: translatex(100vw);
-    	.container,
-    	.icon-close-menu,
-    	.contact-cta {
+  &.closed {
+  	// z-index: -100;
+  	// display: flex;
+  	background-color: $plum;
+  	transform: translatex(100vw);
+  	.container,
+  	.icon-close-menu,
+  	.contact-cta {
 			transform: translatex(-100vw);
 		}
-    }
+  }
 	
 	a {
 		color: $plum;

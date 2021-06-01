@@ -18,6 +18,8 @@ h1 {
 	margin-bottom: 1rem;
 
 	font-size: 17px;
+	line-height: 1.2;
+
 	@include atMedia($min, $tablet) {
 		font-size: 1.8vw;
 	}
@@ -78,5 +80,8 @@ u {
 	text-decoration: none; // text decorations are clipped in WebKit browsers
 	&:hover {
 		background-position: 0 100%;
+		.bg-lavender & {
+			color: $lime;
+		}
 	}
 }

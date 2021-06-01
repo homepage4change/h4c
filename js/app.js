@@ -16,214 +16,344 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //$ and $$ -- Query selector shorthands
 var $ = document.querySelector.bind(document);
 var $$ = document.querySelectorAll.bind(document);
-var app = $("#app");
-var cards = $$('.card');
-var slates = $$('.slate');
-var requestId = null;
-initViewportVars(); //Load Greensock plugin
+document.addEventListener("DOMContentLoaded", function (event) {
+  var app = $("#app");
+  var cards = $$('.card');
+  var slates = $$('.slate');
+  var requestId = null;
 
-var gsap = __webpack_require__(/*! gsap/dist/gsap */ "./node_modules/gsap/dist/gsap.js").gsap;
+  if (is_touch_device()) {
+    $('body').classList.add('is-touch');
+  }
 
-var ScrollTrigger = __webpack_require__(/*! gsap/dist/ScrollTrigger */ "./node_modules/gsap/dist/ScrollTrigger.js").ScrollTrigger;
+  initViewportVars(); //Load Greensock plugin
 
-var ScrollToPlugin = __webpack_require__(/*! gsap/dist/ScrollToPlugin */ "./node_modules/gsap/dist/ScrollToPlugin.js").ScrollToPlugin;
+  var gsap = __webpack_require__(/*! gsap/dist/gsap */ "./node_modules/gsap/dist/gsap.js").gsap;
 
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(ScrollToPlugin); // Register a new timeline object
+  var ScrollTrigger = __webpack_require__(/*! gsap/dist/ScrollTrigger */ "./node_modules/gsap/dist/ScrollTrigger.js").ScrollTrigger;
 
-var tl;
+  var ScrollToPlugin = __webpack_require__(/*! gsap/dist/ScrollToPlugin */ "./node_modules/gsap/dist/ScrollToPlugin.js").ScrollToPlugin;
 
-if (window.innerWidth > 767 && !is_touch_device()) {
-  tl = gsap.timeline({
-    // Attach it to the scroll
-    scrollTrigger: {
-      trigger: app,
-      pin: true,
-      start: "top top",
-      end: function end() {
-        return "+=".concat(app.offsetHeight * (cards.length / 2 + slates.length / 2));
-      },
-      scrub: 0.3,
-      invalidateOnRefresh: true,
-      onRefresh: function onRefresh(self) {
-        return tl.progress(self.progress);
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollToPlugin); // Register a new timeline object
+
+  var tl;
+
+  if (window.innerWidth > 767) {
+    tl = gsap.timeline({
+      // Attach it to the scroll
+      scrollTrigger: {
+        trigger: app,
+        pin: true,
+        start: "top top",
+        end: function end() {
+          return "+=".concat(app.offsetHeight * (cards.length / 2 + slates.length / 2));
+        },
+        scrub: 0.3,
+        invalidateOnRefresh: true,
+        onRefresh: function onRefresh(self) {
+          return tl.progress(self.progress);
+        }
       }
-    }
-  });
-  buildTimeline();
-  window.addEventListener("resize", requestResize);
-} // if(window.innerWidth <= 767 && is_touch_device()) {
-
-
-if (window.innerWidth <= 767) {
-  mobile_swapNavColours();
-}
-/******************************************************************
- * Event handlers
- ******************************************************************/
-// Submit button hover
-
-
-var heading = $('#the-end .heading');
-var submitButton = $('#the-end .submit');
-submitButton.addEventListener('mouseover', function () {
-  return heading.classList.add('pause');
-});
-submitButton.addEventListener('mouseout', function () {
-  return heading.classList.remove('pause');
-}); //Scroll to top when H4C logo is clicked
-
-var links = $$('.link-home');
-
-var _iterator = _createForOfIteratorHelper(links),
-    _step;
-
-try {
-  for (_iterator.s(); !(_step = _iterator.n()).done;) {
-    var link = _step.value;
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      gsap.to(window, {
-        scrollTo: 0
-      });
     });
-  } //Toggle (collapse/expand) Sub-menu
+    buildTimeline();
+    window.addEventListener("resize", requestResize);
+  } // if(window.innerWidth <= 767 && is_touch_device()) {
 
-} catch (err) {
-  _iterator.e(err);
-} finally {
-  _iterator.f();
-}
 
-var collapsible = $('.collapsible');
-var subMenu = $('.collapse');
-collapsible.addEventListener('click', function (e) {
-  e.preventDefault();
-  subMenu.classList.toggle("active");
-}); //Show Main Menu
-
-var burgers = $$('.hamburger-menu');
-var mainMenu = $('#menu');
-
-var _iterator2 = _createForOfIteratorHelper(burgers),
-    _step2;
-
-try {
-  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-    var burger = _step2.value;
-    burger.addEventListener('click', function (e) {
-      e.preventDefault();
-      mainMenu.classList.remove('hidden');
-      app.classList.add('blur');
-      setTimeout(function () {
-        return mainMenu.classList.remove('closed');
-      }, 20);
-    });
-  } //Hide Main Menu
-
-} catch (err) {
-  _iterator2.e(err);
-} finally {
-  _iterator2.f();
-}
-
-var menuLinks = $$('.close-menu');
-
-var _iterator3 = _createForOfIteratorHelper(menuLinks),
-    _step3;
-
-try {
-  for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-    var menuLink = _step3.value;
-    menuLink.addEventListener('click', handleMenuLinkClick);
+  if (window.innerWidth <= 767) {
+    mobile_swapNavColours();
   }
   /******************************************************************
-   * Functions
+   * Event handlers
    ******************************************************************/
+  // Final screen submit link hover effect
 
-} catch (err) {
-  _iterator3.e(err);
-} finally {
-  _iterator3.f();
-}
 
-function requestResize() {
-  cancelAnimationFrame(requestId);
-  requestId = requestAnimationFrame(resize);
-}
-
-function resize() {
-  var progress = tl.totalProgress();
-  tl.seek(0).clear();
-  buildTimeline(progress);
-}
-
-function buildTimeline(progress) {
-  /******************************************************************
-   * Timeline animations
-   ******************************************************************/
-  // Animation duration
-  var d = 1; //Move the first two cards into the center position
-
-  tl.fromTo('.card:nth-child(2)', {
-    y: "100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
+  var heading = $('#the-end .heading');
+  var submitButton = $('#the-end .submit');
+  submitButton.addEventListener('mouseover', function () {
+    return heading.classList.add('pause');
   });
-  tl.fromTo('.card:nth-child(2) .container', {
-    y: "-100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(2) .nav-element', {
-    y: -1 * innerHeight
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(3)', {
-    y: "-100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(3) .container', {
-    y: "100%"
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(3) .nav-element', {
-    y: innerHeight
-  }, {
-    y: 0,
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d); //Hide the hero
+  submitButton.addEventListener('mouseout', function () {
+    return heading.classList.remove('pause');
+  }); //Fix submit button width -- ensure width is a round number
 
-  tl.to('#hero', {
-    y: "100%",
-    duration: 0,
-    ease: 'linear'
-  }); //Animate all the cards
+  setTimeout(fixButtonWidth, 1000);
+  window.addEventListener('resize', fixButtonWidth); //Scroll to top when H4C logo is clicked
 
-  for (var i = 1; i < cards.length - 2; i += 2) {
-    //target                                  	//from       //to           //duration      //delay
-    tl.fromTo('.card:nth-child(' + (i + 1) + ')', {
+  var links = $$('.link-home');
+
+  var _iterator = _createForOfIteratorHelper(links),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var link = _step.value;
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        gsap.to(window, {
+          scrollTo: 0
+        });
+      });
+    } //Toggle (collapse/expand) Sub-menu
+
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  var collapsible = $('.collapsible');
+  var subMenu = $('.collapse');
+  collapsible.addEventListener('click', function (e) {
+    e.preventDefault();
+    subMenu.classList.toggle("active");
+  }); //Show Main Menu
+
+  var burgers = $$('.hamburger-menu');
+  var mainMenu = $('#menu');
+
+  var _iterator2 = _createForOfIteratorHelper(burgers),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var burger = _step2.value;
+      burger.addEventListener('click', function (e) {
+        e.preventDefault();
+        mainMenu.classList.remove('hidden');
+        app.classList.add('blur');
+        setTimeout(function () {
+          return mainMenu.classList.remove('closed');
+        }, 20);
+      });
+    } //Hide Main Menu
+
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  var menuLinks = $$('.close-menu');
+
+  var _iterator3 = _createForOfIteratorHelper(menuLinks),
+      _step3;
+
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var menuLink = _step3.value;
+      menuLink.addEventListener('click', handleMenuLinkClick);
+    }
+    /******************************************************************
+     * Functions
+     ******************************************************************/
+
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
+  }
+
+  function fixButtonWidth() {
+    var buttons = $$('.submit-cta');
+
+    var _iterator4 = _createForOfIteratorHelper(buttons),
+        _step4;
+
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        button = _step4.value;
+        button.style.width = "auto";
+        button.style.width = Math.round(button.clientWidth) + "px";
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+  }
+
+  function requestResize() {
+    cancelAnimationFrame(requestId);
+    requestId = requestAnimationFrame(resize);
+  }
+
+  function resize() {
+    var progress = tl.totalProgress();
+    tl.seek(0).clear();
+    buildTimeline(progress);
+  }
+
+  function buildTimeline(progress) {
+    /******************************************************************
+     * Timeline animations
+     ******************************************************************/
+    // Animation duration
+    var d = 1; //Move the first two cards into the center position
+
+    tl.fromTo('.card:nth-child(2)', {
+      y: "100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    });
+    tl.fromTo('.card:nth-child(2) .container', {
+      y: "-100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(2) .nav-element', {
+      y: -1 * innerHeight
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(3)', {
+      y: "-100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(3) .container', {
+      y: "100%"
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d);
+    tl.fromTo('.card:nth-child(3) .nav-element', {
+      y: innerHeight
+    }, {
+      y: 0,
+      duration: d,
+      ease: 'linear'
+    }, "-=" + d); //Hide the hero
+
+    tl.to('#hero', {
+      y: "100%",
+      duration: 0,
+      ease: 'linear'
+    }); //Animate all the cards
+
+    for (var i = 1; i < cards.length - 2; i += 2) {
+      //target                                  	//from       //to           //duration      //delay
+      tl.fromTo('.card:nth-child(' + (i + 1) + ')', {
+        y: 0
+      }, {
+        y: "-100%",
+        duration: d,
+        ease: 'linear'
+      });
+      tl.fromTo('.card:nth-child(' + (i + 1) + ') .container', {
+        y: 0
+      }, {
+        y: "100%",
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+
+      if ($('.card:nth-child(' + (i + 1) + ') .nav-element')) {
+        tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', {
+          y: 0
+        }, {
+          y: innerHeight,
+          duration: d,
+          ease: 'linear'
+        }, "-=" + d); ///
+      }
+
+      tl.fromTo('.card:nth-child(' + (i + 3) + ')', {
+        y: "100%"
+      }, {
+        y: 0,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+      tl.fromTo('.card:nth-child(' + (i + 3) + ') .container', {
+        y: "-100%"
+      }, {
+        y: 0,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+
+      if ($('.card:nth-child(' + (i + 3) + ') .nav-element')) {
+        tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', {
+          y: -1 * innerHeight
+        }, {
+          y: 0,
+          duration: d,
+          ease: 'linear'
+        }, "-=" + d); ///
+      }
+
+      tl.fromTo('.card:nth-child(' + (i + 2) + ')', {
+        y: 0
+      }, {
+        y: "100%",
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+      tl.fromTo('.card:nth-child(' + (i + 2) + ') .container', {
+        y: 0
+      }, {
+        y: "-100%",
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+
+      if ($('.card:nth-child(' + (i + 2) + ') .nav-element')) {
+        tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', {
+          y: 0
+        }, {
+          y: -1 * innerHeight,
+          duration: d,
+          ease: 'linear'
+        }, "-=" + d); ///
+      }
+
+      tl.fromTo('.card:nth-child(' + (i + 4) + ')', {
+        y: "-100%"
+      }, {
+        y: 0,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+      tl.fromTo('.card:nth-child(' + (i + 4) + ') .container', {
+        y: "100%"
+      }, {
+        y: 0,
+        duration: d,
+        ease: 'linear'
+      }, "-=" + d);
+
+      if ($('.card:nth-child(' + (i + 4) + ') .nav-element')) {
+        tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', {
+          y: innerHeight
+        }, {
+          y: 0,
+          duration: d,
+          ease: 'linear'
+        }, "-=" + d); ///
+      }
+    } //Move the last two cards off stage to reveal the final section
+
+
+    tl.fromTo('.card:nth-child(' + cards.length + ')', {
       y: 0
     }, {
       y: "-100%",
       duration: d,
       ease: 'linear'
     });
-    tl.fromTo('.card:nth-child(' + (i + 1) + ') .container', {
+    tl.fromTo('.card:nth-child(' + cards.length + ') .container', {
       y: 0
     }, {
       y: "100%",
@@ -231,49 +361,24 @@ function buildTimeline(progress) {
       ease: 'linear'
     }, "-=" + d);
 
-    if ($('.card:nth-child(' + (i + 1) + ') .nav-element')) {
-      tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', {
+    if ($('.card:nth-child(' + cards.length + ') .nav-element')) {
+      tl.fromTo('.card:nth-child(' + cards.length + ') .nav-element', {
         y: 0
       }, {
         y: innerHeight,
         duration: d,
         ease: 'linear'
-      }, "-=" + d); ///
+      }, "-=" + d);
     }
 
-    tl.fromTo('.card:nth-child(' + (i + 3) + ')', {
-      y: "100%"
-    }, {
-      y: 0,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d);
-    tl.fromTo('.card:nth-child(' + (i + 3) + ') .container', {
-      y: "-100%"
-    }, {
-      y: 0,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d);
-
-    if ($('.card:nth-child(' + (i + 3) + ') .nav-element')) {
-      tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', {
-        y: -1 * innerHeight
-      }, {
-        y: 0,
-        duration: d,
-        ease: 'linear'
-      }, "-=" + d); ///
-    }
-
-    tl.fromTo('.card:nth-child(' + (i + 2) + ')', {
+    tl.fromTo('.card:nth-child(' + (cards.length + 1) + ')', {
       y: 0
     }, {
       y: "100%",
       duration: d,
       ease: 'linear'
     }, "-=" + d);
-    tl.fromTo('.card:nth-child(' + (i + 2) + ') .container', {
+    tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .container', {
       y: 0
     }, {
       y: "-100%",
@@ -281,237 +386,158 @@ function buildTimeline(progress) {
       ease: 'linear'
     }, "-=" + d);
 
-    if ($('.card:nth-child(' + (i + 2) + ') .nav-element')) {
-      tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', {
+    if ($('.card:nth-child(' + (cards.length + 1) + ') .nav-element')) {
+      tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .nav-element', {
         y: 0
       }, {
         y: -1 * innerHeight,
         duration: d,
         ease: 'linear'
-      }, "-=" + d); ///
+      }, "-=" + d);
     }
 
-    tl.fromTo('.card:nth-child(' + (i + 4) + ')', {
-      y: "-100%"
-    }, {
-      y: 0,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d);
-    tl.fromTo('.card:nth-child(' + (i + 4) + ') .container', {
-      y: "100%"
-    }, {
-      y: 0,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d);
-
-    if ($('.card:nth-child(' + (i + 4) + ') .nav-element')) {
-      tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', {
-        y: innerHeight
-      }, {
-        y: 0,
-        duration: d,
-        ease: 'linear'
-      }, "-=" + d); ///
-    }
-  } //Move the last two cards off stage to reveal the final section
-
-
-  tl.fromTo('.card:nth-child(' + cards.length + ')', {
-    y: 0
-  }, {
-    y: "-100%",
-    duration: d,
-    ease: 'linear'
-  });
-  tl.fromTo('.card:nth-child(' + cards.length + ') .container', {
-    y: 0
-  }, {
-    y: "100%",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-
-  if ($('.card:nth-child(' + cards.length + ') .nav-element')) {
-    tl.fromTo('.card:nth-child(' + cards.length + ') .nav-element', {
-      y: 0
-    }, {
-      y: innerHeight,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d);
+    tl.totalProgress(progress || 0);
   }
 
-  tl.fromTo('.card:nth-child(' + (cards.length + 1) + ')', {
-    y: 0
-  }, {
-    y: "100%",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
-  tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .container', {
-    y: 0
-  }, {
-    y: "-100%",
-    duration: d,
-    ease: 'linear'
-  }, "-=" + d);
+  function handleMenuLinkClick(e) {
+    var href = this.getAttribute('href') || ""; //Desktop
 
-  if ($('.card:nth-child(' + (cards.length + 1) + ') .nav-element')) {
-    tl.fromTo('.card:nth-child(' + (cards.length + 1) + ') .nav-element', {
-      y: 0
-    }, {
-      y: -1 * innerHeight,
-      duration: d,
-      ease: 'linear'
-    }, "-=" + d);
+    if (window.innerWidth > 767) {
+      e.preventDefault();
+
+      if (this.classList.contains('icon-close-menu')) {
+        closeMenu();
+      } else {
+        var sectionID = href.substring(1);
+        var cnt = 0;
+        var scrollOffset = 0;
+
+        var _iterator5 = _createForOfIteratorHelper(cards),
+            _step5;
+
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var card = _step5.value;
+
+            if (card.getAttribute('id') == sectionID) {
+              scrollOffset = innerHeight + innerHeight * cnt / 2;
+              break;
+            }
+
+            cnt++;
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
+        }
+
+        gsap.to(window, {
+          scrollTo: scrollOffset,
+          duration: 0,
+          onComplete: function onComplete() {
+            return setTimeout(closeMenu, 200);
+          }
+        });
+      }
+    } //Mobile
+    else {
+        closeMenu();
+      }
   }
 
-  tl.totalProgress(progress || 0);
-}
+  function closeMenu() {
+    subMenu.classList.remove("active");
+    app.classList.remove('blur');
+    mainMenu.classList.add('closed');
+    setTimeout(function () {
+      return mainMenu.classList.add('hidden');
+    }, 600);
+  }
 
-function handleMenuLinkClick(e) {
-  var href = this.getAttribute('href') || "";
-
-  if (href.indexOf("https") == -1) {
-    e.preventDefault();
-
-    if (this.classList.contains('icon-close-menu')) {
-      closeMenu();
+  function setViewPortVars() {
+    if (typeof window.visualViewport !== 'undefined') {
+      var vh = window.visualViewport.height * 0.01;
+      var vw = window.visualViewport.width * 0.01;
     } else {
-      var sectionID = href.substring(1);
-      var cnt = 0;
-      var scrollOffset = 0;
+      var vh = window.innerHeight * 0.01;
+      var vw = window.innerWidth * 0.01;
+    }
 
-      var _iterator4 = _createForOfIteratorHelper(cards),
-          _step4;
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+    document.documentElement.style.setProperty('--vw', vw + 'px');
+  }
+
+  function is_touch_device() {
+    var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+
+    var mq = function mq(query) {
+      return window.matchMedia(query).matches;
+    };
+
+    if ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch) {
+      return true;
+    } // include the 'heartz' as a way to have a non matching MQ to help terminate the join
+    // https://git.io/vznFH
+
+
+    var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+    return mq(query);
+  }
+
+  function initViewportVars() {
+    // Set viewport variables
+    if (typeof window.visualViewport !== 'undefined') {
+      var ih = window.visualViewport.height * 0.01;
+    } else {
+      var ih = window.innerHeight * 0.01;
+    }
+
+    document.documentElement.style.setProperty('--ih', ih + 'px');
+    setViewPortVars();
+    window.addEventListener('resize', setViewPortVars);
+  }
+
+  function mobile_swapNavColours() {
+    var sections = $$('section');
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.pageYOffset;
+
+      var _iterator6 = _createForOfIteratorHelper(sections),
+          _step6;
 
       try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var card = _step4.value;
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          section = _step6.value;
+          var sectionTop = section.offsetTop;
+          var sectionBottom = sectionTop + section.offsetHeight;
 
-          if (card.getAttribute('id') == sectionID) {
-            scrollOffset = innerHeight + innerHeight * cnt / 2;
-            break;
-          }
+          if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+            $('.mobile-nav.link-home').classList.remove('lime', 'lavender', 'hidden');
+            $('.mobile-nav.link-menu').classList.remove('lime', 'lavender', 'hidden');
 
-          cnt++;
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
-
-      gsap.to(window, {
-        scrollTo: scrollOffset,
-        duration: 0,
-        onComplete: function onComplete() {
-          return setTimeout(closeMenu, 200);
-        }
-      });
-    }
-  } else {
-    closeMenu();
-  }
-}
-
-function closeMenu() {
-  subMenu.classList.remove("active");
-  app.classList.remove('blur');
-  mainMenu.classList.add('closed');
-  setTimeout(function () {
-    return mainMenu.classList.add('hidden');
-  }, 1200);
-}
-
-function setViewPortVars() {
-  if (typeof window.visualViewport !== 'undefined') {
-    var vh = window.visualViewport.height * 0.01;
-    var vw = window.visualViewport.width * 0.01;
-  } else {
-    var vh = window.innerHeight * 0.01;
-    var vw = window.innerWidth * 0.01;
-  }
-
-  document.documentElement.style.setProperty('--vh', vh + 'px');
-  document.documentElement.style.setProperty('--vw', vw + 'px');
-}
-
-function is_touch_device() {
-  var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
-
-  var mq = function mq(query) {
-    return window.matchMedia(query).matches;
-  };
-
-  if ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch) {
-    return true;
-  } // include the 'heartz' as a way to have a non matching MQ to help terminate the join
-  // https://git.io/vznFH
-
-
-  var query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
-  return mq(query);
-}
-
-function initViewportVars() {
-  // Set viewport variables
-  if (typeof window.visualViewport !== 'undefined') {
-    var ih = window.visualViewport.height * 0.01;
-  } else {
-    var ih = window.innerHeight * 0.01;
-  }
-
-  document.documentElement.style.setProperty('--ih', ih + 'px');
-  setViewPortVars();
-  window.addEventListener('resize', setViewPortVars);
-}
-
-function mobile_swapNavColours() {
-  var sections = $$('section');
-  window.addEventListener('scroll', function () {
-    var scrollTop = window.pageYOffset;
-
-    var _iterator5 = _createForOfIteratorHelper(sections),
-        _step5;
-
-    try {
-      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-        section = _step5.value;
-        var sectionTop = section.offsetTop;
-        var sectionBottom = sectionTop + section.offsetHeight;
-
-        if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
-          console.log(">>>>>", section.id, scrollTop, sectionTop, sectionBottom);
-          $('.mobile-nav.link-home').classList.remove('lime', 'lavender', 'hidden');
-          $('.mobile-nav.link-menu').classList.remove('lime', 'lavender', 'hidden');
-
-          if (section.classList.contains('card--image')) {
-            $('.mobile-nav.link-home').classList.add('hidden');
-            $('.mobile-nav.link-menu').classList.add('hidden');
-          } else if (section.classList.contains('bg-lavender') || section.classList.contains('bg-red')) {
-            $('.mobile-nav.link-home').classList.add('lime');
-            $('.mobile-nav.link-menu').classList.add('lime');
-          } else if (section.classList.contains('bg-lime')) {
-            if (section.id !== "hero") {
-              $('.mobile-nav.link-home').classList.add('lavender');
-              $('.mobile-nav.link-menu').classList.add('lavender');
+            if (section.classList.contains('card--image')) {
+              $('.mobile-nav.link-home').classList.add('hidden');
+              $('.mobile-nav.link-menu').classList.add('hidden');
+            } else if (section.classList.contains('bg-lavender') || section.classList.contains('bg-red')) {
+              $('.mobile-nav.link-home').classList.add('lime');
+              $('.mobile-nav.link-menu').classList.add('lime');
+            } else if (section.classList.contains('bg-lime')) {
+              if (section.id !== "hero") {
+                $('.mobile-nav.link-home').classList.add('lavender');
+                $('.mobile-nav.link-menu').classList.add('lavender');
+              }
             }
           }
-        } // else {
-        // 	console.log(section.id, scrollTop, sectionTop, sectionBottom);	
-        // }
-
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
       }
-    } catch (err) {
-      _iterator5.e(err);
-    } finally {
-      _iterator5.f();
-    }
-  });
-}
+    });
+  }
+});
 
 /***/ }),
 
