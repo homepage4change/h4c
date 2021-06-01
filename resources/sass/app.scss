@@ -419,11 +419,11 @@ body > .mobile-nav {
 
 	@include atMedia($min, $tablet) {
 		&:nth-of-type(2n) {
-			transform: translatey(100%);
+			// transform: translatey(100%);
 		}
 		&:nth-of-type(2n+1) {
 			left: 50%;
-			transform: translatey(-100%);
+			// transform: translatey(-100%);
 		}
 	}
 }
