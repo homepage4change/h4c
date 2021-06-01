@@ -196,32 +196,32 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		//Desktop
 		if(window.innerWidth > 767) {
-			
-			e.preventDefault();
-			
-			if(this.classList.contains('icon-close-menu')) {
-				closeMenu();
-			}
-			else {
-				let sectionID = href.substring(1);
-				let cnt = 0;
-				let scrollOffset = 0;
-
-				for(const card of cards) {
-					if (card.getAttribute('id') == sectionID) {
-						scrollOffset = innerHeight + (innerHeight * cnt/2);
-						break;
-					}
-					cnt++;
+			if(href.indexOf('.html') == -1) {
+				e.preventDefault();
+				
+				if(this.classList.contains('icon-close-menu')) {
+					closeMenu();
 				}
+				else {
+					let sectionID = href.substring(1);
+					let cnt = 0;
+					let scrollOffset = 0;
 
-				gsap.to(window, {
-					scrollTo: scrollOffset,
-					duration: 0,
-					onComplete: () => setTimeout(closeMenu, 200)
-				});
+					for(const card of cards) {
+						if (card.getAttribute('id') == sectionID) {
+							scrollOffset = innerHeight + (innerHeight * cnt/2);
+							break;
+						}
+						cnt++;
+					}
+
+					gsap.to(window, {
+						scrollTo: scrollOffset,
+						duration: 0,
+						onComplete: () => setTimeout(closeMenu, 200)
+					});
+				}
 			}
-			
 		}
 
 		//Mobile

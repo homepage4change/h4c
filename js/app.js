@@ -403,42 +403,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var href = this.getAttribute('href') || ""; //Desktop
 
     if (window.innerWidth > 767) {
-      e.preventDefault();
+      if (href.indexOf('.html') == -1) {
+        e.preventDefault();
 
-      if (this.classList.contains('icon-close-menu')) {
-        closeMenu();
-      } else {
-        var sectionID = href.substring(1);
-        var cnt = 0;
-        var scrollOffset = 0;
+        if (this.classList.contains('icon-close-menu')) {
+          closeMenu();
+        } else {
+          var sectionID = href.substring(1);
+          var cnt = 0;
+          var scrollOffset = 0;
 
-        var _iterator5 = _createForOfIteratorHelper(cards),
-            _step5;
+          var _iterator5 = _createForOfIteratorHelper(cards),
+              _step5;
 
-        try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var card = _step5.value;
+          try {
+            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+              var card = _step5.value;
 
-            if (card.getAttribute('id') == sectionID) {
-              scrollOffset = innerHeight + innerHeight * cnt / 2;
-              break;
+              if (card.getAttribute('id') == sectionID) {
+                scrollOffset = innerHeight + innerHeight * cnt / 2;
+                break;
+              }
+
+              cnt++;
             }
-
-            cnt++;
+          } catch (err) {
+            _iterator5.e(err);
+          } finally {
+            _iterator5.f();
           }
-        } catch (err) {
-          _iterator5.e(err);
-        } finally {
-          _iterator5.f();
+
+          gsap.to(window, {
+            scrollTo: scrollOffset,
+            duration: 0,
+            onComplete: function onComplete() {
+              return setTimeout(closeMenu, 200);
+            }
+          });
         }
-
-        gsap.to(window, {
-          scrollTo: scrollOffset,
-          duration: 0,
-          onComplete: function onComplete() {
-            return setTimeout(closeMenu, 200);
-          }
-        });
       }
     } //Mobile
     else {

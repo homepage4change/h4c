@@ -131,8 +131,8 @@ u:after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -1px;
-  height: 3px;
+  bottom: -0.39vw;
+  height: 0.39vw;
   width: 100%;
   background-color: transparent;
   border: 1px solid #F46153;
@@ -225,6 +225,9 @@ u:after {
 }
 .h4c-logo:hover .hover {
   transform: translate(48px, 37px);
+}
+.page-submission .h4c-logo .hover, .page-submission .h4c-logo .default, .page-submission .h4c-logo .nav-element {
+  fill: #840C4A;
 }
 
 .btyb-juliet {
@@ -363,10 +366,6 @@ body > .mobile-nav {
   .nav-element,
 .default {
     fill: #C9A0EE;
-  }
-  .page-submission .nav-element,
-.page-submission .default {
-    fill: #840C4A;
   }
 
   .link-home .hover, .link-home .default,

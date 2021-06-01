@@ -70,6 +70,11 @@
 			transform: translate(48px, 37px);
 		}
 	}
+	.page-submission & {
+		.hover, .default, .nav-element {
+  		fill: $plum;
+		}
+  }
 }
 
 .btyb-juliet {
@@ -208,9 +213,9 @@ body > .mobile-nav {
 	.nav-element,
 	.default {
     fill: $lavender;
-    .page-submission & {
-    	fill: $plum;
-    }
+    // .page-submission & {
+    // 	fill: $plum;
+    // }
 	}
 
 	.link-home,
