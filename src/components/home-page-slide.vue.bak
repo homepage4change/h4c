@@ -1,0 +1,69 @@
+<template>
+  <section class="slide">
+    <!-- content cards -->
+    <div :id="id" class="card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="customClassLeft">
+      <headerLeft></headerLeft>
+      <div class="container mx-auto text-center self-center">
+        <div class="flex md:h-full w-full justify-center">
+          <div class="heading self-center relative">
+            <h2>{{ heading1 }}
+            <p>{{ subHeading1 }}</p>
+            {{ heading2 }}
+            <p>{{ subHeading2 }}</p>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div :id="idContent" class="card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="customClassRight">
+      <headerRight></headerRight>
+      <div class="container mx-auto text-center self-center">
+        <div class="flex md:h-full w-full justify-center">
+          <div class="copy self-center">
+            <slot></slot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- image cards -->
+    <div :id="idImage1" class="card card--image w-full md:w-1/2 relative md:absolute overflow-hidden" :class="zIndexBottom">
+      <div class="container">
+        <div class="image self-center h-screen">
+          <img :src="require('../images/' + this.image1)" class="object-cover h-full w-full" />
+        </div>
+      </div>
+    </div>
+    <div :id="idImage2" class="card card--image w-full md:w-1/2 relative md:absolute overflow-hidden" :class="zIndexBottom">
+      <div class="container">
+        <div class="image self-center h-screen">
+          <img :src="require('../images/' + this.image2)" class="object-cover h-full w-full" />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import headerLeft from '../components/header-left.vue'
+import headerRight from '../components/header-right.vue'
+
+export default {
+  name: 'slide',
+  props: [
+    'id', 'zIndex', 'bgLeft', 'bgRight', 'heading1', 'subHeading1', 'heading2', 'subHeading2', 'image1', 'image2'
+  ],
+  components: {
+    headerLeft, headerRight
+  },
+  computed: {
+    idContent () { return this.id + '-content' },
+    idImage1 () { return this.id + '-image-1' },
+    idImage2 () { return this.id + '-image-2' },
+    zIndexTop () { return 'z-' + this.zIndex },
+    zIndexBottom () { return 'z-' + (parseInt(this.zIndex) - 5) },
+    customClassLeft () { return this.zIndexTop + ' ' + this.bgLeft },
+    customClassRight () { return this.zIndexTop + ' ' + this.bgRight }
+  }
+}
+</script>

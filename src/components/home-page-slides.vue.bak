@@ -1,0 +1,75 @@
+<template>
+  <div class="slides">
+    <template v-for="slide in slides">
+      <!-- content cards -->
+      <div :id="slide.id" :key="slide.id" class="card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="slideLeft(slide.z, slide.bgLeft)">
+        <headerLeft></headerLeft>
+        <div class="container mx-auto text-center self-center">
+          <div class="flex md:h-full w-full justify-center">
+            <div class="heading self-center relative">
+              <h2>{{ slide.slideheading1 }}
+              <p>{{ slide.slidesubHeading1 }}</p>
+              {{ slide.slideheading2 }}
+              <p>{{ slide.slidesubHeading2 }}</p>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div :id="idContent(slide.id)" :key="idContent(slide.id)" class="card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="slideRight(slide.z, slide.bgRight)">
+        <headerRight></headerRight>
+        <div class="container mx-auto text-center self-center">
+          <div class="flex md:h-full w-full justify-center">
+            <div class="copy self-center">
+              <slot></slot>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- image cards -->
+      <div :id="idImage1(slide.id)" :key="idImage1(slide.id)" class="card card--image w-full md:w-1/2 relative md:absolute overflow-hidden" :class="zBottom(slide.z)">
+        <div class="container">
+          <div class="image self-center h-screen">
+            <img :src="require('../images/' + slide.image1)" class="object-cover h-full w-full" />
+          </div>
+        </div>
+      </div>
+      <div :id="idImage2(slide.id)" :key="idImage2(slide.id)" class="card card--image w-full md:w-1/2 relative md:absolute overflow-hidden" :class="zBottom(slide.z)">
+        <div class="container">
+          <div class="image self-center h-screen">
+            <img :src="require('../images/' + slide.image2)" class="object-cover h-full w-full" />
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>
+
+<script>
+import headerLeft from '../components/header-left.vue'
+import headerRight from '../components/header-right.vue'
+
+export default {
+  name: 'slides',
+  components: {
+    headerLeft, headerRight
+  },
+  data () {
+    return {
+      slides: [
+        { id: 'who', z: '55', bgLeft: 'red', bgRight: 'lavender', heading1: 'Who', subHeading1: 'can participate?', heading2: ', subHeading2: ', image1: 'alqasim.jpg', image2: 'radeva.jpg' }
+      ]
+    }
+  },
+  methods: {
+    idContent (i) { return i + '-content' },
+    idImage1 (i) { return i + '-image-1' },
+    idImage2 (i) { return i + '-image-2' },
+    zIndex (z) { return 'z-' + z },
+    zBottom (z) { return 'z-' + (parseInt(z) - 5) },
+    slideLeft (z, bg) { return this.zIndex(z) + ' ' + bg },
+    slideRight (z, bg) { return this.zIndex(z) + ' ' + bg }
+  }
+}
+</script>
