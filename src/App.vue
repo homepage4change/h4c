@@ -16,7 +16,7 @@ import mobileHeader from './components/mobile-header.vue'
 
 export default {
   name: 'App',
-  
+
   components: {
     mainMenu,
     mobileHeader
