@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- logo -->
-    <a href="/" class="link-home">
+    <a href="/" @click="scrollToTop">
       <inline-svg :src="require('../images/h4c-logo.svg')"></inline-svg>
     </a>
     <!-- juliet -->
@@ -12,5 +12,14 @@
 </template>
 
 <script>
-export default {}
+import gsap from 'gsap'
+export default {
+  methods: {
+    // Scroll to top when H4C logo is clicked
+    scrollToTop (e) {
+      e.preventDefault()
+      gsap.to(window, { scrollTo: 0 })
+    }
+  }
+}
 </script>

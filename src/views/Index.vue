@@ -67,11 +67,33 @@ import bumper from '../components/home-page-bumper.vue'
 // Set up Greensock
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
-let tl
 
 export default {
+  name: 'Index',
+
+  tl: '',
+
   components: {
     bumper, headerLeft, headerRight
+  },
+
+  metaInfo () {
+    const pageTitle = 'Application Submission'
+    const pageDesc = 'A grant to get BIPOC students who are interested in the arts published + paid'
+
+    return {
+      title: pageTitle,
+      meta: [
+        { name: 'description', content: pageDesc },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:url', content: 'https://www.homepageforchange.com/' },
+        { property: 'description', content: pageDesc }
+      ],
+      link: [
+        { rel: 'canonical', href: 'https://www.homepageforchange.com/' }
+      ]
+    }
   },
 
   data () {
@@ -87,55 +109,32 @@ export default {
     }
   },
 
+  created () {
+    Event.$on('menuClosed', () => { this.pageState = '' })
+    Event.$on('menuOpened', () => { this.pageState = 'blur' })
+  },
+
   mounted () {
     const app = this
-    window.addEventListener('load', function (event) {
-      app.setInitialViewportVars()
-      app.setVariableViewportVars()
-      window.addEventListener('resize', app.setVariableViewportVars)
 
-      const rootElem = document.getElementById('home-page')
-      const bumpers = document.querySelectorAll('.bumper')
+    window.addEventListener('load', function (event) {
       app.cards = document.querySelectorAll('.card')
 
       app.requestId = null
 
       // Set up the timeline animation
       if (window.innerWidth > 767) {
-        tl = gsap.timeline({
-          // Attach it to the scroll
-          scrollTrigger: {
-            trigger: '#home-page',
-            pin: true,
-            start: 'top top',
-            end: () => `+=${rootElem.offsetHeight * (app.cards.length / 2 + bumpers.length / 2)}`,
-            scrub: 0.3,
-            invalidateOnRefresh: true,
-            onRefresh: self => tl.progress(self.progress)
-          }
-        })
+        app.initTimeline()
         app.buildTimeline()
         window.addEventListener('resize', app.requestResize)
+        window.tl = this.tl
+        if (location.hash) {
+          setTimeout(app.deepLink, 100)
+        }
       }
 
-      // Fix submit button width -- ensure width is a round number
-      setTimeout(app.fixButtonWidth, 1000)
-      window.addEventListener('resize', app.fixButtonWidth)
-
-      // Scroll to top when H4C logo is clicked
-      const links = document.querySelectorAll('.link-home')
-      for (const link of links) {
-        link.addEventListener('click', e => {
-          e.preventDefault()
-          gsap.to(window, { scrollTo: 0 })
-        })
-      }
+      
     })
-  },
-
-  created () {
-    Event.$on('menuClosed', () => { this.pageState = '' })
-    Event.$on('menuOpened', () => { this.pageState = 'blur' })
   },
 
   methods: {
@@ -147,24 +146,44 @@ export default {
     slideLeft (z, bg) { return this.zIndex(z) + ' bg-' + bg },
     slideRight (z, bg) { return this.zIndex(z) + ' bg-' + bg },
 
-    setInitialViewportVars () {
-      const ih = (typeof (window.visualViewport) !== 'undefined') ? window.visualViewport.height * 0.01 : window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--ih', ih + 'px')
-    },
+    deepLink () {
+      const sectionID = location.hash.substring(1)
+      let cnt = 0
+      let scrollOffset = 0
 
-    setVariableViewportVars () {
-      let vw, vh
-
-      if (typeof (window.visualViewport) !== 'undefined') {
-        vh = window.visualViewport.height * 0.01
-        vw = window.visualViewport.width * 0.01
-      } else {
-        vh = window.innerHeight * 0.01
-        vw = window.innerWidth * 0.01
+      for (const card of this.cards) {
+        console.log(card.getAttribute('id'), sectionID)
+        if (card.getAttribute('id') === sectionID) {
+          scrollOffset = window.innerHeight + (window.innerHeight * (cnt / 2))
+          break
+        }
+        cnt++
       }
 
-      document.documentElement.style.setProperty('--vh', vh + 'px')
-      document.documentElement.style.setProperty('--vw', vw + 'px')
+      gsap.to(window, {
+        scrollTo: scrollOffset,
+        duration: 0
+      })
+    },
+
+    initTimeline () {
+      const app = this
+      const rootElem = document.getElementById('home-page')
+      const bumpers = document.querySelectorAll('.bumper')
+
+      app.tl = gsap.timeline({
+        // Attach it to the scroll
+        scrollTrigger: {
+          id: 'st',
+          trigger: '#home-page',
+          pin: true,
+          start: 'top top',
+          end: () => `+=${rootElem.offsetHeight * (app.cards.length / 2 + bumpers.length / 2)}`,
+          scrub: 0.3,
+          invalidateOnRefresh: true,
+          onRefresh: self => app.tl.progress(self.progress)
+        }
+      })
     },
 
     buildTimeline (progress) {
@@ -172,59 +191,59 @@ export default {
       const d = 1
 
       // Move the first two cards into the center position
-      tl.fromTo('.card:nth-child(2)', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' })
-      tl.fromTo('.card:nth-child(2) .container', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
-      tl.fromTo('.card:nth-child(2) .nav-element', { y: -1 * innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(2)', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' })
+      this.tl.fromTo('.card:nth-child(2) .container', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(2) .nav-element', { y: -1 * innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
 
-      tl.fromTo('.card:nth-child(3)', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
-      tl.fromTo('.card:nth-child(3) .container', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
-      tl.fromTo('.card:nth-child(3) .nav-element', { y: innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(3)', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(3) .container', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(3) .nav-element', { y: innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
 
       // Hide the hero
-      tl.to('#hero', { yPercent: 100, duration: 0, ease: 'linear' })
+      this.tl.to('#hero', { yPercent: 100, duration: 0, ease: 'linear' })
 
       // Animate all the cards
       for (let i = 1; i < this.cards.length - 2; i += 2) {
         // target                       //from  //to    //duration //delay
-        tl.fromTo('.card:nth-child(' + (i + 1) + ')', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' })
-        tl.fromTo('.card:nth-child(' + (i + 1) + ') .container', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 1) + ')', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' })
+        this.tl.fromTo('.card:nth-child(' + (i + 1) + ') .container', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
         if (document.querySelector('.card:nth-child(' + (i + 1) + ') .nav-element')) {
-          tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', { y: 0 }, { y: innerHeight, duration: d, ease: 'linear' }, '-=' + d)
+          this.tl.fromTo('.card:nth-child(' + (i + 1) + ') .nav-element', { y: 0 }, { y: innerHeight, duration: d, ease: 'linear' }, '-=' + d)
         }
 
-        tl.fromTo('.card:nth-child(' + (i + 3) + ')', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
-        tl.fromTo('.card:nth-child(' + (i + 3) + ') .container', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 3) + ')', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 3) + ') .container', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
         if (document.querySelector('.card:nth-child(' + (i + 3) + ') .nav-element')) {
-          tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', { y: -1 * innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
+          this.tl.fromTo('.card:nth-child(' + (i + 3) + ') .nav-element', { y: -1 * innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
         }
 
-        tl.fromTo('.card:nth-child(' + (i + 2) + ')', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
-        tl.fromTo('.card:nth-child(' + (i + 2) + ') .container', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 2) + ')', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 2) + ') .container', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' }, '-=' + d)
         if (document.querySelector('.card:nth-child(' + (i + 2) + ') .nav-element')) {
-          tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', { y: 0 }, { y: -1 * innerHeight, duration: d, ease: 'linear' }, '-=' + d)
+          this.tl.fromTo('.card:nth-child(' + (i + 2) + ') .nav-element', { y: 0 }, { y: -1 * innerHeight, duration: d, ease: 'linear' }, '-=' + d)
         }
 
-        tl.fromTo('.card:nth-child(' + (i + 4) + ')', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
-        tl.fromTo('.card:nth-child(' + (i + 4) + ') .container', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 4) + ')', { yPercent: -100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (i + 4) + ') .container', { yPercent: 100 }, { yPercent: 0, duration: d, ease: 'linear' }, '-=' + d)
         if (document.querySelector('.card:nth-child(' + (i + 4) + ') .nav-element')) {
-          tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', { y: innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
+          this.tl.fromTo('.card:nth-child(' + (i + 4) + ') .nav-element', { y: innerHeight }, { y: 0, duration: d, ease: 'linear' }, '-=' + d)
         }
       }
 
       // Move the last two cards off stage to reveal the final section
-      tl.fromTo('.card:nth-child(' + (this.cards.length) + ')', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' })
-      tl.fromTo('.card:nth-child(' + (this.cards.length) + ') .container', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(' + (this.cards.length) + ')', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' })
+      this.tl.fromTo('.card:nth-child(' + (this.cards.length) + ') .container', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
       if (document.querySelector('.card:nth-child(' + (this.cards.length) + ') .nav-element')) {
-        tl.fromTo('.card:nth-child(' + (this.cards.length) + ') .nav-element', { y: 0 }, { y: innerHeight, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (this.cards.length) + ') .nav-element', { y: 0 }, { y: innerHeight, duration: d, ease: 'linear' }, '-=' + d)
       }
 
-      tl.fromTo('.card:nth-child(' + (this.cards.length + 1) + ')', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
-      tl.fromTo('.card:nth-child(' + (this.cards.length + 1) + ') .container', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(' + (this.cards.length + 1) + ')', { yPercent: 0 }, { yPercent: 100, duration: d, ease: 'linear' }, '-=' + d)
+      this.tl.fromTo('.card:nth-child(' + (this.cards.length + 1) + ') .container', { yPercent: 0 }, { yPercent: -100, duration: d, ease: 'linear' }, '-=' + d)
       if (document.querySelector('.card:nth-child(' + (this.cards.length + 1) + ') .nav-element')) {
-        tl.fromTo('.card:nth-child(' + (this.cards.length + 1) + ') .nav-element', { y: 0 }, { y: -1 * innerHeight, duration: d, ease: 'linear' }, '-=' + d)
+        this.tl.fromTo('.card:nth-child(' + (this.cards.length + 1) + ') .nav-element', { y: 0 }, { y: -1 * innerHeight, duration: d, ease: 'linear' }, '-=' + d)
       }
 
-      tl.totalProgress(progress || 0)
+      this.tl.totalProgress(progress || 0)
     },
 
     requestResize () {
@@ -233,17 +252,9 @@ export default {
     },
 
     resize () {
-      const progress = tl.totalProgress()
-      tl.seek(0).clear()
+      const progress = this.tl.totalProgress()
+      this.tl.seek(0).clear()
       this.buildTimeline(progress)
-    },
-
-    fixButtonWidth () {
-      const buttons = document.querySelectorAll('.submit-cta')
-      for (const button of buttons) {
-        button.style.width = 'auto'
-        button.style.width = Math.round(button.clientWidth) + 'px'
-      }
     }
   }
 }

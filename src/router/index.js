@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../views/Index.vue'
+import VueMeta from 'vue-meta'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta)
 
 window.Event = new Vue()
 
@@ -10,20 +11,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Index
+    component: () => import('../views/Index.vue')
   },
   {
     path: '/submission',
     name: 'Submission',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "submission" */ '../views/Submission.vue')
+    component: () => import('../views/Submission.vue')
   },
   {
     path: '/archive',
     name: 'Archive',
-    component: () => import(/* webpackChunkName: "archive" */ '../views/Archive.vue')
+    component: () => import('../views/Archive.vue')
   }
 ]
 

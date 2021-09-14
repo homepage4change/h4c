@@ -9,18 +9,19 @@
 
     <div class="container mx-auto self-center">
       <ul>
-        <li><a href="/" class="link-home uppercase close-menu swipe">Home</a></li>
+        <li><a href="/" @click="deepLink" class="link-home uppercase close-menu swipe">Home</a></li>
         <li>
           <a href="#" @click="toggleCollapsible" class="uppercase collapsible swipe">The Program</a>
           <ul class="collapse" :class="subMenuState">
-            <li><a href="#who" @click="deepLink" class="close-menu swipe">Requirements</a></li>
-            <li><a href="#what" @click="deepLink" class="close-menu swipe">Submission Details</a></li>
-            <li><a href="#where" @click="deepLink" class="close-menu swipe">Process</a></li>
-            <li><a href="#when" @click="deepLink" class="close-menu swipe">Deadlines</a></li>
-            <li><a href="#why" @click="deepLink" class="close-menu swipe">About H4C</a></li>
+            <li><a href="/#who" @click="deepLink" class="close-menu swipe">Requirements</a></li>
+            <li><a href="/#what" @click="deepLink" class="close-menu swipe">Submission Details</a></li>
+            <li><a href="/#where" @click="deepLink" class="close-menu swipe">Process</a></li>
+            <li><a href="/#when" @click="deepLink" class="close-menu swipe">Deadlines</a></li>
+            <li><a href="/#why" @click="deepLink" class="close-menu swipe">About H4C</a></li>
           </ul>
         </li>
-        <li><router-link to="/submission" class="uppercase close-menu swipe">Submission</router-link></li>
+        <li><a href="/submission" class="uppercase close-menu swipe">Submission</a></li>
+        <li><a href="/archive" class="uppercase close-menu swipe">Archive</a></li>
       </ul>
     </div>
 
@@ -58,44 +59,50 @@ export default {
     },
 
     deepLink (e) {
-      const $el = e.target
-      const href = $el.getAttribute('href')
-      const cards = document.querySelectorAll('.card')
+      if (this.$route.path === '/') {
+        const $el = e.target
+        const href = $el.getAttribute('href')
+        const cards = document.querySelectorAll('.card')
 
-      if (window.innerWidth > 767) {
-        // Desktop
-        if (href.indexOf('.html') === -1) {
-          e.preventDefault()
+        if (window.innerWidth > 767) {
+          // Desktop
+          if (href.indexOf('.html') === -1) {
+            e.preventDefault()
 
-          if ($el.classList.contains('icon-close-menu')) {
-            this.closeMenu()
-          } else {
-            const sectionID = href.substring(1)
-            let cnt = 0
-            let scrollOffset = 0
+            if ($el.classList.contains('icon-close-menu')) {
+              this.closeMenu()
+            } else {
+              const sectionID = href.substring(2)
+              let cnt = 0
+              let scrollOffset = 0
 
-            for (const card of cards) {
-              if (card.getAttribute('id') === sectionID) {
-                scrollOffset = innerHeight + (innerHeight * (cnt / 2))
-                break
+              for (const card of cards) {
+                if (card.getAttribute('id') === sectionID) {
+                  scrollOffset = innerHeight + (innerHeight * (cnt / 2))
+                  break
+                }
+                cnt++
               }
-              cnt++
-            }
 
-            gsap.to(window, {
-              scrollTo: scrollOffset,
-              duration: 0,
-              onComplete: () => setTimeout(this.closeMenu, 200)
-            })
+              gsap.to(window, {
+                scrollTo: scrollOffset,
+                duration: 0,
+                onComplete: () => setTimeout(this.closeMenu, 200)
+              })
+            }
           }
+        } else {
+          // Mobile
+          this.closeMenu()
         }
-      } else {
-        // Mobile
-        this.closeMenu()
       }
     },
 
-    closeMenu () {
+    closeMenu (e) {
+      if (typeof e !== 'undefined') {
+        e.preventDefault()
+      }
+
       this.subMenuState = ''
       this.menuState = 'closed'
       setTimeout(() => { this.menuState = 'closed hidden' }, 600)

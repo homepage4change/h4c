@@ -9,6 +9,29 @@
 
 <script>
 export default {
+  name: 'Submission',
+
+  metaInfo () {
+    const pageTitle = 'Application Submission'
+    const pageDesc = 'A grant to get BIPOC students who are interested in the arts published + paid'
+    const slug = 'submission'
+
+    return {
+      title: pageTitle,
+      titleTemplate: '%s | Homepage for Change',
+      meta: [
+        { name: 'description', content: pageDesc },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: pageTitle + ' | Homepage for Change' },
+        { property: 'og:url', content: 'https://www.homepageforchange.com/' + slug },
+        { property: 'description', content: pageDesc }
+      ],
+      link: [
+        { rel: 'canonical', href: 'https://www.homepageforchange.com/' + slug }
+      ]
+    }
+  },
+
   mounted () {
     const typeformScript = document.createElement('script')
     typeformScript.setAttribute('src', '//embed.typeform.com/next/embed.js')

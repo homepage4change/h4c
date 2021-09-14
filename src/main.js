@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 
 window.Vue = Vue
 window.axios = axios
+window.router = router
 
 new Vue({
   router,

@@ -239,11 +239,15 @@ body .mobile-nav {
 	}
 }
 
-
+/* HOME OAGE  ---------------------------*/
 #home-page {
 	transition: filter 0.6s ease-in-out;
 	height: vh(100)!important;
 	max-height: vh(100)!important;
+}
+
+#archive-page {
+	height: calc(var(--vh, 1vh) * 100);
 }
 
 .container {
@@ -254,8 +258,7 @@ body .mobile-nav {
 
 /* SECTIONS  ---------------------------*/
 .card,
-.bumper {
-	
+.bumper {	
 	padding: 16.4vw 8.7vw;
 
 	@include atMedia($min, $tablet) {
@@ -350,7 +353,6 @@ body .mobile-nav {
 		}
 	}
 }
-
 
 //Final screen
 #the-end {
@@ -575,8 +577,6 @@ body .mobile-nav {
 			font-size: 1.953125vw;
 		}
 	}
-
-	
 }
 .collapse {
 	overflow: hidden;
