@@ -18,7 +18,7 @@ export default {
 
   methods: {
     openMenu () {
-      Event.$emit('menuOpened')
+      Event.$emit('menu-opened')
     }
   }
 }

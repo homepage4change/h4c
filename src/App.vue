@@ -6,6 +6,9 @@
       <router-view></router-view>
     </transition>
 
+    <transition name="fade">
+      <recipientModal :recipient="activeRecipient"></recipientModal>
+    </transition>
     <mainMenu></mainMenu>
   </div>
 </template>
@@ -13,13 +16,21 @@
 <script>
 import mainMenu from './components/menu.vue'
 import mobileHeader from './components/mobile-header.vue'
+import recipientModal from './components/recipient-modal.vue'
 
 export default {
   name: 'App',
 
   components: {
     mainMenu,
-    mobileHeader
+    mobileHeader,
+    recipientModal
+  },
+
+  data () {
+    return {
+      activeRecipient: ''
+    }
   },
 
   mounted () {

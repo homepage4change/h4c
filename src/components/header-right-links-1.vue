@@ -20,15 +20,14 @@ export default {
   },
 
   mounted () {
-    // Fix submit button width -- ensure width is a round number
-    this.fixButtonWidth()
+    setTimeout(this.fixButtonWidth, 200)
     window.addEventListener('resize', this.fixButtonWidth)
   },
 
   methods: {
     openMenu (e) {
       e.preventDefault()
-      Event.$emit('menuOpened')
+      Event.$emit('menu-opened')
     },
 
     // This was done to ensure that the submit button's are all exactly the same size and aren't partial pixels

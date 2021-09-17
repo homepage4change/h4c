@@ -47,7 +47,7 @@ export default {
 
   created () {
     const app = this
-    Event.$on('menuOpened', () => {
+    Event.$on('menu-opened', () => {
       app.menuState = 'closed' // remove hidden
       setTimeout(() => { app.menuState = '' }, 20)
     })
@@ -106,7 +106,7 @@ export default {
       this.subMenuState = ''
       this.menuState = 'closed'
       setTimeout(() => { this.menuState = 'closed hidden' }, 600)
-      Event.$emit('menuClosed')
+      Event.$emit('menu-closed')
     }
   }
 }

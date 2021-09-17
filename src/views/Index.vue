@@ -48,7 +48,7 @@
     </template>
 
     <bumper id="the-end" zIndex="z-0" version="2">
-      <a href="/submission.html" class="swipe submit uppercase">
+      <a href="/submission" class="swipe submit uppercase">
         Submit your artwork.
       </a>
     </bumper>
@@ -78,7 +78,7 @@ export default {
   },
 
   metaInfo () {
-    const pageTitle = 'Application Submission'
+    const pageTitle = 'Homepage for Change'
     const pageDesc = 'A grant to get BIPOC students who are interested in the arts published + paid'
 
     return {
@@ -110,8 +110,8 @@ export default {
   },
 
   created () {
-    Event.$on('menuClosed', () => { this.pageState = '' })
-    Event.$on('menuOpened', () => { this.pageState = 'blur' })
+    Event.$on('menu-closed', () => { this.pageState = '' })
+    Event.$on('menu-opened', () => { this.pageState = 'blur' })
   },
 
   mounted () {
@@ -132,10 +132,25 @@ export default {
           setTimeout(app.deepLink, 100)
         }
       }
-
-      
     })
   },
+
+  // beforeDestroy () {
+  //   console.log('Index beforeDestroy called')
+
+  //   this.tl.kill(true)
+  //   ScrollTrigger.getById('st').kill(true)
+  //   gsap.set('.card', { clearProps: true })
+  // },
+
+  // beforeDestroy () {
+  //   console.log('Index beforeDestroy called')
+  //   console.log(this.tl)
+  //   this.tl.scrollTrigger.kill(true)
+  //   // this.tl.kill(true)
+  //   // this.tl = null
+  //   // console.log(this.tl)
+  // },
 
   methods: {
     idContent (i) { return i + '-content' },
