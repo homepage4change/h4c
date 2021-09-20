@@ -34,6 +34,9 @@ export default {
   },
 
   created () {
+    this.testTouchDevice()
+    window.addEventListener('resize', this.testTouchDevice)
+
     Event.$on('modal-opened', (recipient) => {
       this.recipient = recipient
     })
@@ -42,12 +45,6 @@ export default {
 
   mounted () {
     const app = this
-    const isTouchDevice = require('is-touch-device')
-
-    // Add 'is-touch' class to the <body> element if the device is touch enabled
-    if (isTouchDevice()) {
-      document.querySelector('body').classList.add('is-touch')
-    }
 
     window.addEventListener('load', function (event) {
       app.setInitialViewportVars()
@@ -75,6 +72,18 @@ export default {
 
       document.documentElement.style.setProperty('--vh', vh + 'px')
       document.documentElement.style.setProperty('--vw', vw + 'px')
+    },
+
+    testTouchDevice () {
+      const isTouchDevice = require('is-touch-device')
+
+      if (isTouchDevice()) {
+        document.querySelector('body').classList.add('is-touch')
+        Event.$emit('is-touch-device')
+      } else {
+        document.querySelector('body').classList.remove('is-touch')
+        Event.$emit('is-pointer-device')
+      }
     }
   }
 }

@@ -65,8 +65,8 @@
 	.hover {
 		transform: translate(-92px, 37px);
 	}
-	@media (hover: hover) {
-    &:hover {
+	
+  &:hover {
 		.default {
 			transform: translate(188px, 37px);
 		}
@@ -74,7 +74,7 @@
 			transform: translate(48px, 37px);
 		}
 	}
-	}
+	
 	
 	.page-submission & {
 		.hover, .default, .nav-element {
@@ -95,14 +95,12 @@
 	.hover {
 		transform: translate(-92.86px, 678.851px);
 	}
-	@media (hover: hover) {
-		&:hover {
-			.default {
-				transform: translate(187.137px, 678.851px);
-			}
-			.hover {
-				transform: translate(47.137px, 678.851px);
-			}
+	&:hover {
+		.default {
+			transform: translate(187.137px, 678.851px);
+		}
+		.hover {
+			transform: translate(47.137px, 678.851px);
 		}
 	}
 }
@@ -117,10 +115,8 @@
 		top: 3.125vw;
 		right: 3.90625vw;
 	}
-	@media (hover: hover) {
-		&:hover .hover {
-			transform: translatex(130px);
-		}
+	&:hover .hover {
+		transform: translatex(130px);
 	}
 }
 .icon-close-menu {
@@ -138,12 +134,11 @@
 		transition: all 0.2s ease-in-out;
 		transform-origin: 50% 50%;
 	}
-	@media (hover: hover) {
-		&:hover polygon {
-			transform: rotate(90deg);
-			fill: $plum;
-		}
+	&:hover polygon {
+		transform: rotate(90deg);
+		fill: $plum;
 	}
+
 }
 
 .submit-cta {	
@@ -587,11 +582,11 @@ body .mobile-nav {
   	padding: 0 3vw 1vw 1vw;
   	justify-content: flex-end;
   }
-  @media (hover: hover) {
-	  &:hover {
-	  	color: $red;
-	  }
-	}
+
+  &:hover {
+  	color: $red;
+  }
+
   @include atMedia($min, $smDesktop) {
 		min-width: 550px;
 	}

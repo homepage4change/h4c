@@ -86,6 +86,12 @@ u {
 	}
 }
 
+.is-touch .swipe {
+	&:hover, &:hover .swipe {
+		background-position: 100%;
+	}
+}
+
 
 .hide-on-load {
 	opacity: 1;
