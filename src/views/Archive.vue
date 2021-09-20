@@ -1,10 +1,10 @@
 <template>
-  <div id="archive-page" class="bg-red w-full h-full md:overflow-hidden" :class="pageState">
-    <headerTop></headerTop>
+  <div id="archive-page" class="page bg-red w-full min-h-full md:overflow-hidden" :class="pageState">
+    <headerTop v-if="isDesktop"></headerTop>
 
     <h1 class="sr-only">Recipient Archive</h1>
 
-    <div id="archives" class="w-full">
+    <div id="archives" class="hide-on-load w-full min-h-full">
       <template v-for="archive in archives">
         <div  :key="archive.year" class="recipients">
           <h2>{{ archive.year }}</h2>
@@ -61,30 +61,33 @@ export default {
 
   data () {
     return {
-      pageState: '',
+      isDesktop: true,
+      pageState: 'preloading',
       archives: [
         {
           year: '2021',
           recipients: [
             {
-              month: 'Sept',
+              month: 'September',
               name: 'Elvina Raharja',
               title: 'Multi-disciplinary Artist',
-              description: 'Puan is a coming-of-age performance exploring self-identity and womanhood as a young Indonesian woman. Back home in Indonesia, things exist in a binary. You’re either A or B – but you better be A. This philosophy is deeply reflected in Indonesian beauty standards, favouring Eurocentric features and lighter skin tones. It was embedded in our culture and media. As someone who is not the Asian beauty standard, I have felt displaced most of my life. When you’re told your body is wrong, you start to wonder if your existence is valid. However, my past informs my present. I wouldn’t be able to tell this story without going through those tribulations. I’m glad I could find the help and healing I needed to bring me to this place and create this project.',
-              url: 'wearejuliet.com',
-              socialHandle: '@elvinanr',
+              description: '“<em>Puan</em> is a coming-of-age performance exploring self-identity and womanhood as a young Indonesian woman. Back home in Indonesia, things exist in a binary. You’re either A or B – but you better be A. This philosophy is deeply reflected in Indonesian beauty standards, favouring Eurocentric features and lighter skin tones. It was embedded in our culture and media. As someone who is not the Asian beauty standard, I have felt displaced most of my life. When you’re told your body is wrong, you start to wonder if your existence is valid. However, my past informs my present. I wouldn’t be able to tell this story without going through those tribulations. I’m glad I could find the help and healing I needed to bring me to this place and create this project.”',
+              bio: 'ELVINA RAHARJA (she/they) is a multi-disciplinary artist who works in dance, fashion, and film. Their artistry strives for conscious and intentional creation, stemming from their experiences as a Southeast Asian immigrant and mindfulness practices.',
+              url: 'elvinaraharja.com',
+              socialHandle: '',
               imgHeadshot: 'Elvina-Raharja-headshot.jpg',
               imgScreenshot: 'screenshot-sep-2021.jpg',
-              imgArtwork: 'screenshot-sep-2021.jpg',
+              imgArtwork: 'artwork-sep-2021.webp',
               cardLayout: 'landscape'
             },
             {
-              month: 'Aug',
+              month: 'August',
               name: 'Tone Burke',
               title: 'Digital Artist',
-              description: 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.',
-              url: 'wearejuliet.com',
-              socialHandle: '@toneburke',
+              description: '“Oftentimes I stare at the stars in wonder of what else there may be out there, answers to questions no one may really have but continuing to reach for answers. When I stare at the sky, I feel connected. I realize how small we are, and I feel grateful. I understand how everything works in unison with each other. The answers to the questions are in nature. The answers to the questions are in the sky. This digital rendering depicts a hand in the sky whilst being struck by lightning. The lightning signifies connectivity, and the butterfly which sits on the hand is a symbol of rebirth, revival, and untimely giving direction to the answers.”',
+              bio: 'TONE BURKE is an emerging artist from Toronto, Ontario. A self-taught designer and entrepreneur, Burke began designing in high school and later designing clothing, which only furthered his passion. Today his design is a representation of everyday life and personal expression.',
+              url: 'originaltone.com',
+              socialHandle: '',
               imgHeadshot: 'Tone-Burke-headshot.jpg',
               imgScreenshot: 'screenshot-aug-2021.jpg',
               imgArtwork: 'screenshot-aug-2021.jpg',
@@ -94,9 +97,10 @@ export default {
               month: 'July',
               name: 'Hau Pham',
               title: 'Visual Artist',
-              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
-              url: 'wearejuliet.com',
-              socialHandle: '@haupham',
+              description: '“My artistic practice is a depiction of the Asian feminine experience. Through examining the relationship with the object, my work explores the curiosity, guilt and uncertainty when connecting value with identity. Value is often placed in objects, and objects are considerably traced to identity, identity often being intertwined within a cultural narrative. We often make quick assumptions of other people based off the things they choose to surround themselves with. We use objects as indicators for not only how we see ourselves, but also how we choose to understand others. With this painting, there is a depiction of a common object that has clearly been affected by the human experience, a single pair of fake eyelashes that have been worn and crumpled. What does this tell us about the person who holds possession of it? With this still life work, there is an asking of consideration for understanding, but beyond the surface level. The still life asks the viewer to reconsider, to reframe how we perceive something we have assumed ourselves to understand.”',
+              bio: 'HAU PHAM is an emerging artist based in Vaughan, Ontario. She is a soon to be graduate of OCAD University, with a BFA in Drawing and Painting and a minor in English.',
+              url: 'haupham.format.com',
+              socialHandle: '',
               imgHeadshot: 'Hau-Pham-headshot.jpg',
               imgScreenshot: 'screenshot-jul-2021.jpg',
               imgArtwork: 'screenshot-jul-2021.jpg',
@@ -113,9 +117,7 @@ export default {
     Event.$on('menu-opened', () => { this.pageState = 'blur' })
     Event.$on('modal-closed', () => { this.pageState = '' })
     Event.$on('modal-opened', () => { this.pageState = 'blur' })
-  },
 
-  mounted () {
     const app = this
 
     window.addEventListener('load', function (event) {
@@ -127,9 +129,23 @@ export default {
       if (window.innerWidth > 767) {
         app.initTimeline()
         app.buildTimeline()
-        window.addEventListener('resize', app.requestResize)
+        window.addEventListener('resize', () => app.requestResize())
+        window.tl = this.tl
+      } else {
+        app.initTimeline_Mobile()
+        app.buildTimeline_Mobile()
+        window.addEventListener('resize', () => app.requestResize('mobile'))
         window.tl = this.tl
       }
+    })
+  },
+
+  mounted () {
+    setTimeout(() => { this.pageState = '' }, 250)
+    this.isDesktop = (window.innerWidth > 767)
+    window.addEventListener('resize', () => {
+      this.isDesktop = (window.innerWidth > 767)
+      console.log(this.isDesktop)
     })
   },
 
@@ -215,20 +231,53 @@ export default {
       this.tl.totalProgress(progress || 0)
     },
 
-    requestResize () {
-      cancelAnimationFrame(this.requestId)
-      this.requestId = requestAnimationFrame(this.resize)
+    initTimeline_Mobile () {
+      const app = this
+
+      this.tl = gsap.timeline({
+        // Attach it to the scroll
+        scrollTrigger: {
+          id: 'st',
+          trigger: '#archives',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+          invalidateOnRefresh: true,
+          onRefresh: self => app.tl.progress(self.progress)
+        }
+      })
     },
 
-    resize () {
+    buildTimeline_Mobile (progress) {
+      // Animation duration
+      const easing = 'linear'
+      const yEnd = -40
+      let el
+
+      // loop through the cards
+      for (let i = 1; i < this.cards.length + 1; i++) {
+        // get a reference to the current card
+        el = document.querySelector('.recipient-card:nth-of-type(' + i + ')')
+        this.tl.to(el, { y: yEnd, x: 0, ease: easing })
+      }
+
+      this.tl.totalProgress(progress || 0)
+    },
+
+    requestResize (viewport) {
+      cancelAnimationFrame(this.requestId)
+      this.requestId = requestAnimationFrame(() => this.resize(viewport))
+    },
+
+    resize (viewport) {
       const progress = this.tl.totalProgress()
       this.tl.seek(0).clear()
-      this.buildTimeline(progress)
+      if (viewport === 'mobile') {
+        this.buildTimeline_Mobile(progress)
+      } else {
+        this.buildTimeline(progress)
+      }
     }
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

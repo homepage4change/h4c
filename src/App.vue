@@ -7,7 +7,7 @@
     </transition>
 
     <transition name="fade">
-      <recipientModal :recipient="activeRecipient"></recipientModal>
+      <recipientModal :recipient="recipient" v-if="recipient"></recipientModal>
     </transition>
     <mainMenu></mainMenu>
   </div>
@@ -29,8 +29,15 @@ export default {
 
   data () {
     return {
-      activeRecipient: ''
+      recipient: false
     }
+  },
+
+  created () {
+    Event.$on('modal-opened', (recipient) => {
+      this.recipient = recipient
+    })
+    Event.$on('modal-closed', () => { this.recipient = false })
   },
 
   mounted () {

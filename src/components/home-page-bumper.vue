@@ -3,7 +3,7 @@
 
     <headerFull :version="ver"></headerFull>
 
-    <div class="container mx-auto text-center self-center">
+    <div class="hide-on-load container mx-auto text-center self-center">
       <div class="flex h-full w-full justify-center">
         <div class="heading self-center relative" :class="hoverState">
           <slot></slot>

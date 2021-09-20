@@ -1,5 +1,5 @@
 <template>
-  <div id="home-page" class="w-full h-full md:overflow-hidden flex flex-wrap" :class="pageState">
+  <div id="home-page" class="page w-full h-full md:overflow-hidden flex flex-wrap" :class="pageState">
     <bumper id="hero" zIndex="z-55" version="1">
       <h1>Welcome to the Homepage of Homepage For Change.</h1>
       <p class="w-11/12 m-auto">We’re on a mission to give BIPOC students a platform for their art and a <u>$2,000 grant</u> to continue making more.</p>
@@ -7,7 +7,7 @@
 
     <template v-for="slide in slides">
       <!-- content cards -->
-      <section :id="slide.id" :key="slide.id" class="card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="slideLeft(slide.z, slide.bgLeft)">
+      <section :id="slide.id" :key="slide.id" class="hide-on-load card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="slideLeft(slide.z, slide.bgLeft)">
         <headerLeft></headerLeft>
         <div class="container mx-auto text-center self-center">
           <div class="flex md:h-full w-full justify-center">
@@ -21,7 +21,7 @@
           </div>
         </div>
       </section>
-      <section :id="idContent(slide.id)" :key="idContent(slide.id)" class="card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="slideRight(slide.z, slide.bgRight)">
+      <section :id="idContent(slide.id)" :key="idContent(slide.id)" class="hide-on-load card flex w-full md:w-1/2 relative md:absolute overflow-hidden" :class="slideRight(slide.z, slide.bgRight)">
         <headerRight></headerRight>
         <div class="container mx-auto text-center self-center">
           <div class="flex md:h-full w-full justify-center">
@@ -98,7 +98,7 @@ export default {
 
   data () {
     return {
-      pageState: '',
+      pageState: 'preloading',
       slides: [
         { id: 'who', z: '55', bgLeft: 'red', bgRight: 'lavender', heading1: 'Who', subHeading1: 'can participate?', heading2: '', subHeading2: '', image1: 'alqasim.jpg', image2: 'radeva.jpg', content: '<p>This program is open to all Toronto/GTA BIPOC students enrolled in high school, post-secondary, or a community arts program. (Don’t worry, we always evaluate work against those at the same education level.)</p>' },
         { id: 'what', z: '45', bgLeft: 'lavender', bgRight: 'lime', heading1: 'What', subHeading1: 'can I submit &', heading2: 'What', subHeading2: 'is the selection process?', image1: 'neath.jpg', image2: 'arias.jpg', content: '<p>You can submit any manifestation of your art – whether that’s a photo you took, a photo you took of something you made, or even a Word document containing a short story or poem. Just double-check specs and file types before submitting.</p><p>You’re welcome to apply multiple times (please do!) but we ask that you only submit one piece per submission period.</p><p>Voting will be conducted by a jury within the Juliet agency. We’ll consider each piece’s originality, aesthetic, and message when deciding who the recipient of the homepage space – and the $2,000 grant – will be. Shortly after the judging process, we’ll contact the chosen recipient via email.</p>' },
@@ -112,9 +112,7 @@ export default {
   created () {
     Event.$on('menu-closed', () => { this.pageState = '' })
     Event.$on('menu-opened', () => { this.pageState = 'blur' })
-  },
 
-  mounted () {
     const app = this
 
     window.addEventListener('load', function (event) {
@@ -131,26 +129,17 @@ export default {
         if (location.hash) {
           setTimeout(app.deepLink, 100)
         }
+      } else {
+        if (location.hash) {
+          window.location = location.hash
+        }
       }
     })
   },
 
-  // beforeDestroy () {
-  //   console.log('Index beforeDestroy called')
-
-  //   this.tl.kill(true)
-  //   ScrollTrigger.getById('st').kill(true)
-  //   gsap.set('.card', { clearProps: true })
-  // },
-
-  // beforeDestroy () {
-  //   console.log('Index beforeDestroy called')
-  //   console.log(this.tl)
-  //   this.tl.scrollTrigger.kill(true)
-  //   // this.tl.kill(true)
-  //   // this.tl = null
-  //   // console.log(this.tl)
-  // },
+  mounted () {
+    setTimeout(() => { this.pageState = '' }, 1000)
+  },
 
   methods: {
     idContent (i) { return i + '-content' },
@@ -167,7 +156,6 @@ export default {
       let scrollOffset = 0
 
       for (const card of this.cards) {
-        console.log(card.getAttribute('id'), sectionID)
         if (card.getAttribute('id') === sectionID) {
           scrollOffset = window.innerHeight + (window.innerHeight * (cnt / 2))
           break

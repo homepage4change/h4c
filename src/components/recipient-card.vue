@@ -1,7 +1,7 @@
 <template>
   <div class="recipient-card swipe" @click="toggleModal">
     <h3 class="swipe">{{ recipient.month }}: {{ recipient.name }}</h3>
-    <img :src="require('../images/' + recipient.imgScreenshot)" />
+    <img :src="require('../images/' + recipient.imgScreenshot)" rel="preload" />
   </div>
 
 </template>
@@ -21,7 +21,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

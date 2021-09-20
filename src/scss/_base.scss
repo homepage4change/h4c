@@ -85,3 +85,15 @@ u {
 		}
 	}
 }
+
+
+.hide-on-load {
+	opacity: 1;
+	transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.preloading {
+	.hide-on-load {
+		opacity: 0;
+	}
+}
+

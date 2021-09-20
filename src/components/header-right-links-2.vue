@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- hamburger menu -->
-    <a href="#" class="hamburger-menu" @click="openMenu">
+    <a href="#" class="hamburger-menu" @click.prevent="openMenu">
       <inline-svg :src="require('../images/hamburger.svg')"></inline-svg>
     </a>
     <!-- contact us -->

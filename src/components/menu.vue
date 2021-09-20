@@ -2,7 +2,7 @@
   <div id="menu" class="flex flex-col justify-center md:h-screen w-screen fixed top-0 left-0" :class="menuState">
     <header>
       <!-- close menu -->
-      <a href="#" @click="closeMenu">
+      <a href="#" @click.prevent="closeMenu">
         <svg class="icon-close-menu close-menu nav-element z-1 fixed" width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill-rule="nonzero" points="-0.0291790571 38.8629882 16.9413837 21.8924255 -0.0291790571 4.92186272 4.92056841 -0.0278847506 21.8911312 16.942678 38.8616939 -0.0278847506 43.8114414 4.92186272 26.8408786 21.8924255 43.8114414 38.8629882 38.8616939 43.8127357 21.8911312 26.8421729 4.92056841 43.8127357"></polygon></svg>
       </a>
     </header>
@@ -59,16 +59,16 @@ export default {
     },
 
     deepLink (e) {
-      if (this.$route.path === '/') {
-        const $el = e.target
-        const href = $el.getAttribute('href')
-        const cards = document.querySelectorAll('.card')
+      if (window.innerWidth > 767) { // Desktop
+        if (location.pathname === '/') {
+          e.preventDefault()
+        }
+        if (this.$route.path === '/') {
+          const $el = e.target
+          const href = $el.getAttribute('href')
+          const cards = document.querySelectorAll('.card')
 
-        if (window.innerWidth > 767) {
-          // Desktop
           if (href.indexOf('.html') === -1) {
-            e.preventDefault()
-
             if ($el.classList.contains('icon-close-menu')) {
               this.closeMenu()
             } else {
@@ -91,18 +91,13 @@ export default {
               })
             }
           }
-        } else {
-          // Mobile
-          this.closeMenu()
         }
+      } else { // Mobile
+        this.closeMenu()
       }
     },
 
-    closeMenu (e) {
-      if (typeof e !== 'undefined') {
-        e.preventDefault()
-      }
-
+    closeMenu () {
       this.subMenuState = ''
       this.menuState = 'closed'
       setTimeout(() => { this.menuState = 'closed hidden' }, 600)

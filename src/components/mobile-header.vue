@@ -5,7 +5,7 @@
       <inline-svg :src="require('../images/h4c-logo.svg')"></inline-svg>
     </a>
     <!-- hamburger menu -->
-    <a href="#" class="hamburger-menu link-menu mobile-nav" :class="mobileNavClasses">
+    <a href="#" class="hamburger-menu link-menu mobile-nav" :class="mobileNavClasses" @click.prevent="openMenu">
       <inline-svg :src="require('../images/hamburger.svg')"></inline-svg>
     </a>
   </nav>
@@ -19,18 +19,38 @@ export default {
     }
   },
 
+  created () {
+    Event.$on('menu-closed', () => { this.swapNavClasses() })
+    Event.$on('menu-opened', () => { this.mobileNavClasses = this.mobileNavClasses + ' blur' })
+    Event.$on('modal-closed', () => { this.swapNavClasses() })
+    Event.$on('modal-opened', () => { this.mobileNavClasses = this.mobileNavClasses + ' blur' })
+  },
+
   mounted () {
     if (window.innerWidth <= 767) {
-      this.mobile_swapNavClasses()
+      if (location.pathname === '/archive') {
+        this.swapNavClasses()
+      } else {
+        window.addEventListener('load', this.scrollListener)
+      }
     }
   },
 
   methods: {
-    mobile_swapNavClasses () {
-      const app = this
-      const sections = document.querySelectorAll('section')
+    openMenu () {
+      Event.$emit('menu-opened')
+    },
 
-      window.addEventListener('scroll', () => {
+    scrollListener () {
+      window.addEventListener('scroll', this.swapNavClasses)
+    },
+
+    swapNavClasses () {
+      if (location.pathname === '/archive') {
+        this.mobileNavClasses = 'lime'
+      } else {
+        // const app = this
+        const sections = document.querySelectorAll('section')
         const scrollTop = window.pageYOffset
 
         for (const section of sections) {
@@ -38,21 +58,20 @@ export default {
           const sectionBottom = sectionTop + section.offsetHeight
 
           if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
-            app.mobileNavClasses = ''
+            this.mobileNavClasses = ''
             if (section.classList.contains('card--image')) {
-              app.mobileNavClasses = 'hidden'
+              this.mobileNavClasses = 'hidden'
             } else if (section.classList.contains('bg-lavender') || section.classList.contains('bg-red')) {
-              app.mobileNavClasses = 'lime'
+              this.mobileNavClasses = 'lime'
             } else if (section.classList.contains('bg-lime')) {
               if (section.id !== 'hero') {
-                app.mobileNavClasses = 'lavender'
+                this.mobileNavClasses = 'lavender'
               }
             }
           }
         }
-      })
+      }
     }
   }
-
 }
 </script>

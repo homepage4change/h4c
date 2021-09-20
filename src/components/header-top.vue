@@ -1,22 +1,20 @@
 <template>
-  <div>
+  <nav>
     <!-- logo -->
-    <a href="/" class="link-home">
+    <a href="/" class="link-home lime">
       <inline-svg :src="require('../images/h4c-logo.svg')"></inline-svg>
     </a>
-
     <!-- hamburger menu -->
-    <a href="#" class="hamburger-menu" @click="openMenu">
+    <a href="#" class="hamburger-menu link-menu lime" @click.prevent="openMenu">
       <inline-svg :src="require('../images/hamburger.svg')"></inline-svg>
     </a>
-  </div>
+  </nav>
 </template>
 
 <script>
 export default {
   methods: {
-    openMenu (e) {
-      e.preventDefault()
+    openMenu () {
       Event.$emit('menu-opened')
     }
   }

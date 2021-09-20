@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="page-submission">
+  <div id="app" class="page page-submission">
     <a href="/" class="link-home">
       <inline-svg :src="require('../images/h4c-logo.svg')"></inline-svg>
     </a>
