@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="page page-submission">
-    <a href="/" class="link-home">
+    <!-- <a href="/" class="link-home">
       <inline-svg :src="require('../images/h4c-logo.svg')"></inline-svg>
-    </a>
+    </a> -->
     <iframe id="typeform-full" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media;" src="https://form.typeform.com/to/BRPH7fLk?typeform-medium=embed-snippet"></iframe>
   </div>
 </template>

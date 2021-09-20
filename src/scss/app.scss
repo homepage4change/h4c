@@ -250,6 +250,19 @@ body .mobile-nav {
 				}
 			}
 		}
+		&.plum {
+			// filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.05));
+			.nav-element,
+			.default {
+		    fill: $plum;
+			}
+			.hover {
+				fill: $plum;
+				rect {
+					fill: $plum;
+				}
+			}
+		}
 		&.lavender {
 			.nav-element,
 			.default {

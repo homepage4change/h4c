@@ -28,7 +28,7 @@ export default {
 
   mounted () {
     if (window.innerWidth <= 767) {
-      if (location.pathname === '/archive') {
+      if (location.pathname !== '/') {
         this.swapNavClasses()
       } else {
         window.addEventListener('load', this.scrollListener)
@@ -48,6 +48,8 @@ export default {
     swapNavClasses () {
       if (location.pathname === '/archive') {
         this.mobileNavClasses = 'lime'
+      } else if (location.pathname === '/submission') {
+        this.mobileNavClasses = 'plum'
       } else {
         // const app = this
         const sections = document.querySelectorAll('section')
