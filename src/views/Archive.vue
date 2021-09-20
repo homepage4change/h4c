@@ -145,7 +145,6 @@ export default {
     this.isDesktop = (window.innerWidth > 767)
     window.addEventListener('resize', () => {
       this.isDesktop = (window.innerWidth > 767)
-      console.log(this.isDesktop)
     })
   },
 
