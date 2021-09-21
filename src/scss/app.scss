@@ -139,7 +139,10 @@
 		transform: rotate(90deg);
 		fill: $plum;
 	}
-
+	&.lime:hover polygon {
+		transform: rotate(90deg);
+		fill: $lime;
+	}
 }
 
 .submit-cta {	
@@ -732,6 +735,9 @@ body .mobile-nav {
 	    height: 100%;
 	    display: block;
 	    object-fit: cover;
+  	}
+  	video {
+  		object-fit: cover;
   	}
   }
 

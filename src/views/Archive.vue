@@ -77,7 +77,7 @@ export default {
               socialHandle: '',
               imgHeadshot: 'Elvina-Raharja-headshot.jpg',
               imgScreenshot: 'screenshot-sep-2021.jpg',
-              imgArtwork: 'artwork-sep-2021.webp',
+              imgArtwork: 'artwork-sep-2021.mp4',
               cardLayout: 'landscape'
             },
             {
@@ -90,7 +90,7 @@ export default {
               socialHandle: '',
               imgHeadshot: 'Tone-Burke-headshot.jpg',
               imgScreenshot: 'screenshot-aug-2021.jpg',
-              imgArtwork: 'screenshot-aug-2021.jpg',
+              imgArtwork: 'artwork-aug-2021.jpg',
               cardLayout: 'landscape'
             },
             {
@@ -103,7 +103,7 @@ export default {
               socialHandle: '',
               imgHeadshot: 'Hau-Pham-headshot.jpg',
               imgScreenshot: 'screenshot-jul-2021.jpg',
-              imgArtwork: 'screenshot-jul-2021.jpg',
+              imgArtwork: 'artwork-jul-2021.jpg',
               cardLayout: 'landscape'
             }
           ]

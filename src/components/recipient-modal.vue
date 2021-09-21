@@ -1,6 +1,9 @@
 <template>
   <div id="modal-container" class="z-100">
-    <span class="close" @click="toggleModal">CLOSE</span>
+    <!-- close modal -->
+    <a href="#" class="close" @click.prevent="toggleModal">
+      <svg class="icon-close-menu close-menu nav-element z-1 fixed lime" width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill-rule="nonzero" points="-0.0291790571 38.8629882 16.9413837 21.8924255 -0.0291790571 4.92186272 4.92056841 -0.0278847506 21.8911312 16.942678 38.8616939 -0.0278847506 43.8114414 4.92186272 26.8408786 21.8924255 43.8114414 38.8629882 38.8616939 43.8127357 21.8911312 26.8421729 4.92056841 43.8127357"></polygon></svg>
+    </a>
     <div class="recipient-card__modal" :class="recipient.cardLayout">
         <div class="headshot">
           <img :src="require('../images/' + recipient.imgHeadshot)" rel="preload" />
@@ -23,7 +26,10 @@
           <p v-html="recipient.bio"></p>
         </div>
         <div class="artwork">
-          <img :src="require('../images/' + recipient.imgArtwork)" rel="preload" />
+          <img v-if="isImage(recipient.imgArtwork)" :src="require('../images/' + recipient.imgArtwork)" rel="preload" />
+          <video v-else loop="" muted="" playsinline="" autoplay="" preload="auto">
+            <source :src="require('../images/' + recipient.imgArtwork)" type="video/mp4">
+          </video>
         </div>
       </div>
   </div>
@@ -41,6 +47,10 @@ export default {
     toggleModal () {
       // this.recipient = false
       Event.$emit('modal-closed')
+    },
+
+    isImage (asset) {
+      return asset.includes('.jpg')
     }
   }
 }
