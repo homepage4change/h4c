@@ -68,6 +68,32 @@ export default {
           year: '2021',
           recipients: [
             {
+              month: 'November',
+              name: 'Tevon Edwards',
+              title: 'Illustrator',
+              description: '“This artwork is of multiple versions of me. It’s almost like a party with how much random shenanigans are going on in the picture. It’s called <em>Vacancy</em> because that’s the opposite of busy, which is what this illustration demonstrates.”',
+              bio: 'TEVON EDWARDS is a high school student of Guyanese and Filipino heritage, currently attending Western Technical Commercial School. His love for drawing started at a young age, ever since he got his hands on crayons as a kid. Over the years his focus has become mainly character work and design. Tevon is currently part of his high school’s Design Studio Program.',
+              url: 'instagram.com/twvons',
+              socialHandle: 'twvons',
+              imgHeadshot: 'headshot-tevon-edwards-square.jpg',
+              imgScreenshot: 'screenshot-nov-2021.jpg',
+              imgArtwork: 'artwork-nov-2021.jpg',
+              cardLayout: 'landscape'
+            },
+            {
+              month: 'October',
+              name: 'Safa Ali Mudei',
+              title: 'Dancer and Director',
+              description: '“In Islam, there’s a belief that when a person dies and they have been laid to rest in the grave(s), their soul gets separated from their physical body and goes into another realm where they are put through many trials of either blessings or punishments; heaven or hell, depending on what they have done in their intermediate lives until their last days. This realm is called Barzakh, the Islamic version of purgatory which is also in relation to being in limbo. Follow the soul as they endure their own version of Barzakh.”',
+              bio: 'SAFA ALI MUDEI is a Muslim, East-African Canadian artist attending UofT. Safa’s artistic style of dance and film derives from the experiences and perspectives she has received from the religion of Islam and her Somali heritage.',
+              url: 'instagram.com/safaali_',
+              socialHandle: 'safaali_',
+              imgHeadshot: 'headshot-safa-ali-square.jpg',
+              imgScreenshot: 'screenshot-oct-2021.jpg',
+              imgArtwork: 'artwork-oct-2021.mp4',
+              cardLayout: 'landscape'
+            },
+            {
               month: 'September',
               name: 'Elvina Raharja',
               title: 'Multi-disciplinary Artist',
