@@ -48,7 +48,7 @@
     </template>
 
     <bumper id="the-end" zIndex="z-0" version="2">
-      <a href="/submission" class="swipe submit uppercase">
+      <a href="/submit-your-work" class="swipe submit uppercase">
         Submit your artwork.
       </a>
     </bumper>
@@ -77,25 +77,6 @@ export default {
     bumper, headerLeft, headerRight
   },
 
-  metaInfo () {
-    const pageTitle = 'Homepage for Change'
-    const pageDesc = 'A grant to get BIPOC students who are interested in the arts published + paid'
-
-    return {
-      title: pageTitle,
-      meta: [
-        { name: 'description', content: pageDesc },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: pageTitle },
-        { property: 'og:url', content: 'https://www.homepageforchange.com/' },
-        { property: 'description', content: pageDesc }
-      ],
-      link: [
-        { rel: 'canonical', href: 'https://www.homepageforchange.com/' }
-      ]
-    }
-  },
-
   data () {
     return {
       pageState: 'preloading',
@@ -103,7 +84,7 @@ export default {
         { id: 'who', z: '55', bgLeft: 'red', bgRight: 'lavender', heading1: 'Who', subHeading1: 'can participate?', heading2: '', subHeading2: '', image1: 'alqasim.jpg', image2: 'radeva.jpg', content: '<p>This program is open to all Toronto/GTA BIPOC students enrolled in high school, post-secondary, or a community arts program. (Don’t worry, we always evaluate work against those at the same education level.)</p>' },
         { id: 'what', z: '45', bgLeft: 'lavender', bgRight: 'lime', heading1: 'What', subHeading1: 'can I submit &', heading2: 'What', subHeading2: 'is the selection process?', image1: 'neath.jpg', image2: 'arias.jpg', content: '<p>You can submit any manifestation of your art – whether that’s a photo you took, a photo you took of something you made, or even a Word document containing a short story or poem. Just double-check specs and file types before submitting.</p><p>You’re welcome to apply multiple times (please do!) but we ask that you only submit one piece per submission period.</p><p>Voting will be conducted by a jury within the Juliet agency. We’ll consider each piece’s originality, aesthetic, and message when deciding who the recipient of the homepage space – and the $2,000 grant – will be. Shortly after the judging process, we’ll contact the chosen recipient via email.</p>' },
         { id: 'where', z: '35', bgLeft: 'red', bgRight: 'lavender', heading1: 'Where', subHeading1: 'can I submit &', heading2: 'Where', subHeading2: 'will my work live?', image1: 'brock.jpg', image2: 'alqasim-2.jpg', content: '<p>Simply fill out the form provided under the submission section and attach your JPEG, MP4, or Word document containing your piece of work.</p><p>If selected, your work will appear on the Juliet homepage until the next recipient is announced. This will give everyone from creatives to producers to directors a chance to see your work. Once your time on our homepage is up, we’ll catalogue your piece right here on homepageforchange.com alongside the work of other past recipients.</p>' },
-        { id: 'when', z: '25', bgLeft: 'lavender', bgRight: 'lime', heading1: 'When', subHeading1: 'can I submit?', heading2: '', subHeading2: '', image1: 'warszynski.jpg', image2: 'collis.jpg', content: '<p>Please make your submission by the deadlines listed below, but feel free to enter again (and again and again) after that. Here are the dates to keep in mind for submissions, and when you can expect to see your work take over the wearejuliet.com homepage.</p><div class="schedule"><table><thead><tr><th>2021 Submission Deadlines*</th><th>Homepage Takeovers</th></tr></thead><tbody><tr><td><span class="font-bold">1.</span> June 22</td><td>July 1 - 30</td></tr><tr><td><span class="font-bold">2.</span> July 22</td><td>August 1 - 31</td></tr><tr><td><span class="font-bold">3.</span> August 23</td><td>September 1 - 30</td></tr><tr><td><span class="font-bold">4.</span> September 22</td><td>October 1 - 31</td></tr><tr><td><span class="font-bold">5.</span> November 21</td><td>December 1 - 31</td></tr></tbody></table><div class="footnote">*All work needs to be submitted by 12PM EST on the given dates.</div></div>' },
+        { id: 'when', z: '25', bgLeft: 'lavender', bgRight: 'lime', heading1: 'When', subHeading1: 'can I submit?', heading2: '', subHeading2: '', image1: 'warszynski.jpg', image2: 'collis.jpg', content: '<p>Please make your submission by the deadlines listed below, but feel free to enter again (and again and again) after that. Here are the dates to keep in mind for submissions, and when you can expect to see your work take over the wearejuliet.com homepage.</p><p><strong>COMING SOON:</strong> Los Angeles homepage takeover extension planned for March 2022. Stay tuned!</p><div class="schedule"><table><thead><tr><th>2022 Submission Deadlines*</th><th>Homepage Takeovers</th></tr></thead><tbody><tr><td><span class="font-bold">1.</span> December 15</td><td>January</td></tr><tr><td><span class="font-bold">2.</span> January 17</td><td>February</td></tr><tr><td><span class="font-bold">3.</span> February 15</td><td>March</td></tr><tr><td><span class="font-bold">4.</span> March 17</td><td>April</td></tr><tr><td><span class="font-bold">5.</span> April 15</td><td>May</td></tr><tr><td><span class="font-bold">6.</span> May 17</td><td>June</td></tr></tbody></table><div class="footnote">*All work needs to be submitted by 12PM EST on the given dates.</div></div>' },
         { id: 'why', z: '15', bgLeft: 'red', bgRight: 'lavender', heading1: 'Why', subHeading1: 'does this program exist?', heading2: '', subHeading2: '', image1: 'radeva-2.jpg', image2: 'rodrigues.jpg', content: '<p>To give BIPOC artists a platform and the means to continue creating their art.</p><p>The advertising industry needs a dramatic increase in BIPOC representation. It’s been embarrassingly imbalanced for far too long. Especially in a city as diverse as Toronto, that’s unacceptable. We hope that initiatives like this can help to create change. Because change is long overdue.</p>' }
       ]
     }

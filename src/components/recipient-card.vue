@@ -1,6 +1,6 @@
 <template>
   <div class="recipient-card swipe" @click="toggleModal">
-    <h3 class="swipe">{{ recipient.month }}: {{ recipient.name }}</h3>
+    <h3 class="swipe">{{ recipient.month }} {{ year }}: {{ recipient.name }}</h3>
     <img :src="require('../images/' + recipient.imgScreenshot)" rel="preload" />
   </div>
 
@@ -11,7 +11,8 @@ export default {
   name: 'recipientCard',
 
   props: [
-    'recipient'
+    'recipient',
+    'year'
   ],
 
   methods: {

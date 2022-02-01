@@ -5,7 +5,7 @@
       <inline-svg :src="require('../images/hamburger.svg')"></inline-svg>
     </a>
     <!-- submit cta -->
-    <a href="/submission" class="link-submit">
+    <a href="/submit-your-work" class="link-submit">
       <button ref="button" class="swipe submit-cta nav-element z-1 absolute button uppercase" :style="buttonWidth">Submit</button>
     </a>
   </div>

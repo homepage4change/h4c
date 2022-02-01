@@ -20,8 +20,8 @@
             <li><a href="/#why" @click="deepLink" class="close-menu swipe">About H4C</a></li>
           </ul>
         </li>
-        <li><a href="/submission" class="uppercase close-menu swipe">Submission</a></li>
-        <li><a href="/archive" class="uppercase close-menu swipe">Archive</a></li>
+        <li><a href="/grant-recipients" class="uppercase close-menu swipe">Grant Recipients</a></li>
+        <li><a href="/submit-your-work" class="uppercase close-menu swipe">Submit Your Work</a></li>
       </ul>
     </div>
 

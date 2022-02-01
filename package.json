@@ -16,8 +16,8 @@
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.14",
     "vue": "^2.6.11",
+    "vue-headful": "^2.1.0",
     "vue-inline-svg": "^2.0.0",
-    "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {

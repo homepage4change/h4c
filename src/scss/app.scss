@@ -154,6 +154,7 @@
 	background-image: linear-gradient(to right, $red, $red 50%, $lavender 50%);
 	-webkit-background-clip: initial;
 	-webkit-text-fill-color: initial;
+	width: 12.9279279279vw;
 
 	.bg-lavender & {
 		color: $lavender;
@@ -331,6 +332,7 @@ body .mobile-nav {
 		}
 		@include atMedia($min, $tablet) {
 			width: 45vw;
+			max-width: 900px;
 		}
 		transition: all 0.3s ease-in-out;
 
@@ -547,8 +549,7 @@ body .mobile-nav {
 	@include atMedia($max, $pre-tablet) {
 		padding: 50vh 0 50vh;
 	}
-}
-.recipients {
+
   h2 {
       position: fixed;
       transform: rotate(90deg) translatex(-54%);
@@ -556,6 +557,7 @@ body .mobile-nav {
       top: calc(50% - 4vw);
       left: 3vw;
       margin-top: 0;
+      font-size: 4vw;
       @include atMedia($max, $pre-tablet) {
       	font-size: 2.75rem;
       	transform: rotate(90deg) translatex(-65%);
@@ -638,7 +640,7 @@ body .mobile-nav {
 	}	
 }
 #modal-container {
-  background: rgba(78,22,51,0.2);
+  background: rgba(78,22,51,0.45);
   width: 100vw;
   height: 100vh;
   position: fixed;

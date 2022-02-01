@@ -1,17 +1,22 @@
 <template>
   <div id="archive-page" class="page bg-red w-full min-h-full md:overflow-hidden" :class="pageState">
+    <vue-headful
+        title="Grant Recipients | Homepage for Change"
+        description="Grant recipients of the H4C to get BIPOC students who are interested in the arts published + paid"
+        url="https://www.homepageforchange.com/grant-recipients"
+    />
     <headerTop v-if="isDesktop"></headerTop>
 
-    <h1 class="sr-only">Recipient Archive</h1>
+    <h1>Recipient Archive</h1>
 
     <div id="archives" class="hide-on-load w-full min-h-full">
+      <h2>Grant<br>Recipients</h2>
       <template v-for="archive in archives">
-        <div  :key="archive.year" class="recipients">
-          <h2>{{ archive.year }}</h2>
+        <!-- <div :key="archive.year" class="recipients"> -->
           <template v-for="recipient in archive.recipients">
-            <recipientCard :key="recipient.name" :recipient="recipient"></recipientCard>
+            <recipientCard :key="recipient.name" :recipient="recipient" :year="archive.year"></recipientCard>
           </template>
-        </div>
+        <!-- </div> -->
       </template>
     </div>
   </div>
@@ -38,35 +43,58 @@ export default {
     headerTop, recipientCard
   },
 
-  metaInfo () {
-    const pageTitle = 'Archive'
-    const pageDesc = 'Grant recipients of the H4C to get BIPOC students who are interested in the arts published + paid'
-    const slug = 'archive'
-
-    return {
-      title: pageTitle,
-      titleTemplate: '%s | Homepage for Change',
-      meta: [
-        { name: 'description', content: pageDesc },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: pageTitle + ' | Homepage for Change' },
-        { property: 'og:url', content: 'https://www.homepageforchange.com/' + slug },
-        { property: 'description', content: pageDesc }
-      ],
-      link: [
-        { rel: 'canonical', href: 'https://www.homepageforchange.com/' + slug }
-      ]
-    }
-  },
-
   data () {
     return {
       isDesktop: true,
       pageState: 'preloading',
       archives: [
         {
+          year: '2022',
+          recipients: [
+            {
+              month: 'February',
+              name: 'Ella Saini',
+              title: 'Filmmaker',
+              description: '“This short documentary showcases the experiences of three LGBTQ+ youth learning about sex health under an inadequete Canadian sex-ed curriculum. Each subject opens up about their knowledge surrounding sexual health, gender identity, sexuality, and its impact on their self-image.”',
+              bio: 'Ella Saini (she/they) is a Filipino-Indian artist born and raised in Scarborough, Ontario. They’re a passionate editor and sound engineer currently studying film at Sheridan College. They also have a love for experimenting with different mediums of art, sharing ideas in an interesting and collaborative way. THE TALK is an illuminating film brought to life by Saini and a team of fellow creatives, including producer and animator, Vanessa Solivio.',
+              url: 'ellasaini.myportfolio.com',
+              socialHandle: '',
+              imgHeadshot: 'headshot-ella-saini-square.jpg',
+              imgScreenshot: 'screenshot-feb-2022.jpg',
+              imgArtwork: 'artwork-feb-2022.mp4',
+              cardLayout: 'landscape'
+            },
+            {
+              month: 'January',
+              name: 'Sameena Anis',
+              title: 'Multi-disciplinary Artist',
+              description: '“As a disabled, queer, and Brown immigrant – all my identities mesh together in this fictional story. The background is a mixed media illustration with Indian glass painting, and the piece itself is in a shadow box frame with sculpture encased in resin; unable to move, forever encased in its history.”',
+              bio: 'Sameena Anis (they/them) is a multi-disciplinary artist born in India and raised in Sharjah, moving to Canada seven years ago. They’re currently taking hybrid courses at Thornhill Secondary School and Seneca College with a love for all mediums of art. Their entry titled “Wind in the Night” is a beautifully intricate piece that represents colonization and the fear of aliens, pondering what inspires people to immigrate, move places, and fear newcomers.',
+              url: 'dairysam.wixsite.com/portfolio',
+              socialHandle: 'dairy.sam',
+              imgHeadshot: 'headshot-sameena-anis-square.jpg',
+              imgScreenshot: 'screenshot-jan-2022.jpg',
+              imgArtwork: 'artwork-jan-2022.jpg',
+              cardLayout: 'landscape'
+            }
+          ]
+        },
+        {
           year: '2021',
           recipients: [
+            {
+              month: 'December',
+              name: 'Vicky Wang',
+              title: 'Musician',
+              description: '“Earlybird, Live in Concert” is my debut live EP and concert film as a musical artist. Under the moniker Earlybird, I write and perform soulful and soothing songs with my voice secure and guitar in hand. I recorded this 7-song project and performance on a chilly winter day at the height of the pandemic. I hope these songs serve to encourage those who watch and listen, and remind them where the light is.”',
+              bio: 'Vicky Wang AKA Earlybird is a Toronto-based songstress with a zest for life. Her songwriting is candid and heartfelt, and listeners can’t help but follow along as her stories unfold, line by line. In the midst of excitement and uncertainty, she encourages her listeners to take heart and pause to reflect. With her recently released “Earlybird, Live in Concert” EP and film, she is well on her way to taking flight.',
+              url: 'instagram.com/theearlybirdsings',
+              socialHandle: 'theearlybirdsings',
+              imgHeadshot: 'headshot-earlybird-square.jpg',
+              imgScreenshot: 'screenshot-dec-2021.jpg',
+              imgArtwork: 'artwork-dec-2021.mp4',
+              cardLayout: 'landscape'
+            },
             {
               month: 'November',
               name: 'Tevon Edwards',
@@ -213,7 +241,7 @@ export default {
       const easing = 'linear'
 
       const cardHeight = document.querySelector('.recipient-card').offsetHeight
-      const yEnd = -(cardHeight + window.innerHeight)
+      const yEnd = -(cardHeight + (window.innerHeight * 1.05))
 
       let el, _d, _xStart, _xEnd, _yEnd, _pos
 

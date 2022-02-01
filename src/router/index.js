@@ -1,27 +1,40 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueMeta from 'vue-meta'
 
 Vue.use(VueRouter)
-Vue.use(VueMeta)
 
 window.Event = new Vue()
 
 const routes = [
+  // Routes
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: () => import('../views/Index.vue')
   },
   {
-    path: '/submission',
-    name: 'Submission',
+    path: '/submit-your-work',
+    name: 'submit',
     component: () => import('../views/Submission.vue')
   },
   {
-    path: '/archive',
-    name: 'Archive',
+    path: '/grant-recipients',
+    name: 'grant-recipients',
     component: () => import('../views/Archive.vue')
+  },
+
+  // Redirections
+  {
+    path: '/archive',
+    redirect: { name: 'grant-recipients' }
+  },
+  {
+    path: '/submission',
+    redirect: { name: 'submit' }
+  },
+  {
+    path: '*',
+    redirect: { name: 'home' }
   }
 ]
 
